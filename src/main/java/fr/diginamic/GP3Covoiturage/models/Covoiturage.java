@@ -67,9 +67,11 @@ public class Covoiturage {
 	 * relation many to many avec collaborateur
 	 */
 	@ManyToMany
-	@JoinTable(name = "Participation", joinColumns = @JoinColumn(name = "Covoiturageid", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "Collaborateurid", referencedColumnName = "id"))
+	@JoinTable(name = "Participation", 
+	joinColumns = @JoinColumn(name = "Covoiturageid", referencedColumnName = "id"),
+	inverseJoinColumns = @JoinColumn(name = "Collaborateurid", referencedColumnName = "id"))
 
-	List<Collaborateur> collaborateurs = new ArrayList<>();
+	private List<Collaborateur> collaborateurs = new ArrayList<>();
 
 	
 
