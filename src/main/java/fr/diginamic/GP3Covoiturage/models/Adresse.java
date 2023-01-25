@@ -37,11 +37,11 @@ public class Adresse {
 	@Size(max = 5)
 	private Integer numero;
 	
-	@Column(name = "complement_numero", length = 3)
+	@Column(columnDefinition = "varchar(3)", name = "complement_numero", length = 3)
 	@Size(max = 3)
 	private String complementNumero;
 	
-	@Column(name = "voie", length = 255, nullable = false)
+	@Column(columnDefinition = "varchar(255)", name = "voie", length = 255, nullable = false)
 	@NotBlank
 	@Size(max = 255)
 	private String voie;
@@ -51,17 +51,17 @@ public class Adresse {
 	@Size(max = 6)
 	private Integer codePostal;
 	
-	@Column(name = "departement", nullable = false)
+	@Column(columnDefinition = "varchar(100)", name = "departement", nullable = false)
 	@NotBlank
 	@Size(max = 100)
 	private String departement;
 	
-	@Column(name = "pays", nullable = false)
+	@Column(columnDefinition = "varchar(50)",name = "pays", nullable = false)
 	@NotBlank
 	@Size(max = 50)
 	private String pays;
 	
-	@Column(name = "ville", nullable = false)
+	@Column(columnDefinition = "varchar(58)",name = "ville", nullable = false)
 	@NotBlank
 	@Size(max = 58)
 	private String ville;
