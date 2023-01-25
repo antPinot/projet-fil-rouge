@@ -3,6 +3,7 @@ package fr.diginamic.GP3Covoiturage.models;
 import java.util.ArrayList;
 import java.util.List;
 
+import fr.diginamic.GP3Covoiturage.enums.Categorie;
 import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;

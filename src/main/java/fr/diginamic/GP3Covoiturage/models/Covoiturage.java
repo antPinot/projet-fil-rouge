@@ -1,6 +1,7 @@
 package fr.diginamic.GP3Covoiturage.models;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.Column;
@@ -43,17 +44,27 @@ public class Covoiturage {
 	@Column(length = 4)
 	private Integer distance;
 
-	@Column(length = 10)
-	private Integer idOrganisateur;
+	
+	
+	
+	/**
+	 * relation many to one avec autres classes
+	 */
+	@ManyToOne
+	@JoinColumn(name = "idOrganisateur")
+	private Collaborateur organisateur;
 
-	@Column(length = 10)
-	private Integer vehiculePersonnelId;
+	@ManyToOne
+	@JoinColumn(name = "VehiculePersonnel_id")
+	private VehiculePersonnel vehiculePersonnel;
 
-	@Column(length = 10)
-	private Integer idAdresseDepart;
+	@ManyToOne
+	@JoinColumn(name = "idAdresseDepart")
+	private Adresse adresseDepart;
 
-	@Column(length = 10)
-	private Integer idAdresseArrivee;
+	@ManyToOne
+	@JoinColumn(name = "idAdresseArrivee")
+	private Adresse idAdresseArrivee;
 
 	/**
 	 * relation many to many avec collaborateur
@@ -73,7 +84,7 @@ public class Covoiturage {
 	 * relation many to one avec Vehicule_Personnel
 	 */
 	@ManyToOne
-	private Vehicule_Personnel vehicule_Personnel;
+	private VehiculePersonnel vehicule_Personnel;
 
 	/**
 	 * constructeur avec les entites
@@ -275,20 +286,6 @@ public class Covoiturage {
 	 */
 	public void setAdresse(Adresse adresse) {
 		this.adresse = adresse;
-	}
-
-	/**
-	 * @return the vehicule_Personnel
-	 */
-	public Vehicule_Personnel getVehicule_Personnel() {
-		return vehicule_Personnel;
-	}
-
-	/**
-	 * @param vehicule_Personnel the vehicule_Personnel to set
-	 */
-	public void setVehicule_Personnel(Vehicule_Personnel vehicule_Personnel) {
-		this.vehicule_Personnel = vehicule_Personnel;
 	}
 
 	/**

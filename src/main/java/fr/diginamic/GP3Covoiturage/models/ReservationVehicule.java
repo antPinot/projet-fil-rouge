@@ -21,8 +21,8 @@ import jakarta.validation.constraints.Size;
 /**
  * @author antPinot
  * 
- * Modèle de l'entité ReservationVehicule qui 
- * représente une réservation de véhicule de société
+ *         Modèle de l'entité ReservationVehicule qui représente une réservation
+ *         de véhicule de société
  *
  */
 
@@ -34,22 +34,22 @@ public class ReservationVehicule {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
-	/** Date de début de la réservation*/
+	/** Date de début de la réservation */
 	@Column(name = "date_depart", nullable = false)
 	@NotNull
 	private LocalDateTime dateDepart;
-	
-	/** Date de fin de la réservation*/
+
+	/** Date de fin de la réservation */
 	@Column(name = "date_retour", nullable = false)
 	@NotNull
 	private LocalDateTime dateRetour;
 
-	/** Collaborateur effectuant la réservation*/
+	/** Collaborateur effectuant la réservation */
 	@ManyToOne
 	@JoinColumn(name = "collaborateur_id")
 	private Collaborateur collaborateur;
-	
-	/** Véhicule de société faisant l'objet de la réservation*/
+
+	/** Véhicule de société faisant l'objet de la réservation */
 	@ManyToOne
 	@JoinColumn(name = "vehicule_societe_id")
 	private VehiculeSociete vehiculeSociete;
@@ -74,11 +74,11 @@ public class ReservationVehicule {
 	 * @param vehiculeSociete
 	 */
 	public ReservationVehicule(Integer id, @NotNull LocalDateTime dateDepart, @NotNull LocalDateTime dateRetour,
-			@Size(max = 1000) String photo, Collaborateur collaborateur, VehiculeSociete vehiculeSociete) {
+			Collaborateur collaborateur, VehiculeSociete vehiculeSociete) {
 		this.id = id;
 		this.dateDepart = dateDepart;
 		this.dateRetour = dateRetour;
-		this.photo = photo;
+
 		this.collaborateur = collaborateur;
 		this.vehiculeSociete = vehiculeSociete;
 	}
@@ -135,24 +135,6 @@ public class ReservationVehicule {
 	 */
 	public void setDateRetour(LocalDateTime dateRetour) {
 		this.dateRetour = dateRetour;
-	}
-
-	/**
-	 * Getter pour l'attribut photo
-	 * 
-	 * @return the photo
-	 */
-	public String getPhoto() {
-		return photo;
-	}
-
-	/**
-	 * Setter pour l'attribut photo
-	 * 
-	 * @param photo the photo to set
-	 */
-	public void setPhoto(String photo) {
-		this.photo = photo;
 	}
 
 	/**
