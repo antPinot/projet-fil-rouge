@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.ManyToMany;
@@ -11,6 +12,12 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Size;
 
+/** Classe VehiculePersonnel
+ * 
+ * @author Quentin
+ */
+
+@Entity
 @Table(name="VehiculePersonnel")
 public class VehiculePersonnel {
 	
