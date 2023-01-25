@@ -71,17 +71,7 @@ public class Covoiturage {
 
 	List<Collaborateur> collaborateurs = new ArrayList<>();
 
-	/**
-	 * relation many to one avec adresse
-	 */
-	@ManyToOne
-	private Adresse adresse;
-
-	/**
-	 * relation many to one avec Vehicule_Personnel
-	 */
-	@ManyToOne
-	private VehiculePersonnel vehicule_Personnel;
+	
 
 	/**
 	 * constructeur avec les entites
@@ -102,8 +92,7 @@ public class Covoiturage {
 		this.adresseDepart = adresseDepart;
 		this.adresseArrivee = adresseArrivee;
 		this.collaborateurs = collaborateurs;
-		this.adresse = adresse;
-		this.vehicule_Personnel = vehicule_Personnel;
+		
 	}
 
 	/**
@@ -260,20 +249,7 @@ public class Covoiturage {
 		this.collaborateurs = collaborateurs;
 	}
 
-	/**
-	 * @return the adresse
-	 */
-	public Adresse getAdresse() {
-		return adresse;
-	}
-
-	/**
-	 * @param adresse the adresse to set
-	 */
-	public void setAdresse(Adresse adresse) {
-		this.adresse = adresse;
-	}
-
+	
 	/**
 	 * @return the adresseArrivee
 	 */
@@ -288,19 +264,6 @@ public class Covoiturage {
 		this.adresseArrivee = adresseArrivee;
 	}
 
-	/**
-	 * @return the vehicule_Personnel
-	 */
-	public VehiculePersonnel getVehicule_Personnel() {
-		return vehicule_Personnel;
-	}
-
-	/**
-	 * @param vehicule_Personnel the vehicule_Personnel to set
-	 */
-	public void setVehicule_Personnel(VehiculePersonnel vehicule_Personnel) {
-		this.vehicule_Personnel = vehicule_Personnel;
-	}
 	
 	
 	
@@ -331,7 +294,7 @@ public class Covoiturage {
 				+ ", nbPersonnes=" + nbPersonnes + ", dureeTrajet=" + dureeTrajet + ", distance=" + distance
 				+ ", organisateur=" + organisateur + ", vehiculePersonnel=" + vehiculePersonnel + ", adresseDepart="
 				+ adresseDepart + ", adresseArrivee=" + adresseArrivee + ", collaborateurs=" + collaborateurs
-				+ ", adresse=" + adresse + ", vehicule_Personnel=" + vehicule_Personnel + "]";
+				+ "]";
 	}
 
 }
