@@ -43,11 +43,6 @@ public class ReservationVehicule {
 	@Column(name = "date_retour", nullable = false)
 	@NotNull
 	private LocalDateTime dateRetour;
-	
-	/** URL de la photo */
-	@Column(name = "photo", length = 1000)
-	@Size(max = 1000)
-	private String photo;
 
 	/** Collaborateur effectuant la réservation*/
 	@ManyToOne
