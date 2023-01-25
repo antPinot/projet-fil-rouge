@@ -1,5 +1,6 @@
 package fr.diginamic.GP3Covoiturage.models;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.Column;
