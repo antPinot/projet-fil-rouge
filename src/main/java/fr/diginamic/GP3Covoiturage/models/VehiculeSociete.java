@@ -3,20 +3,23 @@ package fr.diginamic.GP3Covoiturage.models;
 import java.util.ArrayList;
 import java.util.List;
 
+import fr.diginamic.GP3Covoiturage.enums.Categorie;
 import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Size;
 
-/** Classe Athlete 
+/** Classe VehiculeSociete 
  * 
  * @author Quentin
  */
 
+@Entity
 @Table(name="VehiculeSociete")
 public class VehiculeSociete {
 	
@@ -45,8 +48,7 @@ public class VehiculeSociete {
 	@Column(name="statut", length = 1, nullable= false)
 	private int statut;
 	
-	@ManyToOne
-	@JoinColumn(name = "id_Categorie")
+	@Enumerated(EnumType.STRING)
 	public Categorie categorie;
 	
 	@OneToMany(mappedBy = "vehiculeSociete")
