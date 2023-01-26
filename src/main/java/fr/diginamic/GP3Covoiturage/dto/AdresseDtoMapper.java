@@ -3,13 +3,9 @@
  */
 package fr.diginamic.GP3Covoiturage.dto;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.springframework.stereotype.Component;
 
 import fr.diginamic.GP3Covoiturage.models.Adresse;
-import fr.diginamic.GP3Covoiturage.models.Covoiturage;
 
 /**
  * @author antPinot
