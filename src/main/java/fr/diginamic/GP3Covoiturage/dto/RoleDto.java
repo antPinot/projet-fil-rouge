@@ -1,4 +1,4 @@
-package fr.diginamic.GP3Covoiturage.Dto;
+package fr.diginamic.GP3Covoiturage.dto;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,16 +26,19 @@ public class RoleDto {
 	/**
 	 * @return constructor avec les entites
 	 */
-	public RoleDto(Integer id, String name) {
-		super();
-		this.id = id;
-		this.name = name;
-	}
+	 
 
 	/**
 	 * @return constructor vide
 	 */
 	public RoleDto() {
+	}
+
+	public RoleDto(Integer id, String name, List<CollaborateurDto> collaborateurs) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.collaborateurs = collaborateurs;
 	}
 
 	/**
