@@ -28,6 +28,8 @@ public class Role {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
+	
+
 	@Column(length = 50)
 	private String name;
 
@@ -80,6 +82,21 @@ public class Role {
 	 */
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	
+	/**
+	 * @return the collaborateurs
+	 */
+	public List<Collaborateur> getCollaborateurs() {
+		return collaborateurs;
+	}
+
+	/**
+	 * @param collaborateurs the collaborateurs to set
+	 */
+	public void setCollaborateurs(List<Collaborateur> collaborateurs) {
+		this.collaborateurs = collaborateurs;
 	}
 
 	/**
