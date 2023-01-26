@@ -3,7 +3,6 @@ package fr.diginamic.GP3Covoiturage.dto;
 import java.util.ArrayList;
 import java.util.List;
 
-import fr.diginamic.GP3Covoiturage.models.Collaborateur;
 
 /**
  * @author Fekhreddine

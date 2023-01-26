@@ -1,6 +1,6 @@
 package fr.diginamic.GP3Covoiturage.models;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,7 +30,7 @@ public class Covoiturage {
 	private Integer id;
 
 	@Column(name = "dateDepart")
-	private LocalDate dateDepart;
+	private LocalDateTime dateDepart;
 
 	@Column(length = 2)
 	private Integer placesRestantes;
@@ -78,7 +78,7 @@ public class Covoiturage {
 	/**
 	 * constructeur avec les entites
 	 */
-	public Covoiturage(Integer id, LocalDate dateDepart, Integer placesRestantes, Integer nbPersonnes,
+	public Covoiturage(Integer id, LocalDateTime dateDepart, Integer placesRestantes, Integer nbPersonnes,
 			Integer dureeTrajet, Integer distance, Collaborateur organisateur, VehiculePersonnel vehiculePersonnel,
 			Adresse adresseDepart, Adresse adresseArrivee, List<Collaborateur> collaborateurs, Adresse adresse
 			 ) {
@@ -130,14 +130,14 @@ public class Covoiturage {
 	/**
 	 * @return the dateDepart
 	 */
-	public LocalDate getDateDepart() {
+	public LocalDateTime getDateDepart() {
 		return dateDepart;
 	}
 
 	/**
 	 * @param dateDepart the dateDepart to set
 	 */
-	public void setDateDepart(LocalDate dateDepart) {
+	public void setDateDepart(LocalDateTime dateDepart) {
 		this.dateDepart = dateDepart;
 	}
 
