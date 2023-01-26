@@ -19,8 +19,8 @@ public class ReservationVehiculeDtoMapper {
 		ReservationVehiculeDto dto = new ReservationVehiculeDto(reservationVehicule.getId(), 
 				DateUtils.toString(reservationVehicule.getDateDepart()), 
 				DateUtils.toString(reservationVehicule.getDateRetour()), 
-				MapperCollaborateur.methodeStatic(reservationVehicule.getCollaborateur()), 
-				MapperVehiculeSociete.methodeStatic(reservationVehicule.getVehiculeSociete()));
+				CollaborateurDtoMapper.toDto(reservationVehicule.getCollaborateur()), 
+				VehiculeSocieteDtoMapper.toDto(reservationVehicule.getVehiculeSociete()));
 		
 		return dto;
 	}
