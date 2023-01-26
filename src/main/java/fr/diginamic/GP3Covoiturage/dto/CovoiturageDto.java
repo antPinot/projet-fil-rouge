@@ -1,4 +1,4 @@
-package fr.diginamic.GP3Covoiturage.Dto;
+package fr.diginamic.GP3Covoiturage.dto;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

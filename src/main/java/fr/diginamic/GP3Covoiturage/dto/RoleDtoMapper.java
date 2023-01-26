@@ -1,4 +1,4 @@
-package fr.diginamic.GP3Covoiturage.Dto;
+package fr.diginamic.GP3Covoiturage.dto;
 
 import fr.diginamic.GP3Covoiturage.models.Role;
 
