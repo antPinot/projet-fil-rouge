@@ -3,7 +3,6 @@ package fr.diginamic.GP3Covoiturage.dto;
 import java.util.ArrayList;
 import java.util.List;
 
-import fr.diginamic.GP3Covoiturage.models.Collaborateur;
 import fr.diginamic.GP3Covoiturage.models.VehiculePersonnel;
 
 public class VehiculePersonnelDtoMapper {
@@ -15,7 +14,8 @@ public class VehiculePersonnelDtoMapper {
 				vehiculePersonnel.getMarque(),
 				vehiculePersonnel.getModele(),
 				vehiculePersonnel.getLimitePlace(),
-				CollaborateurDtoMapper.toDto(vehiculePersonnel.getCollaborateurs()));
+				vehiculePersonnel.getPlaces(),
+				CollaborateurDtoMapper.listToDto(vehiculePersonnel.getCollaborateurs()));
 		
 		return dto;
 	}
