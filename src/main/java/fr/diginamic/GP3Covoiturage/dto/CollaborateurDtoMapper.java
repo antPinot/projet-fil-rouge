@@ -19,13 +19,17 @@ public class CollaborateurDtoMapper {
 				collaborateur.getLogin(),
 				collaborateur.getPassword(),
 				DateUtils.toString(collaborateur.getDateCreation()),
-				VehiculePersonnelDtoMapper.toDto(collaborateur.getVehiculespersonnels()),
-				RoleDtoMapper.toDto(collaborateur.getRoles()),
-				CovoiturageDtoMapper.toDto(collaborateur.getCovoiturages()));
+				VehiculePersonnelDtoMapper.listToDto(collaborateur.getVehiculespersonnels()),
+				RoleDtoMapper.listToDto(collaborateur.getRoles()),
+				CovoiturageDtoMapper.listToDto(collaborateur.getCovoiturages()));
 		
 		return dto;
 	}
 	
+	
+	/**
+	 * methode renvoi une list
+	 */
 	public static List<CollaborateurDto> listToDto(List<Collaborateur> collaborateurs) {
 		List<CollaborateurDto> listCollabDto = new ArrayList<>();
 		collaborateurs.forEach(c -> listCollabDto.add(CollaborateurDtoMapper.toDto(c)));

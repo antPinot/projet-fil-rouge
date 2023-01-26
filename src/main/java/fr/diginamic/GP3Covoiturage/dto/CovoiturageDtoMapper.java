@@ -13,38 +13,31 @@ import fr.diginamic.GP3Covoiturage.models.Covoiturage;
  */
 public class CovoiturageDtoMapper {
 
-	public static  CovoiturageDto toDto(Covoiturage covoiturage) {
-		
-		CovoiturageDto dto = new CovoiturageDto(covoiturage.getId(),
-				DateUtils.toString(covoiturage.getDateDepart())),
-				covoiturage.getPlacesRestantes(),
-				covoiturage.getNbPersonnes(),
-				covoiturage.getDureeTrajet(),
-				covoiturage.getDistance(),
-				CollaborateurDtoMapper.toDto(covoiturage.getOrganisateur()),
+	public static CovoiturageDto toDto(Covoiturage covoiturage) {
+
+		CovoiturageDto dto = new CovoiturageDto(covoiturage.getId(), DateUtils.toString(covoiturage.getDateDepart()),
+				covoiturage.getPlacesRestantes(), covoiturage.getNbPersonnes(), covoiturage.getDureeTrajet(),
+				covoiturage.getDistance(), CollaborateurDtoMapper.toDto(covoiturage.getOrganisateur()),
 				VehiculePersonnelDtoMapper.toDto(covoiturage.getVehiculePersonnel()),
 				AdresseDtoMapper.toDto(covoiturage.getAdresseDepart()),
 				AdresseDtoMapper.toDto(covoiturage.getAdresseArrivee()),
-				CollaborateurDtoMapper.toDto(covoiturage.getCollaborateurs());
-		
+				CollaborateurDtoMapper.listToDto(covoiturage.getCollaborateurs()));
+
 		return dto;
-		
+
 	}
 
 	/**
 	 * methode qui retourne une liste de collaborateurs
 	 */
 
-	public static List<CollaborateurDto> listToDtoCollaborateur(List<Collaborateur> collaborateurs) {
+	public static List<CovoiturageDto> listToDto(List<Covoiturage> covoiturages) {
 
-		List<CollaborateurDto> listCollabDto = new ArrayList<>();
+		List<CovoiturageDto> listCovoiDto = new ArrayList<>();
 
-		collaborateurs.forEach(c -> listCollabDto.add(CollaborateurDtoMapper.toDto(c)));
+		covoiturages.forEach(c -> listCovoiDto.add(CovoiturageDtoMapper.toDto(c)));
 
-		return listCollabDto;
+		return listCovoiDto;
 	}
-	
-	
-	 
 
 }

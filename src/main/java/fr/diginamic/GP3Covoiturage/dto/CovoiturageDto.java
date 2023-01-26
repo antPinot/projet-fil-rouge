@@ -49,7 +49,7 @@ public class CovoiturageDto {
 	/**
 	 * constructeur avec les entites
 	 */
-	public CovoiturageDto(Integer id, LocalDate dateDepart, Integer placesRestantes, Integer nbPersonnes,
+	public CovoiturageDto(Integer id, String dateDepart, Integer placesRestantes, Integer nbPersonnes,
 			Integer dureeTrajet, Integer distance, CollaborateurDto organisateur,
 			VehiculePersonnelDto vehiculePersonnel, AdresseDto adresseDepart, AdresseDto adresseArrivee,
 			List<CollaborateurDto> collaborateurs) {
