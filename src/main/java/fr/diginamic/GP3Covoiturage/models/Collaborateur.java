@@ -72,7 +72,6 @@ public class Collaborateur {
 
 	@ManyToMany
 	@JoinTable(name = "Participation", joinColumns = @JoinColumn(name = "Collaborateurid", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "Covoiturageid", referencedColumnName = "id"))
-
 	private List<Covoiturage> covoiturages = new ArrayList<Covoiturage>();
 
 	public Collaborateur() {
