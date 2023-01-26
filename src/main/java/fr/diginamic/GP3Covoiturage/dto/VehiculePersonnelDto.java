@@ -36,9 +36,10 @@ public class VehiculePersonnelDto {
 	 * @param limitePlace
 	 * @param collaborateurs
 	 */
-	public VehiculePersonnelDto(String immatriculation, String marque, String modele, int places, int limitePlace,
+	public VehiculePersonnelDto(int id, String immatriculation, String marque, String modele, int places, int limitePlace,
 			List<CollaborateurDto> collaborateurs) {
 		super();
+		this.id = id;
 		this.immatriculation = immatriculation;
 		this.marque = marque;
 		this.modele = modele;

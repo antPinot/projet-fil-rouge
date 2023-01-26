@@ -80,8 +80,8 @@ public class Covoiturage {
 	 */
 	public Covoiturage(Integer id, LocalDate dateDepart, Integer placesRestantes, Integer nbPersonnes,
 			Integer dureeTrajet, Integer distance, Collaborateur organisateur, VehiculePersonnel vehiculePersonnel,
-			Adresse adresseDepart, Adresse adresseArrivee, List<Collaborateur> collaborateurs, Adresse adresse,
-			VehiculePersonnel vehicule_Personnel) {
+			Adresse adresseDepart, Adresse adresseArrivee, List<Collaborateur> collaborateurs, Adresse adresse
+			 ) {
 		super();
 		this.id = id;
 		this.dateDepart = dateDepart;
