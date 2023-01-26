@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.diginamic.GP3Covoiturage.models.Collaborateur;
+import fr.diginamic.GP3Covoiturage.utils.DateUtils;
 
 public class CollaborateurDtoMapper {
 	
@@ -13,12 +14,12 @@ public class CollaborateurDtoMapper {
 				collaborateur.getMatricule(),
 				collaborateur.getNom(),
 				collaborateur.getPrenom(),
-				DateUtils.toString(collaborateur.getDateNaissance()),
+				DateUtils.localDateToString(collaborateur.getDateNaissance()),
 				collaborateur.getTelephone(),
 				collaborateur.getMail(),
 				collaborateur.getLogin(),
 				collaborateur.getPassword(),
-				DateUtils.toString(collaborateur.getDateCreation()),
+				DateUtils.localDateToString(collaborateur.getDateCreation()),
 				VehiculePersonnelDtoMapper.listToDto(collaborateur.getVehiculespersonnels()),
 				RoleDtoMapper.listToDto(collaborateur.getRoles()),
 				CovoiturageDtoMapper.listToDto(collaborateur.getCovoiturages()));

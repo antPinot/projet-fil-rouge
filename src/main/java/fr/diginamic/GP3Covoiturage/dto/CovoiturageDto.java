@@ -1,12 +1,7 @@
 package fr.diginamic.GP3Covoiturage.dto;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-
-import fr.diginamic.GP3Covoiturage.models.Adresse;
-import fr.diginamic.GP3Covoiturage.models.Collaborateur;
-import fr.diginamic.GP3Covoiturage.models.VehiculePersonnel;
 
 /**
  * @author Fekhreddine

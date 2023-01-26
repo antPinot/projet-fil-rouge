@@ -1,7 +1,7 @@
 package fr.diginamic.GP3Covoiturage.models;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import jakarta.persistence.Column;
@@ -39,7 +39,7 @@ public class Collaborateur {
 	private String prenom;
 
 	@Column(name = "dateNaissance", length = 50, nullable = false)
-	private Date dateNaissance;
+	private LocalDate dateNaissance;
 
 	@Column(name = "telephone", length = 10, nullable = false)
 	private int telephone;
@@ -54,7 +54,7 @@ public class Collaborateur {
 	private String password;
 
 	@Column(name = "dateCreation", length = 50, nullable = false)
-	private Date dateCreation;
+	private LocalDate dateCreation;
 
 	@OneToMany(mappedBy = "organisateur")
 	private List<Covoiturage> annonces = new ArrayList<Covoiturage>();
@@ -97,8 +97,8 @@ public class Collaborateur {
 	 * @param roles
 	 * @param covoiturages
 	 */
-	public Collaborateur(int id, int matricule, String nom, String prenom, Date dateNaissance, int telephone,
-			String mail, String login, String password, Date dateCreation, List<Covoiturage> annonces,
+	public Collaborateur(int id, int matricule, String nom, String prenom, LocalDate dateNaissance, int telephone,
+			String mail, String login, String password, LocalDate dateCreation, List<Covoiturage> annonces,
 			List<ReservationVehicule> reservationsVehicule, List<VehiculePersonnel> vehiculespersonnels,
 			List<Role> roles, List<Covoiturage> covoiturages) {
 		this.id = id;
@@ -195,7 +195,7 @@ public class Collaborateur {
 	 * 
 	 * @return the dateNaissance
 	 */
-	public Date getDateNaissance() {
+	public LocalDate getDateNaissance() {
 		return dateNaissance;
 	}
 
@@ -204,7 +204,7 @@ public class Collaborateur {
 	 * 
 	 * @param dateNaissance the dateNaissance to set
 	 */
-	public void setDateNaissance(Date dateNaissance) {
+	public void setDateNaissance(LocalDate dateNaissance) {
 		this.dateNaissance = dateNaissance;
 	}
 
@@ -285,7 +285,7 @@ public class Collaborateur {
 	 * 
 	 * @return the dateCreation
 	 */
-	public Date getDateCreation() {
+	public LocalDate getDateCreation() {
 		return dateCreation;
 	}
 
@@ -294,7 +294,7 @@ public class Collaborateur {
 	 * 
 	 * @param dateCreation the dateCreation to set
 	 */
-	public void setDateCreation(Date dateCreation) {
+	public void setDateCreation(LocalDate dateCreation) {
 		this.dateCreation = dateCreation;
 	}
 

@@ -3,10 +3,8 @@ package fr.diginamic.GP3Covoiturage.dto;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.hibernate.type.descriptor.DateTimeUtils;
-
-import fr.diginamic.GP3Covoiturage.models.Collaborateur;
 import fr.diginamic.GP3Covoiturage.models.Covoiturage;
+import fr.diginamic.GP3Covoiturage.utils.DateUtils;
 
 /**
  * @author Fekhreddine
@@ -15,7 +13,7 @@ public class CovoiturageDtoMapper {
 
 	public static CovoiturageDto toDto(Covoiturage covoiturage) {
 
-		CovoiturageDto dto = new CovoiturageDto(covoiturage.getId(), DateUtils.toString(covoiturage.getDateDepart()),
+		CovoiturageDto dto = new CovoiturageDto(covoiturage.getId(), DateUtils.localDateTimeToString(covoiturage.getDateDepart()),
 				covoiturage.getPlacesRestantes(), covoiturage.getNbPersonnes(), covoiturage.getDureeTrajet(),
 				covoiturage.getDistance(), CollaborateurDtoMapper.toDto(covoiturage.getOrganisateur()),
 				VehiculePersonnelDtoMapper.toDto(covoiturage.getVehiculePersonnel()),
