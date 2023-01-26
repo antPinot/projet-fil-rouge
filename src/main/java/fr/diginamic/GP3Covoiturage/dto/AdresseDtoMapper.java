@@ -35,12 +35,5 @@ public class AdresseDtoMapper {
 		return dto;
 		
 	}
-	
-	public static List<AdresseDto> listToDto(List<Adresse> adresses){
-		List<AdresseDto> listDto = new ArrayList<>();
-		adresses.forEach(a -> listDto.add(AdresseDtoMapper.toDto(a)));
-		return listDto;
-	}
-	
-	
+
 }
