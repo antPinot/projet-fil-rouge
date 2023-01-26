@@ -36,8 +36,6 @@ public class DateUtils {
 		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/YYYY hh:mm", Locale.FRANCE);
 		return dtf.format(localDate);
 	}
-<<<<<<< HEAD
-=======
 	
 	public static LocalDate stringToLocalDate(String formattedLocalDate) {
 		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/YYYY", Locale.FRANCE);
@@ -48,6 +46,5 @@ public class DateUtils {
 		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/YYYY hh:mm", Locale.FRANCE);
 		return LocalDateTime.parse(formattedLocalDateTime, dtf);
 	}
->>>>>>> e654393 (Ajout methodes static toModel + DateUtils stringToDate)
 
 }
