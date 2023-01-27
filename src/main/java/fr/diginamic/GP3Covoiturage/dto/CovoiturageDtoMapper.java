@@ -60,10 +60,11 @@ public class CovoiturageDtoMapper {
 				c.getPlacesRestantes(), c.getNbPersonnes(), c.getDureeTrajet(), c.getDistance(),
 				CollaborateurDtoMapper.toModel(c.getOrganisateur()),
 				VehiculePersonnelDtoMapper.toModel(c.getVehiculePersonnel()),
-				AdresseDtoMapper.toModel(c.getAdresseDepart()), AdresseDtoMapper.toModel(c.getAdresseArrivee()),
+				AdresseDtoMapper.toModel(c.getAdresseDepart()), 
+				AdresseDtoMapper.toModel(c.getAdresseArrivee()),
 				CollaborateurDtoMapper.listToModels(c.getCollaborateurs()));
 
-		return c;
+		return modelCovoit;
 	}
 
 }

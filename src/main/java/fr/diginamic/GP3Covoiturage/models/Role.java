@@ -44,17 +44,20 @@ public class Role {
 	/**
 	 * @return constructor avec les entites
 	 */
-	public Role(Integer id, String name) {
+	public Role(Integer id, String name, List<Collaborateur> collaborateurs) {
 		super();
 		this.id = id;
 		this.name = name;
+		this.collaborateurs = collaborateurs;
 	}
+
 
 	/**
 	 * @return constructor vide
 	 */
 	public Role() {
 	}
+
 
 	/**
 	 * @return the id
