@@ -51,10 +51,10 @@ public class VehiculeSociete {
 	private int statut;
 	
 	@Enumerated(EnumType.STRING)
-	public Categorie categorie;
+	private Categorie categorie;
 	
 	@OneToMany(mappedBy = "vehiculeSociete")
-	public List<ReservationVehicule> reservationsVehicule = new ArrayList<ReservationVehicule>();
+	private List<ReservationVehicule> reservationsVehicule = new ArrayList<ReservationVehicule>();
 	
 	public VehiculeSociete() {
 		super();
@@ -69,9 +69,12 @@ public class VehiculeSociete {
 	 * @param photo
 	 * @param disponible
 	 * @param statut
+	 * @param categorie
+	 * @param reservationsVehicule
 	 */
 	public VehiculeSociete(int id, String immatriculation, String marque, String modele, @Size(max = 9) int places,
-			String photo, int disponible, int statut) {
+			String photo, int disponible, int statut, Categorie categorie,
+			List<ReservationVehicule> reservationsVehicule) {
 		super();
 		this.id = id;
 		this.immatriculation = immatriculation;
@@ -81,6 +84,8 @@ public class VehiculeSociete {
 		this.photo = photo;
 		this.disponible = disponible;
 		this.statut = statut;
+		this.categorie = categorie;
+		this.reservationsVehicule = reservationsVehicule;
 	}
 
 	/**

@@ -22,7 +22,9 @@ public class VehiculePersonnelDto {
 	
 	private int limitePlace;
 	
-	public List<CollaborateurDto> collaborateurs = new ArrayList<CollaborateurDto>();
+	private List<CovoiturageDto> covoiturages = new ArrayList<CovoiturageDto>();
+	
+	private List<CollaborateurDto> collaborateurs = new ArrayList<CollaborateurDto>();
 
 	public VehiculePersonnelDto() {
 		super();
@@ -37,7 +39,7 @@ public class VehiculePersonnelDto {
 	 * @param collaborateurs
 	 */
 	public VehiculePersonnelDto(int id, String immatriculation, String marque, String modele, int places, int limitePlace,
-			List<CollaborateurDto> collaborateurs) {
+			List<CovoiturageDto> covoiturages, List<CollaborateurDto> collaborateurs) {
 		super();
 		this.id = id;
 		this.immatriculation = immatriculation;
@@ -45,6 +47,7 @@ public class VehiculePersonnelDto {
 		this.modele = modele;
 		this.places = places;
 		this.limitePlace = limitePlace;
+		this.covoiturages = covoiturages;
 		this.collaborateurs = collaborateurs;
 	}
 
@@ -142,6 +145,22 @@ public class VehiculePersonnelDto {
 	 */
 	public void setLimitePlace(int limitePlace) {
 		this.limitePlace = limitePlace;
+	}
+	
+	/**
+	 * Getter pour l'attribut covoiturages
+	 * @return the covoiturages
+	 */
+	public List<CovoiturageDto> getCovoiturages() {
+		return covoiturages;
+	}
+
+	/**
+	 * Setter pour l'attribut covoiturages
+	 * @param covoiturages the covoiturages to set
+	 */
+	public void setCovoiturages(List<CovoiturageDto> covoiturages) {
+		this.covoiturages = covoiturages;
 	}
 
 	/**
