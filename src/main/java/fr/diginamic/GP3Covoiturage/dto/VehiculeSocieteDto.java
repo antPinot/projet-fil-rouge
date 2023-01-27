@@ -1,6 +1,9 @@
 package fr.diginamic.GP3Covoiturage.dto;
 
-import fr.diginamic.GP3Covoiturage.enums.Categorie;
+import java.util.ArrayList;
+import java.util.List;
+
+import fr.diginamic.GP3Covoiturage.models.ReservationVehicule;
 
 /** Classe VehiculeSocieteDto
  * 
@@ -25,7 +28,9 @@ public class VehiculeSocieteDto {
 	
 	private int statut;
 	
-	public Categorie categorie;
+	private String categorie;
+	
+	private List<ReservationVehicule> reservationsVehicule = new ArrayList<ReservationVehicule>();
 
 	public VehiculeSocieteDto() {
 		super();
@@ -43,7 +48,7 @@ public class VehiculeSocieteDto {
 	 * @param categorie
 	 */
 	public VehiculeSocieteDto(int id, String immatriculation, String marque, String modele, int places, String photo,
-			int disponible, int statut, Categorie categorie) {
+			int disponible, int statut, String categorie, List<ReservationVehicule> reservationsVehicule) {
 		super();
 		this.id = id;
 		this.immatriculation = immatriculation;
@@ -54,6 +59,7 @@ public class VehiculeSocieteDto {
 		this.disponible = disponible;
 		this.statut = statut;
 		this.categorie = categorie;
+		this.reservationsVehicule = reservationsVehicule;
 	}
 
 	/**
@@ -188,7 +194,7 @@ public class VehiculeSocieteDto {
 	 * Getter pour l'attribut categorie
 	 * @return the categorie
 	 */
-	public Categorie getCategorie() {
+	public String getCategorie() {
 		return categorie;
 	}
 
@@ -196,8 +202,24 @@ public class VehiculeSocieteDto {
 	 * Setter pour l'attribut categorie
 	 * @param categorie the categorie to set
 	 */
-	public void setCategorie(Categorie categorie) {
+	public void setCategorie(String categorie) {
 		this.categorie = categorie;
+	}
+
+	/**
+	 * Getter pour l'attribut reservationsVehicule
+	 * @return the reservationsVehicule
+	 */
+	public List<ReservationVehicule> getReservationsVehicule() {
+		return reservationsVehicule;
+	}
+
+	/**
+	 * Setter pour l'attribut reservationsVehicule
+	 * @param reservationsVehicule the reservationsVehicule to set
+	 */
+	public void setReservationsVehicule(List<ReservationVehicule> reservationsVehicule) {
+		this.reservationsVehicule = reservationsVehicule;
 	}
 	
 }
