@@ -31,8 +31,8 @@ public class VehiculeSocieteDtoMapper {
 				vehiculeSocieteDto.getPhoto(),
 				vehiculeSocieteDto.getDisponible(),
 				vehiculeSocieteDto.getStatut(),
-				Categorie.valueOfName(vehiculeSocieteDto.getCategorie(),
-				ReservationVehiculeDtoMapper.listToModels(vehiculeSocieteDto.getReservationsVehicule())));
+				Categorie.valueOfName(vehiculeSocieteDto.getCategorie()),
+				ReservationVehiculeDtoMapper.listToModels(vehiculeSocieteDto.getReservationsVehicule()));
 		
 		return model;		
 	}

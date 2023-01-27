@@ -33,7 +33,7 @@ public class RoleDtoMapper {
 	 * methode qui retourne une liste de role
 	 * 
 	 */
-	public static List<Role> listToRoles(List<RoleDto> rolesDto) {
+	public static List<Role> listToModels(List<RoleDto> rolesDto) {
 
 		List<Role> listModelsRoles = new ArrayList<>();
 
@@ -43,14 +43,14 @@ public class RoleDtoMapper {
 	}
 
 	/**
-	 * methode qui retourne un modele
+	 * methode toModel qui retourne un modele
 	 * 
 	 */
 	public static Role toModel(RoleDto c) {
 
-		Role modelRole = new Role(c.getId(), c.getName(), CollaborateurDtoMapper.toModel(c.getCollaborateurs()));
+		Role modelRole = new Role(c.getId(), c.getName(), CollaborateurDtoMapper.listToModels(c.getCollaborateurs()));
 
-		return c;
+		return modelRole;
 	}
 
 }
