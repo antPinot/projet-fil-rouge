@@ -10,7 +10,7 @@ import java.util.List;
 
 public class VehiculePersonnelDto {
 	
-	private int id;
+	private Integer id;
 	
 	private String immatriculation;
 	
@@ -18,9 +18,9 @@ public class VehiculePersonnelDto {
 	
 	private String modele;
 	
-	private int places;
+	private Integer places;
 	
-	private int limitePlace;
+	private Integer limitePlace;
 	
 	private List<CovoiturageDto> covoiturages = new ArrayList<CovoiturageDto>();
 	
@@ -38,7 +38,7 @@ public class VehiculePersonnelDto {
 	 * @param limitePlace
 	 * @param collaborateurs
 	 */
-	public VehiculePersonnelDto(int id, String immatriculation, String marque, String modele, int places, int limitePlace,
+	public VehiculePersonnelDto(Integer id, String immatriculation, String marque, String modele, Integer places, Integer limitePlace,
 			List<CovoiturageDto> covoiturages, List<CollaborateurDto> collaborateurs) {
 		super();
 		this.id = id;
@@ -55,7 +55,7 @@ public class VehiculePersonnelDto {
 	 * Getter pour l'attribut id
 	 * @return the id
 	 */
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
@@ -63,7 +63,7 @@ public class VehiculePersonnelDto {
 	 * Setter pour l'attribut id
 	 * @param id the id to set
 	 */
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -119,7 +119,7 @@ public class VehiculePersonnelDto {
 	 * Getter pour l'attribut places
 	 * @return the places
 	 */
-	public int getPlaces() {
+	public Integer getPlaces() {
 		return places;
 	}
 
@@ -127,7 +127,7 @@ public class VehiculePersonnelDto {
 	 * Setter pour l'attribut places
 	 * @param places the places to set
 	 */
-	public void setPlaces(int places) {
+	public void setPlaces(Integer places) {
 		this.places = places;
 	}
 
@@ -135,7 +135,7 @@ public class VehiculePersonnelDto {
 	 * Getter pour l'attribut limitePlace
 	 * @return the limitePlace
 	 */
-	public int getLimitePlace() {
+	public Integer getLimitePlace() {
 		return limitePlace;
 	}
 
@@ -143,7 +143,7 @@ public class VehiculePersonnelDto {
 	 * Setter pour l'attribut limitePlace
 	 * @param limitePlace the limitePlace to set
 	 */
-	public void setLimitePlace(int limitePlace) {
+	public void setLimitePlace(Integer limitePlace) {
 		this.limitePlace = limitePlace;
 	}
 	

@@ -10,9 +10,9 @@ import java.util.List;
 
 public class CollaborateurDto {
 	
-	private int id;
+	private Integer id;
 	
-	private int matricule;
+	private Integer matricule;
 
 	private String nom;
 
@@ -20,7 +20,7 @@ public class CollaborateurDto {
 
 	private String dateNaissance;
 
-	private int telephone;
+	private Integer telephone;
 
 	private String mail;
 
@@ -58,7 +58,7 @@ public class CollaborateurDto {
 	 * @param roles
 	 * @param covoiturages
 	 */
-	public CollaborateurDto(int id, int matricule, String nom, String prenom, String dateNaissance, int telephone, String mail,
+	public CollaborateurDto(Integer id, Integer matricule, String nom, String prenom, String dateNaissance, Integer telephone, String mail,
 			String login, String password, String dateCreation, List<CovoiturageDto> annonces, List<ReservationVehiculeDto> reservationsVehicule,
 			List<VehiculePersonnelDto> vehiculesPersonnel, List<RoleDto> roles, List<CovoiturageDto> covoiturages) {
 		super();
@@ -82,28 +82,28 @@ public class CollaborateurDto {
 	/**Getter pour l'attribut id
 	 * @return the id
 	 */
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
 	/**Setter pour l'attribut id
 	 * @param id the id to set
 	 */
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
 	/**Getter pour l'attribut matricule
 	 * @return the matricule
 	 */
-	public int getMatricule() {
+	public Integer getMatricule() {
 		return matricule;
 	}
 
 	/**Setter pour l'attribut matricule
 	 * @param matricule the matricule to set
 	 */
-	public void setMatricule(int matricule) {
+	public void setMatricule(Integer matricule) {
 		this.matricule = matricule;
 	}
 
@@ -152,14 +152,14 @@ public class CollaborateurDto {
 	/**Getter pour l'attribut telephone
 	 * @return the telephone
 	 */
-	public int getTelephone() {
+	public Integer getTelephone() {
 		return telephone;
 	}
 
 	/**Setter pour l'attribut telephone
 	 * @param telephone the telephone to set
 	 */
-	public void setTelephone(int telephone) {
+	public void setTelephone(Integer telephone) {
 		this.telephone = telephone;
 	}
 

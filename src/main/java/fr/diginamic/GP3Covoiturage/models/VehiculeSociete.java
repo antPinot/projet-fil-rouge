@@ -26,7 +26,7 @@ public class VehiculeSociete {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private Integer id;
 	
 	@Column(name="immatriculation", length = 9, nullable= false, unique= true)
 	private String immatriculation;
@@ -44,8 +44,8 @@ public class VehiculeSociete {
 	@Column(name="photo", length = 255, nullable= false)
 	private String photo;
 	
-	@Column(name="disponible", length = 1, nullable= false)
-	private int disponible;
+	@Column(name="disponible", nullable= false)
+	private boolean disponible;
 	
 	@Column(name="statut", length = 1, nullable= false)
 	private int statut;
@@ -72,8 +72,8 @@ public class VehiculeSociete {
 	 * @param categorie
 	 * @param reservationsVehicule
 	 */
-	public VehiculeSociete(int id, String immatriculation, String marque, String modele, @Size(max = 9) int places,
-			String photo, int disponible, int statut, Categorie categorie,
+	public VehiculeSociete(Integer id, String immatriculation, String marque, String modele, @Size(max = 9) int places,
+			String photo, boolean disponible, int statut, Categorie categorie,
 			List<ReservationVehicule> reservationsVehicule) {
 		super();
 		this.id = id;
@@ -92,7 +92,7 @@ public class VehiculeSociete {
 	 * Getter pour l'attribut id
 	 * @return the id
 	 */
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
@@ -100,7 +100,7 @@ public class VehiculeSociete {
 	 * Setter pour l'attribut id
 	 * @param id the id to set
 	 */
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -188,7 +188,7 @@ public class VehiculeSociete {
 	 * Getter pour l'attribut disponible
 	 * @return the disponible
 	 */
-	public int getDisponible() {
+	public boolean getDisponible() {
 		return disponible;
 	}
 
@@ -196,7 +196,7 @@ public class VehiculeSociete {
 	 * Setter pour l'attribut disponible
 	 * @param disponible the disponible to set
 	 */
-	public void setDisponible(int disponible) {
+	public void setDisponible(boolean disponible) {
 		this.disponible = disponible;
 	}
 
