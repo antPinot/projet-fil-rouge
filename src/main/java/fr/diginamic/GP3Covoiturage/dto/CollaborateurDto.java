@@ -3,10 +3,6 @@ package fr.diginamic.GP3Covoiturage.dto;
 import java.util.ArrayList;
 import java.util.List;
 
-import fr.diginamic.GP3Covoiturage.models.Covoiturage;
-import fr.diginamic.GP3Covoiturage.models.ReservationVehicule;
-
-
 /** Classe CollaborateurDto
  * 
  * @author Quentin
@@ -34,9 +30,9 @@ public class CollaborateurDto {
 
 	private String dateCreation;
 	
-	private List<Covoiturage> annonces = new ArrayList<Covoiturage>();
+	private List<CovoiturageDto> annonces = new ArrayList<CovoiturageDto>();
 	
-	private List<ReservationVehicule> reservationsVehicule = new ArrayList<ReservationVehicule>();
+	private List<ReservationVehiculeDto> reservationsVehicule = new ArrayList<ReservationVehiculeDto>();
 	
 	private List<VehiculePersonnelDto> vehiculesPersonnel = new ArrayList<VehiculePersonnelDto>();
 	
@@ -63,7 +59,7 @@ public class CollaborateurDto {
 	 * @param covoiturages
 	 */
 	public CollaborateurDto(int id, int matricule, String nom, String prenom, String dateNaissance, int telephone, String mail,
-			String login, String password, String dateCreation, List<Covoiturage> annonces, List<ReservationVehicule> reservationsVehicule,
+			String login, String password, String dateCreation, List<CovoiturageDto> annonces, List<ReservationVehiculeDto> reservationsVehicule,
 			List<VehiculePersonnelDto> vehiculesPersonnel, List<RoleDto> roles, List<CovoiturageDto> covoiturages) {
 		super();
 		this.id=id;
@@ -227,7 +223,7 @@ public class CollaborateurDto {
 	 * Getter pour l'attribut annonces
 	 * @return the annonces
 	 */
-	public List<Covoiturage> getAnnonces() {
+	public List<CovoiturageDto> getAnnonces() {
 		return annonces;
 	}
 
@@ -235,7 +231,7 @@ public class CollaborateurDto {
 	 * Setter pour l'attribut annonces
 	 * @param annonces the annonces to set
 	 */
-	public void setAnnonces(List<Covoiturage> annonces) {
+	public void setAnnonces(List<CovoiturageDto> annonces) {
 		this.annonces = annonces;
 	}
 
@@ -243,7 +239,7 @@ public class CollaborateurDto {
 	 * Getter pour l'attribut reservationsVehicule
 	 * @return the reservationsVehicule
 	 */
-	public List<ReservationVehicule> getReservationsVehicule() {
+	public List<ReservationVehiculeDto> getReservationsVehicule() {
 		return reservationsVehicule;
 	}
 
@@ -251,7 +247,7 @@ public class CollaborateurDto {
 	 * Setter pour l'attribut reservationsVehicule
 	 * @param reservationsVehicule the reservationsVehicule to set
 	 */
-	public void setReservationsVehicule(List<ReservationVehicule> reservationsVehicule) {
+	public void setReservationsVehicule(List<ReservationVehiculeDto> reservationsVehicule) {
 		this.reservationsVehicule = reservationsVehicule;
 	}
 
