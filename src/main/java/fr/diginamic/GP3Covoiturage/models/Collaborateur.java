@@ -27,7 +27,7 @@ public class Collaborateur {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private Integer id;
 
 	@Column(name = "matricule", length = 15, nullable = false, unique = true)
 	private int matricule;
@@ -97,7 +97,7 @@ public class Collaborateur {
 	 * @param roles
 	 * @param covoiturages
 	 */
-	public Collaborateur(int id, int matricule, String nom, String prenom, LocalDate dateNaissance, int telephone,
+	public Collaborateur(Integer id, int matricule, String nom, String prenom, LocalDate dateNaissance, int telephone,
 			String mail, String login, String password, LocalDate dateCreation, List<Covoiturage> annonces,
 			List<ReservationVehicule> reservationsVehicule, List<VehiculePersonnel> vehiculespersonnels,
 			List<Role> roles, List<Covoiturage> covoiturages) {
@@ -123,7 +123,7 @@ public class Collaborateur {
 	 * 
 	 * @return the id
 	 */
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
@@ -132,7 +132,7 @@ public class Collaborateur {
 	 * 
 	 * @param id the id to set
 	 */
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

@@ -24,7 +24,7 @@ public class VehiculePersonnel {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private Integer id;
 	
 	@Column(name="immatriculation", length = 9, nullable= false, unique= true)
 	private String immatriculation;
@@ -62,7 +62,7 @@ public class VehiculePersonnel {
 	 * @param covoiturages
 	 * @param collaborateurs
 	 */
-	public VehiculePersonnel(int id, String immatriculation, String marque, String modele, @Size(max = 9) int places,
+	public VehiculePersonnel(Integer id, String immatriculation, String marque, String modele, @Size(max = 9) int places,
 			int limitePlace, List<Covoiturage> covoiturages, List<Collaborateur> collaborateurs) {
 		super();
 		this.id = id;
@@ -79,7 +79,7 @@ public class VehiculePersonnel {
 	 * Getter pour l'attribut id
 	 * @return the id
 	 */
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
@@ -87,7 +87,7 @@ public class VehiculePersonnel {
 	 * Setter pour l'attribut id
 	 * @param id the id to set
 	 */
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
