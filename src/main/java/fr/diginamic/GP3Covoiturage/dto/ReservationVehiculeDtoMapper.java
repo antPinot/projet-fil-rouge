@@ -35,6 +35,8 @@ public class ReservationVehiculeDtoMapper {
 				DateUtils.stringToLocalDateTime(reservationVehiculeDto.getDateRetour()), 
 				CollaborateurDtoMapper.toModel(reservationVehiculeDto.getCollaborateur()), 
 				VehiculeSocieteDtoMapper.toModel(reservationVehiculeDto.getVehiculeSociete()));
+		
+		return model;
 	}
 	
 	public static List<ReservationVehiculeDto> listToDto(List<ReservationVehicule> reservations){

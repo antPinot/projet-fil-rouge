@@ -49,8 +49,10 @@ public class AdresseDtoMapper {
 				adresseDto.getDepartement(), 
 				adresseDto.getPays(),
 				adresseDto.getVille(), 
-				CovoiturageDtoMapper.listToModel(adresseDto.getCovoiturageDepart()), 
-				CovoiturageDtoMapper.listToModel(adresseDto.getCovoiturageArrivee()));
+				CovoiturageDtoMapper.listToModels(adresseDto.getCovoiturageDepart()), 
+				CovoiturageDtoMapper.listToModels(adresseDto.getCovoiturageArrivee()));
+		
+		return model;
 	}
 
 }
