@@ -16,7 +16,7 @@ import fr.diginamic.GP3Covoiturage.models.ReservationVehicule;
 import fr.diginamic.GP3Covoiturage.models.VehiculeSociete;
 
 /**
- * Repository de l'entité Adresse fournissant des méthodes d'accès à la 
+ * Repository de l'entité ReservationVehicule fournissant des méthodes d'accès à la 
  * base de données
  * @author antPinot
  *
