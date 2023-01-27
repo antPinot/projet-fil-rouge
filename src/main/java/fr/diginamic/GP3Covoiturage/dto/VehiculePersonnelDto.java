@@ -10,7 +10,7 @@ import java.util.List;
 
 public class VehiculePersonnelDto {
 	
-	private int id;
+	private Integer id;
 	
 	private String immatriculation;
 	
@@ -38,7 +38,7 @@ public class VehiculePersonnelDto {
 	 * @param limitePlace
 	 * @param collaborateurs
 	 */
-	public VehiculePersonnelDto(int id, String immatriculation, String marque, String modele, int places, int limitePlace,
+	public VehiculePersonnelDto(Integer id, String immatriculation, String marque, String modele, int places, int limitePlace,
 			List<CovoiturageDto> covoiturages, List<CollaborateurDto> collaborateurs) {
 		super();
 		this.id = id;
@@ -55,7 +55,7 @@ public class VehiculePersonnelDto {
 	 * Getter pour l'attribut id
 	 * @return the id
 	 */
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
@@ -63,7 +63,7 @@ public class VehiculePersonnelDto {
 	 * Setter pour l'attribut id
 	 * @param id the id to set
 	 */
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

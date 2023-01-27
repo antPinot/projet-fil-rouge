@@ -10,7 +10,7 @@ import java.util.List;
 
 public class CollaborateurDto {
 	
-	private int id;
+	private Integer id;
 	
 	private int matricule;
 
@@ -58,7 +58,7 @@ public class CollaborateurDto {
 	 * @param roles
 	 * @param covoiturages
 	 */
-	public CollaborateurDto(int id, int matricule, String nom, String prenom, String dateNaissance, int telephone, String mail,
+	public CollaborateurDto(Integer id, int matricule, String nom, String prenom, String dateNaissance, int telephone, String mail,
 			String login, String password, String dateCreation, List<CovoiturageDto> annonces, List<ReservationVehiculeDto> reservationsVehicule,
 			List<VehiculePersonnelDto> vehiculesPersonnel, List<RoleDto> roles, List<CovoiturageDto> covoiturages) {
 		super();
@@ -82,14 +82,14 @@ public class CollaborateurDto {
 	/**Getter pour l'attribut id
 	 * @return the id
 	 */
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
 	/**Setter pour l'attribut id
 	 * @param id the id to set
 	 */
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
