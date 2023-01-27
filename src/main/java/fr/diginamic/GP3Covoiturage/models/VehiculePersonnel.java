@@ -43,10 +43,10 @@ public class VehiculePersonnel {
 	private int limitePlace;
 	
 	@OneToMany(mappedBy = "vehiculePersonnel")
-	public List<Covoiturage> covoiturages = new ArrayList<Covoiturage>();
+	private List<Covoiturage> covoiturages = new ArrayList<Covoiturage>();
 	
 	@ManyToMany(mappedBy = "vehiculesPersonnel")
-	public List<Collaborateur> collaborateurs = new ArrayList<Collaborateur>();
+	private List<Collaborateur> collaborateurs = new ArrayList<Collaborateur>();
 
 	public VehiculePersonnel() {
 		super();
