@@ -69,3 +69,5 @@ public interface VehiculeSocieteRepository extends JpaRepository<VehiculeSociete
 	 */
 	@Query("SELECT v FROM VehiculeSociete v JOIN v.reservationsVehicule r JOIN r.collaborateur c WHERE c.nom = :nom")
 	public List<VehiculeSociete> findByCollaborateurNom(@Param("nom")String nom);
+	
+}
