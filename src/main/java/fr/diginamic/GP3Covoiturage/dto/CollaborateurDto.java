@@ -3,6 +3,9 @@ package fr.diginamic.GP3Covoiturage.dto;
 import java.util.ArrayList;
 import java.util.List;
 
+import fr.diginamic.GP3Covoiturage.models.Covoiturage;
+import fr.diginamic.GP3Covoiturage.models.ReservationVehicule;
+
 
 /** Classe CollaborateurDto
  * 
@@ -31,6 +34,10 @@ public class CollaborateurDto {
 
 	private String dateCreation;
 	
+	private List<Covoiturage> annonces = new ArrayList<Covoiturage>();
+	
+	private List<ReservationVehicule> reservationsVehicule = new ArrayList<ReservationVehicule>();
+	
 	private List<VehiculePersonnelDto> vehiculesPersonnel = new ArrayList<VehiculePersonnelDto>();
 	
 	private List<RoleDto> roles = new ArrayList<RoleDto>();
@@ -56,8 +63,8 @@ public class CollaborateurDto {
 	 * @param covoiturages
 	 */
 	public CollaborateurDto(int id, int matricule, String nom, String prenom, String dateNaissance, int telephone, String mail,
-			String login, String password, String dateCreation, List<VehiculePersonnelDto> vehiculesPersonnel,
-			List<RoleDto> roles, List<CovoiturageDto> covoiturages) {
+			String login, String password, String dateCreation, List<Covoiturage> annonces, List<ReservationVehicule> reservationsVehicule,
+			List<VehiculePersonnelDto> vehiculesPersonnel, List<RoleDto> roles, List<CovoiturageDto> covoiturages) {
 		super();
 		this.id=id;
 		this.matricule = matricule;
@@ -69,6 +76,8 @@ public class CollaborateurDto {
 		this.login = login;
 		this.password = password;
 		this.dateCreation = dateCreation;
+		this.annonces = annonces;
+		this.reservationsVehicule = reservationsVehicule;
 		this.vehiculesPersonnel = vehiculesPersonnel;
 		this.roles = roles;
 		this.covoiturages = covoiturages;
@@ -212,6 +221,38 @@ public class CollaborateurDto {
 	 */
 	public void setDateCreation(String dateCreation) {
 		this.dateCreation = dateCreation;
+	}
+
+	/**
+	 * Getter pour l'attribut annonces
+	 * @return the annonces
+	 */
+	public List<Covoiturage> getAnnonces() {
+		return annonces;
+	}
+
+	/**
+	 * Setter pour l'attribut annonces
+	 * @param annonces the annonces to set
+	 */
+	public void setAnnonces(List<Covoiturage> annonces) {
+		this.annonces = annonces;
+	}
+
+	/**
+	 * Getter pour l'attribut reservationsVehicule
+	 * @return the reservationsVehicule
+	 */
+	public List<ReservationVehicule> getReservationsVehicule() {
+		return reservationsVehicule;
+	}
+
+	/**
+	 * Setter pour l'attribut reservationsVehicule
+	 * @param reservationsVehicule the reservationsVehicule to set
+	 */
+	public void setReservationsVehicule(List<ReservationVehicule> reservationsVehicule) {
+		this.reservationsVehicule = reservationsVehicule;
 	}
 
 	/**Getter pour l'attribut vehiculesPersonnel

@@ -46,5 +46,14 @@ public enum Categorie {
 	public void setLibelle(String libelle) {
 		this.libelle = libelle;
 	}
-
+	
+	public static Categorie valueOfName (String name) {
+		Categorie[] categorie = values();
+		for(Categorie c: categorie) {
+			if (c.getLibelle().equals(name)) {
+				return c;
+			}
+		}
+		return null;
+	}
 }
