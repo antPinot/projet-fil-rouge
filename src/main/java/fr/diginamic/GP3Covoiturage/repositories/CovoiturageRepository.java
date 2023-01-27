@@ -36,6 +36,11 @@ public interface CovoiturageRepository extends JpaRepository<Covoiturage, Intege
     
    //public List<Covoiturage> findByCollaborateurs(List<Collaborateur> collaborateurs); //ici query avec un join
    
+   
+   /**
+    * @method qui selectionne tous les covoiturages
+    * par collaborateur
+    */
    @Query("SELECT DISTINCT c FROM Covoiturage c JOIN c.collaborateurs c WHERE c =:collaborateur")
 	public List<Covoiturage> findByAllCoivoituragesByCollaborateurs(@Param("collaborateur") Collaborateur collaborateur);
 	
