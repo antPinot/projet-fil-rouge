@@ -15,6 +15,10 @@ import fr.diginamic.GP3Covoiturage.models.Adresse;
 @Component
 public class AdresseDtoMapper {
 	
+	/**
+	 * @param adresse
+	 * @return
+	 */
 	public static AdresseDto toDto(Adresse adresse){
 		
 		AdresseDto dto = new AdresseDto(adresse.getId(), 
@@ -30,6 +34,23 @@ public class AdresseDtoMapper {
 		
 		return dto;
 		
+	}
+	
+	/**
+	 * @param adresseDto
+	 * @return
+	 */
+	public static Adresse toModel(AdresseDto adresseDto) {
+		Adresse model = new Adresse(adresseDto.getId(), 
+				adresseDto.getNumero(), 
+				adresseDto.getComplementNumero(), 
+				adresseDto.getVoie(), 
+				adresseDto.getCodePostal(),
+				adresseDto.getDepartement(), 
+				adresseDto.getPays(),
+				adresseDto.getVille(), 
+				CovoiturageDtoMapper.listToModel(adresseDto.getCovoiturageDepart()), 
+				CovoiturageDtoMapper.listToModel(adresseDto.getCovoiturageArrivee()));
 	}
 
 }
