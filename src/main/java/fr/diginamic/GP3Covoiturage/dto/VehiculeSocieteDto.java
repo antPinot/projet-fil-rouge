@@ -22,7 +22,7 @@ public class VehiculeSocieteDto {
 	
 	private String photo;
 	
-	private int disponible;
+	private boolean disponible;
 	
 	private int statut;
 	
@@ -46,7 +46,7 @@ public class VehiculeSocieteDto {
 	 * @param categorie
 	 */
 	public VehiculeSocieteDto(Integer id, String immatriculation, String marque, String modele, int places, String photo,
-			int disponible, int statut, String categorie, List<ReservationVehiculeDto> reservationsVehicule) {
+			boolean disponible, int statut, String categorie, List<ReservationVehiculeDto> reservationsVehicule) {
 		super();
 		this.id = id;
 		this.immatriculation = immatriculation;
@@ -160,7 +160,7 @@ public class VehiculeSocieteDto {
 	 * Getter pour l'attribut disponible
 	 * @return the disponible
 	 */
-	public int getDisponible() {
+	public boolean getDisponible() {
 		return disponible;
 	}
 
@@ -168,7 +168,7 @@ public class VehiculeSocieteDto {
 	 * Setter pour l'attribut disponible
 	 * @param disponible the disponible to set
 	 */
-	public void setDisponible(int disponible) {
+	public void setDisponible(boolean disponible) {
 		this.disponible = disponible;
 	}
 
