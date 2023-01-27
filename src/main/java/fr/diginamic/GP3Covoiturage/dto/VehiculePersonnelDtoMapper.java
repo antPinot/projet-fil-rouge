@@ -3,7 +3,6 @@ package fr.diginamic.GP3Covoiturage.dto;
 import java.util.ArrayList;
 import java.util.List;
 
-import fr.diginamic.GP3Covoiturage.models.Collaborateur;
 import fr.diginamic.GP3Covoiturage.models.VehiculePersonnel;
 
 public class VehiculePersonnelDtoMapper {
@@ -22,7 +21,7 @@ public class VehiculePersonnelDtoMapper {
 		return dto;
 	}
 	
-	public static VehiculePersonnel ToModel(VehiculePersonnelDto vehiculePersonnelDto) {
+	public static VehiculePersonnel toModel(VehiculePersonnelDto vehiculePersonnelDto) {
 		
 		VehiculePersonnel model = new VehiculePersonnel(vehiculePersonnelDto.getId(),
 				vehiculePersonnelDto.getImmatriculation(),
@@ -44,7 +43,7 @@ public class VehiculePersonnelDtoMapper {
 	
 	public static List<VehiculePersonnel> listToModels(List<VehiculePersonnelDto> vehiculePersonnelDto) {
 		List<VehiculePersonnel> listVehiculePersoModel = new ArrayList<>();
-		vehiculePersonnelDto.forEach(c -> listVehiculePersoModel.add(VehiculePersonnelDtoMapper.toDto(c)));
+		vehiculePersonnelDto.forEach(c -> listVehiculePersoModel.add(VehiculePersonnelDtoMapper.toModel(c)));
 		return listVehiculePersoModel;
 	}
 }

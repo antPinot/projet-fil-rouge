@@ -3,8 +3,6 @@ package fr.diginamic.GP3Covoiturage.dto;
 import java.util.ArrayList;
 import java.util.List;
 
-import fr.diginamic.GP3Covoiturage.models.ReservationVehicule;
-
 /** Classe VehiculeSocieteDto
  * 
  * @author Quentin
@@ -30,7 +28,7 @@ public class VehiculeSocieteDto {
 	
 	private String categorie;
 	
-	private List<ReservationVehicule> reservationsVehicule = new ArrayList<ReservationVehicule>();
+	private List<ReservationVehiculeDto> reservationsVehicule = new ArrayList<ReservationVehiculeDto>();
 
 	public VehiculeSocieteDto() {
 		super();
@@ -48,7 +46,7 @@ public class VehiculeSocieteDto {
 	 * @param categorie
 	 */
 	public VehiculeSocieteDto(int id, String immatriculation, String marque, String modele, int places, String photo,
-			int disponible, int statut, String categorie, List<ReservationVehicule> reservationsVehicule) {
+			int disponible, int statut, String categorie, List<ReservationVehiculeDto> reservationsVehicule) {
 		super();
 		this.id = id;
 		this.immatriculation = immatriculation;
@@ -210,7 +208,7 @@ public class VehiculeSocieteDto {
 	 * Getter pour l'attribut reservationsVehicule
 	 * @return the reservationsVehicule
 	 */
-	public List<ReservationVehicule> getReservationsVehicule() {
+	public List<ReservationVehiculeDto> getReservationsVehicule() {
 		return reservationsVehicule;
 	}
 
@@ -218,7 +216,7 @@ public class VehiculeSocieteDto {
 	 * Setter pour l'attribut reservationsVehicule
 	 * @param reservationsVehicule the reservationsVehicule to set
 	 */
-	public void setReservationsVehicule(List<ReservationVehicule> reservationsVehicule) {
+	public void setReservationsVehicule(List<ReservationVehiculeDto> reservationsVehicule) {
 		this.reservationsVehicule = reservationsVehicule;
 	}
 	
