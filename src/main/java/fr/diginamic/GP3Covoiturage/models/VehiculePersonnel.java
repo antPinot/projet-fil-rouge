@@ -37,10 +37,10 @@ public class VehiculePersonnel {
 	
 	@Column(name="places", length = 1, nullable= false)
 	@Size(max = 9)
-	private int places;
+	private Integer places;
 	
 	@Column(name="limitePlace", length = 1, nullable= false)
-	private int limitePlace;
+	private Integer limitePlace;
 	
 	@OneToMany(mappedBy = "vehiculePersonnel")
 	private List<Covoiturage> covoiturages = new ArrayList<Covoiturage>();
@@ -62,8 +62,8 @@ public class VehiculePersonnel {
 	 * @param covoiturages
 	 * @param collaborateurs
 	 */
-	public VehiculePersonnel(Integer id, String immatriculation, String marque, String modele, @Size(max = 9) int places,
-			int limitePlace, List<Covoiturage> covoiturages, List<Collaborateur> collaborateurs) {
+	public VehiculePersonnel(Integer id, String immatriculation, String marque, String modele, @Size(max = 9) Integer places,
+			Integer limitePlace, List<Covoiturage> covoiturages, List<Collaborateur> collaborateurs) {
 		super();
 		this.id = id;
 		this.immatriculation = immatriculation;
@@ -143,7 +143,7 @@ public class VehiculePersonnel {
 	 * Getter pour l'attribut places
 	 * @return the places
 	 */
-	public int getPlaces() {
+	public Integer getPlaces() {
 		return places;
 	}
 
@@ -151,7 +151,7 @@ public class VehiculePersonnel {
 	 * Setter pour l'attribut places
 	 * @param places the places to set
 	 */
-	public void setPlaces(int places) {
+	public void setPlaces(Integer places) {
 		this.places = places;
 	}
 
@@ -159,7 +159,7 @@ public class VehiculePersonnel {
 	 * Getter pour l'attribut limitePlace
 	 * @return the limitePlace
 	 */
-	public int getLimitePlace() {
+	public Integer getLimitePlace() {
 		return limitePlace;
 	}
 
@@ -167,7 +167,7 @@ public class VehiculePersonnel {
 	 * Setter pour l'attribut limitePlace
 	 * @param limitePlace the limitePlace to set
 	 */
-	public void setLimitePlace(int limitePlace) {
+	public void setLimitePlace(Integer limitePlace) {
 		this.limitePlace = limitePlace;
 	}
 
