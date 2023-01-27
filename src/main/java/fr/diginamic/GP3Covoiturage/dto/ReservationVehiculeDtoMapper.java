@@ -25,5 +25,13 @@ public class ReservationVehiculeDtoMapper {
 		
 		return dto;
 	}
+	
+	public static ReservationVehicule toModel(ReservationVehiculeDto reservationVehiculeDto) {
+		ReservationVehicule model = new ReservationVehicule(reservationVehiculeDto.getId(), 
+				DateUtils.stringToLocalDateTime(reservationVehiculeDto.getDateDepart()), 
+				DateUtils.stringToLocalDateTime(reservationVehiculeDto.getDateRetour()), 
+				CollaborateurDtoMapper.toModel(reservationVehiculeDto.getCollaborateur()), 
+				VehiculeSocieteDtoMapper.toModel(reservationVehiculeDto.getVehiculeSociete()));
+	}
 
 }
