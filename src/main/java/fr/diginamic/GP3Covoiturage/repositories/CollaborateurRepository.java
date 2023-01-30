@@ -29,17 +29,17 @@ public interface CollaborateurRepository extends JpaRepository<Collaborateur, In
 	
 	public List<Collaborateur> findByMail(String mail);
 	
-	public List<Collaborateur> findByCovoiturage(Covoiturage annonces);
+	public List<Collaborateur> findByAnnonces(Covoiturage annonces);
 	
-	public List<Collaborateur> findByReservationVehicule(ReservationVehicule reservationsVehicule);
+	public List<Collaborateur> findByReservationsVehicule(ReservationVehicule reservationsVehicule);
 	
-	@Query("SELECT c FROM Collaborateur c JOIN c.vehiculePersonnel v WHERE v = :vehiculePersonnel")
+	@Query("SELECT c FROM Collaborateur c JOIN c.vehiculesPersonnel v WHERE v = :vehiculePersonnel")
 	public List<Collaborateur> findCollaborateurlByVehiculePersonnels(@Param("vehiculePersonnel") VehiculePersonnel vehiculePersonnel);
 	
 	@Query("SELECT c FROM Collaborateur c JOIN c.roles r WHERE r = :role")
 	public List<Collaborateur> findCollaborateurlByRoles(@Param("role") Role role);
 	
-	@Query("SELECT c FROM Collaborateur c JOIN c.covoiturage c WHERE c = :covoiturage")
+	@Query("SELECT c FROM Collaborateur c JOIN c.covoiturages cov WHERE cov = :covoiturage")
 	public List<Collaborateur> findCollaborateurlByCovoiturages(@Param("covoiturage") Covoiturage covoiturage);
 
 }
