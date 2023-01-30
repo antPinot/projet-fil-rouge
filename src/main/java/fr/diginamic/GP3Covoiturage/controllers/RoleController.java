@@ -58,7 +58,7 @@ public class RoleController {
 	 * @method create
 	 */
 	@PostMapping()
-	public RoleDto createRole(@RequestBody RoleDto createRole) {
+	public RoleDto createRole(@RequestBody @Valid RoleDto createRole) {
 
 		Role modelRole = RoleDtoMapper.toModel(createRole);
 		roleService.create(modelRole);
@@ -70,7 +70,7 @@ public class RoleController {
 	 * @method update
 	 */
 	@PutMapping("/{id}")
-	public RoleDto updateRole(@PathVariable("id") Integer id, RoleDto updateRole) {
+	public RoleDto updateRole(@PathVariable("id") Integer id,@Valid  RoleDto updateRole) {
 		if (!id.equals(updateRole.getId())) {
 
 			throw new RuntimeException("probleme : covoiturage existe pas");
