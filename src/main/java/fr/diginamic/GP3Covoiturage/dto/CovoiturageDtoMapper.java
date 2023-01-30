@@ -54,7 +54,7 @@ public class CovoiturageDtoMapper {
 	/**
 	 * methode qui retourne un modele
 	 */
-	private static Covoiturage toModel(CovoiturageDto c) {
+	public static Covoiturage toModel(CovoiturageDto c) {
 
 		Covoiturage modelCovoit = new Covoiturage(c.getId(), DateUtils.stringToLocalDateTime(c.getDateDepart()),
 				c.getPlacesRestantes(), c.getNbPersonnes(), c.getDureeTrajet(), c.getDistance(),

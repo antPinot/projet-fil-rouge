@@ -51,7 +51,7 @@ public class DateUtils {
 	 * @return
 	 */
 	public static LocalDateTime stringToLocalDateTime(String formattedLocalDateTime) {
-		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/YYYY hh:mm", Locale.FRANCE);
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm", Locale.FRANCE);
 		return LocalDateTime.parse(formattedLocalDateTime, dtf);
 	}
 
