@@ -18,7 +18,7 @@ import fr.diginamic.GP3Covoiturage.models.VehiculeSociete;
 import fr.diginamic.GP3Covoiturage.services.VehiculeSocieteService;
 
 @RestController
-@RequestMapping("")
+@RequestMapping("rest/vehicule-societe")
 public class VehiculeSocieteController {
 	
 	@Autowired

@@ -18,7 +18,7 @@ import fr.diginamic.GP3Covoiturage.models.Collaborateur;
 import fr.diginamic.GP3Covoiturage.services.CollaborateurService;
 
 @RestController
-@RequestMapping("")
+@RequestMapping("/rest/collaborateur")
 public class CollaborateurController {
 	
 	@Autowired

@@ -18,7 +18,7 @@ import fr.diginamic.GP3Covoiturage.models.VehiculePersonnel;
 import fr.diginamic.GP3Covoiturage.services.VehiculePersonnelService;
 
 @RestController
-@RequestMapping("")
+@RequestMapping("rest/vehicule-personnel")
 public class VehiculePersonnelController {
 	
 	@Autowired
