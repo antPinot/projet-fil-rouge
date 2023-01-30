@@ -3,6 +3,8 @@ package fr.diginamic.GP3Covoiturage.dto;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 /**
  * @author Fekhreddine
  */
@@ -28,17 +30,22 @@ public class CovoiturageDto {
 	 * relation many to one avec autres classes
 	 */
 
+	@JsonIgnoreProperties(value = "organisateur")
 	private CollaborateurDto organisateur;
-
+	
+	@JsonIgnoreProperties(value = "vehiculePersonnel")
 	private VehiculePersonnelDto vehiculePersonnel;
-
+	
+	@JsonIgnoreProperties(value = "adresseDepart")
 	private AdresseDto adresseDepart;
-
+	
+	@JsonIgnoreProperties(value = "adresseArrivee")
 	private AdresseDto adresseArrivee;
 
 	/**
 	 * relation many to many avec collaborateur
 	 */
+	@JsonIgnoreProperties(value = "collaborateurs")
 	private List<CollaborateurDto> collaborateurs = new ArrayList<>();
 
 	/**

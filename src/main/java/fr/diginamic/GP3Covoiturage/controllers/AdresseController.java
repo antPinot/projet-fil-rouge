@@ -15,8 +15,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import fr.diginamic.GP3Covoiturage.dto.AdresseDto;
 import fr.diginamic.GP3Covoiturage.dto.AdresseDtoMapper;
+import fr.diginamic.GP3Covoiturage.exceptions.FunctionalException;
 import fr.diginamic.GP3Covoiturage.models.Adresse;
 import fr.diginamic.GP3Covoiturage.services.AdresseService;
+import jakarta.validation.Valid;
 
 /**
  * @author antPinot
@@ -35,7 +37,7 @@ public class AdresseController {
 	 * @param adresseToCreate
 	 */
 	@PostMapping
-	public AdresseDto create(@RequestBody AdresseDto adresseToCreate) {
+	public AdresseDto create(@RequestBody @Valid AdresseDto adresseToCreate) {
 		Adresse model = AdresseDtoMapper.toModel(adresseToCreate);
 		adresseService.create(model);
 		return adresseToCreate;
@@ -43,7 +45,12 @@ public class AdresseController {
 	
 	@GetMapping("/{id}")
 	public AdresseDto read(@PathVariable("id") Integer id) {
-		return adresseService.findById(id);
+		try {
+			return adresseService.findById(id);
+		} catch (FunctionalException e) {
+			System.out.println(e.getMessage()); 
+			return null;
+		}
 	}
 
 	/**
