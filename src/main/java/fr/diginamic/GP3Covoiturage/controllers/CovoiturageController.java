@@ -49,7 +49,7 @@ public class CovoiturageController {
 	 * @method create
 	 */
 	@PostMapping()
-	public CovoiturageDto createCovoiturage(@RequestBody CovoiturageDto createCovoiturage) {
+	public CovoiturageDto createCovoiturage(@RequestBody @Valid CovoiturageDto createCovoiturage) {
 
 		Covoiturage modelCovoit = CovoiturageDtoMapper.toModel(createCovoiturage);
 		covoiturageService.create(modelCovoit);
@@ -60,7 +60,7 @@ public class CovoiturageController {
 	 * @method update
 	 */
 	@PutMapping("/{id}")
-	public CovoiturageDto updateCovoiturage(@PathVariable("id") Integer id, CovoiturageDto updateCovoiturage) {
+	public CovoiturageDto updateCovoiturage(@PathVariable("id") Integer id, @Valid CovoiturageDto updateCovoiturage) {
 		if (!id.equals(updateCovoiturage.getId())) {
 
 			throw new RuntimeException("probleme : covoiturage existe pas");
