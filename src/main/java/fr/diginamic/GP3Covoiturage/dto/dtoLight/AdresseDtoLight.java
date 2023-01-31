@@ -1,5 +1,9 @@
 package fr.diginamic.GP3Covoiturage.dto.dtoLight;
 
+/**
+ * @author Fekhreddine
+ */
+
 public class AdresseDtoLight {
 
 	/** id */

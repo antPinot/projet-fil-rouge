@@ -4,6 +4,8 @@ import fr.diginamic.GP3Covoiturage.models.Adresse;
 
 /**
  * @author Fekhreddine
+ * 
+ * 
  */
 public class AdresseDtoLightMapper {
 
