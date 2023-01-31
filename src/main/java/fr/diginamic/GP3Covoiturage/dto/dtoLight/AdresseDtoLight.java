@@ -1,6 +1,6 @@
 package fr.diginamic.GP3Covoiturage.dto.dtoLight;
 
-public class AdresseLightDto {
+public class AdresseDtoLight {
 
 	/** id */
 	private Integer id;
@@ -27,7 +27,7 @@ public class AdresseLightDto {
 	private String ville;
 
 	/** constructor */
-	public AdresseLightDto(Integer id, Integer numero, String complementNumero, String voie, Integer codePostal,
+	public AdresseDtoLight(Integer id, Integer numero, String complementNumero, String voie, Integer codePostal,
 			String departement, String pays, String ville) {
 		super();
 		this.id = id;
@@ -41,7 +41,7 @@ public class AdresseLightDto {
 	}
 
 	/** constrcutor */
-	public AdresseLightDto() {
+	public AdresseDtoLight() {
 	}
 
 	/**

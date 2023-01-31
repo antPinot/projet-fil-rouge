@@ -1,6 +1,6 @@
 package fr.diginamic.GP3Covoiturage.dto.dtoLight;
 
-public class VehiculePersonnelLightDto {
+public class VehiculePersonnelDtoLight {
 
 	private Integer id;
 
@@ -22,7 +22,7 @@ public class VehiculePersonnelLightDto {
 	 * @param limitePlace
 	 * 
 	 */
-	public VehiculePersonnelLightDto(Integer id, String immatriculation, String marque, String modele, Integer places,
+	public VehiculePersonnelDtoLight(Integer id, String immatriculation, String marque, String modele, Integer places,
 			Integer limitePlace) {
 		super();
 		this.id = id;
@@ -34,7 +34,7 @@ public class VehiculePersonnelLightDto {
 	}
 
 	/** construct vide */
-	public VehiculePersonnelLightDto() {
+	public VehiculePersonnelDtoLight() {
 	}
 
 	/**

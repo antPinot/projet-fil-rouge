@@ -31,18 +31,18 @@ public class CovoiturageDtoLight {
 
 	private CollaborateurDtoLight organisateur;
 
-	private VehiculePersonnelLightDto vehiculePersonnel;
+	private VehiculePersonnelDtoLight vehiculePersonnel;
 
-	private AdresseLightDto adresseDepart;
+	private AdresseDtoLight adresseDepart;
 
-	private AdresseLightDto adresseArrivee;
+	private AdresseDtoLight adresseArrivee;
 
 	/**
 	 * constructeur avec les entites
 	 */
 	public CovoiturageDtoLight(Integer id, String dateDepart, Integer placesRestantes, Integer nbPersonnes,
 			Integer dureeTrajet, Integer distance, CollaborateurDtoLight organisateur,
-			VehiculePersonnelLightDto vehiculePersonnel, AdresseLightDto adresseDepart, AdresseLightDto adresseArrivee) {
+			VehiculePersonnelDtoLight vehiculePersonnel, AdresseDtoLight adresseDepart, AdresseDtoLight adresseArrivee) {
 		super();
 		this.id = id;
 		this.dateDepart = dateDepart;
@@ -163,42 +163,42 @@ public class CovoiturageDtoLight {
 	/**
 	 * @return the vehiculePersonnel
 	 */
-	public VehiculePersonnelLightDto getVehiculePersonnel() {
+	public VehiculePersonnelDtoLight getVehiculePersonnel() {
 		return vehiculePersonnel;
 	}
 
 	/**
 	 * @param vehiculePersonnel the vehiculePersonnel to set
 	 */
-	public void setVehiculePersonnel(VehiculePersonnelLightDto vehiculePersonnel) {
+	public void setVehiculePersonnel(VehiculePersonnelDtoLight vehiculePersonnel) {
 		this.vehiculePersonnel = vehiculePersonnel;
 	}
 
 	/**
 	 * @return the adresseDepart
 	 */
-	public AdresseLightDto getAdresseDepart() {
+	public AdresseDtoLight getAdresseDepart() {
 		return adresseDepart;
 	}
 
 	/**
 	 * @param adresseDepart the adresseDepart to set
 	 */
-	public void setAdresseDepart(AdresseLightDto adresseDepart) {
+	public void setAdresseDepart(AdresseDtoLight adresseDepart) {
 		this.adresseDepart = adresseDepart;
 	}
 
 	/**
 	 * @return the adresseArrivee
 	 */
-	public AdresseLightDto getAdresseArrivee() {
+	public AdresseDtoLight getAdresseArrivee() {
 		return adresseArrivee;
 	}
 
 	/**
 	 * @param adresseArrivee the adresseArrivee to set
 	 */
-	public void setAdresseArrivee(AdresseLightDto adresseArrivee) {
+	public void setAdresseArrivee(AdresseDtoLight adresseArrivee) {
 		this.adresseArrivee = adresseArrivee;
 	}
 
