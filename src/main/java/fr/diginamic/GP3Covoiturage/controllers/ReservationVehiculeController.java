@@ -21,6 +21,7 @@ import fr.diginamic.GP3Covoiturage.dto.dtoLight.ReservationVehiculeDtoLight;
 import fr.diginamic.GP3Covoiturage.dto.dtoLight.ReservationVehiculeDtoLightMapper;
 import fr.diginamic.GP3Covoiturage.models.ReservationVehicule;
 import fr.diginamic.GP3Covoiturage.services.ReservationVehiculeService;
+import jakarta.validation.Valid;
 
 /**
  * @author antPinot
@@ -59,7 +60,7 @@ public class ReservationVehiculeController {
 	 * @return
 	 */
 	@PutMapping
-	public ReservationVehiculeDtoEdit update(@RequestBody ReservationVehiculeDtoEdit reservationVehiculeDtoToUpdate) {
+	public ReservationVehiculeDtoEdit update(@RequestBody @Valid  ReservationVehiculeDtoEdit reservationVehiculeDtoToUpdate) {
 		ReservationVehicule model = ReservationVehiculeDtoEditMapper.toModel(reservationVehiculeDtoToUpdate);
 		reservationVehiculeService.update(model);
 		return reservationVehiculeDtoToUpdate;

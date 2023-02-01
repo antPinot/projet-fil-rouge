@@ -16,6 +16,8 @@ import fr.diginamic.GP3Covoiturage.dto.CovoiturageDto;
 import fr.diginamic.GP3Covoiturage.dto.CovoiturageDtoMapper;
 import fr.diginamic.GP3Covoiturage.dto.dtoEdit.CovoiturageDtoEdit;
 import fr.diginamic.GP3Covoiturage.dto.dtoEdit.CovoiturageDtoEditMapper;
+import fr.diginamic.GP3Covoiturage.dto.dtoLight.CovoiturageDtoLight;
+import fr.diginamic.GP3Covoiturage.dto.dtoLight.CovoiturageDtoLightMapper;
 import fr.diginamic.GP3Covoiturage.models.Covoiturage;
 import fr.diginamic.GP3Covoiturage.services.CovoiturageService;
 import jakarta.transaction.Transactional;
@@ -36,8 +38,8 @@ public class CovoiturageController {
 	 * @method return a id
 	 */
 	@GetMapping("/{id}")
-	public CovoiturageDto findOne(@PathVariable("id") Integer id) {
-		return CovoiturageDtoMapper.toDto(covoiturageService.findById(id));
+	public CovoiturageDtoLight findOne(@PathVariable("id") Integer id) {
+		return CovoiturageDtoLightMapper.toDto(covoiturageService.findById(id));
 	}
 
 	/**
@@ -64,7 +66,7 @@ public class CovoiturageController {
 	 * @method update
 	 */
 	@PutMapping("/{id}")
-	public CovoiturageDtoEdit updateCovoiturage(@PathVariable("id") Integer id, @Valid CovoiturageDtoEdit updateCovoiturage) {
+	public CovoiturageDtoEdit updateCovoiturage(@PathVariable("id") Integer id,@RequestBody @Valid CovoiturageDtoEdit updateCovoiturage) {
 		if (!id.equals(updateCovoiturage.getId())) {
 
 			throw new RuntimeException("probleme : covoiturage existe pas");
@@ -79,7 +81,7 @@ public class CovoiturageController {
 	 * @method delete
 	 */
 	@DeleteMapping("/{id}")
-	public void deleteCovoiturage(@PathVariable("id") Integer id, @RequestBody @Valid Covoiturage deleteCovoiturage) {
+	public void deleteCovoiturage(@PathVariable("id") Integer id, @Valid Covoiturage deleteCovoiturage) {
 		if (!id.equals(deleteCovoiturage.getId())) {
 			throw new RuntimeException("Erreur : Covoiturage pas present en bdd");
 		}
