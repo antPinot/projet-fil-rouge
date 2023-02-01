@@ -8,9 +8,11 @@ import org.springframework.stereotype.Service;
 import fr.diginamic.GP3Covoiturage.models.VehiculeSociete;
 import fr.diginamic.GP3Covoiturage.repositories.VehiculeSocieteRepository;
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 
 @Service
+@Transactional
 public class VehiculeSocieteService {
 	
 	@Autowired

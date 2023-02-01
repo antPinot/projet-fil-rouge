@@ -8,6 +8,7 @@ import java.util.List;
  * @author Quentin
  */
 
+
 public class CollaborateurDto {
 	
 	private Integer id;

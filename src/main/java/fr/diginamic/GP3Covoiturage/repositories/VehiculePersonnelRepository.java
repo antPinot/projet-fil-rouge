@@ -21,9 +21,9 @@ public interface VehiculePersonnelRepository extends JpaRepository<VehiculePerso
 	
 	public List<VehiculePersonnel> findByPlaces(Integer places);
 	
-	public List<VehiculePersonnel> findByLimitePlaces(Integer limitePlaces);
+	public List<VehiculePersonnel> findByLimitePlace(Integer limitePlace);
 
-	@Query("SELECT v FROM VehiculePersonnel v JOIN v.covoiturages c JOIN c.collaborateur c WHERE c.nom = :nom")
+	@Query("SELECT v FROM VehiculePersonnel v JOIN v.covoiturages c JOIN c.collaborateurs col WHERE col.nom = :nom")
 	public List<VehiculePersonnel> findByNomCollaborateur(@Param("nom")String nom);
 	
 	@Query("SELECT v FROM VehiculePersonnel v JOIN v.collaborateurs c WHERE c = :collaborateur")

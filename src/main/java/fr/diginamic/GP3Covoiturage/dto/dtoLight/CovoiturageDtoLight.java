@@ -1,15 +1,13 @@
-package fr.diginamic.GP3Covoiturage.dto;
+package fr.diginamic.GP3Covoiturage.dto.dtoLight;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import fr.diginamic.GP3Covoiturage.dto.AdresseDto;
+import fr.diginamic.GP3Covoiturage.dto.CollaborateurDto;
+import fr.diginamic.GP3Covoiturage.dto.VehiculePersonnelDto;
 
 /**
  * @author Fekhreddine
  */
-
-public class CovoiturageDto {
+public class CovoiturageDtoLight {
 
 	/**
 	 * les entites de la classe
@@ -31,26 +29,20 @@ public class CovoiturageDto {
 	 * relation many to one avec autres classes
 	 */
 
-	private CollaborateurDto organisateur;
-	
-	private VehiculePersonnelDto vehiculePersonnel;
-	
-	private AdresseDto adresseDepart;
-	
-	private AdresseDto adresseArrivee;
+	private CollaborateurDtoLight organisateur;
 
-	/**
-	 * relation many to many avec collaborateur
-	 */
-	private List<CollaborateurDto> collaborateurs = new ArrayList<>();
+	private VehiculePersonnelDtoLight vehiculePersonnel;
+
+	private AdresseDtoLight adresseDepart;
+
+	private AdresseDtoLight adresseArrivee;
 
 	/**
 	 * constructeur avec les entites
 	 */
-	public CovoiturageDto(Integer id, String dateDepart, Integer placesRestantes, Integer nbPersonnes,
-			Integer dureeTrajet, Integer distance, CollaborateurDto organisateur,
-			VehiculePersonnelDto vehiculePersonnel, AdresseDto adresseDepart, AdresseDto adresseArrivee,
-			List<CollaborateurDto> collaborateurs) {
+	public CovoiturageDtoLight(Integer id, String dateDepart, Integer placesRestantes, Integer nbPersonnes,
+			Integer dureeTrajet, Integer distance, CollaborateurDtoLight organisateur,
+			VehiculePersonnelDtoLight vehiculePersonnel, AdresseDtoLight adresseDepart, AdresseDtoLight adresseArrivee) {
 		super();
 		this.id = id;
 		this.dateDepart = dateDepart;
@@ -62,27 +54,14 @@ public class CovoiturageDto {
 		this.vehiculePersonnel = vehiculePersonnel;
 		this.adresseDepart = adresseDepart;
 		this.adresseArrivee = adresseArrivee;
-		this.collaborateurs = collaborateurs;
 	}
 
 	/**
-	 * constructeur vide pour JPA
+	 * constructeur
 	 */
-	public CovoiturageDto() {
+	public CovoiturageDtoLight() {
 	}
 
-	/**
-	 * 
-	 * 
-	 * 
-	 * Getters et Setters
-	 * 
-	 * 
-	 * 
-	 */
- 
-	
-	
 	/**
 	 * @return the id
 	 */
@@ -109,6 +88,20 @@ public class CovoiturageDto {
 	 */
 	public void setDateDepart(String dateDepart) {
 		this.dateDepart = dateDepart;
+	}
+
+	/**
+	 * @return the placesRestantes
+	 */
+	public Integer getPlacesRestantes() {
+		return placesRestantes;
+	}
+
+	/**
+	 * @param placesRestantes the placesRestantes to set
+	 */
+	public void setPlacesRestantes(Integer placesRestantes) {
+		this.placesRestantes = placesRestantes;
 	}
 
 	/**
@@ -156,82 +149,57 @@ public class CovoiturageDto {
 	/**
 	 * @return the organisateur
 	 */
-	public CollaborateurDto getOrganisateur() {
+	public CollaborateurDtoLight getOrganisateur() {
 		return organisateur;
 	}
 
 	/**
 	 * @param organisateur the organisateur to set
 	 */
-	public void setOrganisateur(CollaborateurDto organisateur) {
+	public void setOrganisateur(CollaborateurDtoLight organisateur) {
 		this.organisateur = organisateur;
 	}
 
 	/**
 	 * @return the vehiculePersonnel
 	 */
-	public VehiculePersonnelDto getVehiculePersonnel() {
+	public VehiculePersonnelDtoLight getVehiculePersonnel() {
 		return vehiculePersonnel;
 	}
 
 	/**
 	 * @param vehiculePersonnel the vehiculePersonnel to set
 	 */
-	public void setVehiculePersonnel(VehiculePersonnelDto vehiculePersonnel) {
+	public void setVehiculePersonnel(VehiculePersonnelDtoLight vehiculePersonnel) {
 		this.vehiculePersonnel = vehiculePersonnel;
 	}
 
 	/**
 	 * @return the adresseDepart
 	 */
-	public AdresseDto getAdresseDepart() {
+	public AdresseDtoLight getAdresseDepart() {
 		return adresseDepart;
 	}
 
 	/**
 	 * @param adresseDepart the adresseDepart to set
 	 */
-	public void setAdresseDepart(AdresseDto adresseDepart) {
+	public void setAdresseDepart(AdresseDtoLight adresseDepart) {
 		this.adresseDepart = adresseDepart;
 	}
 
 	/**
 	 * @return the adresseArrivee
 	 */
-	public AdresseDto getAdresseArrivee() {
+	public AdresseDtoLight getAdresseArrivee() {
 		return adresseArrivee;
 	}
 
 	/**
 	 * @param adresseArrivee the adresseArrivee to set
 	 */
-	public void setAdresseArrivee(AdresseDto adresseArrivee) {
+	public void setAdresseArrivee(AdresseDtoLight adresseArrivee) {
 		this.adresseArrivee = adresseArrivee;
-	}
-
-	/**
-	 * @return the collaborateurs
-	 */
-	public List<CollaborateurDto> getCollaborateurs() {
-		return collaborateurs;
-	}
-
-	/**
-	 * @param collaborateurs the collaborateurs to set
-	 */
-	public void setCollaborateurs(List<CollaborateurDto> collaborateurs) {
-		this.collaborateurs = collaborateurs;
-	}
-
-	/**
-	 * @return the placesRestantes
-	 */
-	public Integer getPlacesRestantes() {
-		return placesRestantes;
-	}
-
-	public void setPlacesRestantes(Integer placesRestantes) {
-		this.placesRestantes = placesRestantes;
 	}
 
 }

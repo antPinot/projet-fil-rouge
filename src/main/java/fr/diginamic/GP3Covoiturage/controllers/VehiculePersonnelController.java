@@ -14,26 +14,28 @@ import org.springframework.web.bind.annotation.RestController;
 
 import fr.diginamic.GP3Covoiturage.dto.VehiculePersonnelDto;
 import fr.diginamic.GP3Covoiturage.dto.VehiculePersonnelDtoMapper;
+import fr.diginamic.GP3Covoiturage.dto.dtoEdit.VehiculePersonnelDtoEdit;
+import fr.diginamic.GP3Covoiturage.dto.dtoEdit.VehiculePersonnelDtoEditMapper;
 import fr.diginamic.GP3Covoiturage.models.VehiculePersonnel;
 import fr.diginamic.GP3Covoiturage.services.VehiculePersonnelService;
 
 @RestController
-@RequestMapping("")
+@RequestMapping("rest/vehicule-personnel")
 public class VehiculePersonnelController {
 	
 	@Autowired
 	public VehiculePersonnelService vehiculePersonnelService;
 	
 	@PostMapping
-	public VehiculePersonnelDto create(@RequestBody VehiculePersonnelDto vehiculePersonnelToCreate) {
-		VehiculePersonnel modelVehiculePerso = VehiculePersonnelDtoMapper.toModel(vehiculePersonnelToCreate);
+	public VehiculePersonnelDtoEdit create(@RequestBody VehiculePersonnelDtoEdit vehiculePersonnelToCreate) {
+		VehiculePersonnel modelVehiculePerso = VehiculePersonnelDtoEditMapper.toModel(vehiculePersonnelToCreate);
 		vehiculePersonnelService.create(modelVehiculePerso);
 		return vehiculePersonnelToCreate;
 	}
 	
 	@PutMapping
-	public VehiculePersonnelDto update(@RequestBody VehiculePersonnelDto vehiculePersonnelToUpdate) {
-		VehiculePersonnel modelVehiculePerso = VehiculePersonnelDtoMapper.toModel(vehiculePersonnelToUpdate);
+	public VehiculePersonnelDtoEdit update(@RequestBody VehiculePersonnelDtoEdit vehiculePersonnelToUpdate) {
+		VehiculePersonnel modelVehiculePerso = VehiculePersonnelDtoEditMapper.toModel(vehiculePersonnelToUpdate);
 		vehiculePersonnelService.update(modelVehiculePerso);
 		return vehiculePersonnelToUpdate;
 	}

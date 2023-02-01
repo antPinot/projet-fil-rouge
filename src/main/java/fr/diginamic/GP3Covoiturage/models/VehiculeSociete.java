@@ -14,6 +14,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Size;
 
 /** Classe VehiculeSociete 
  * 
@@ -72,7 +73,7 @@ public class VehiculeSociete {
 	 * @param categorie
 	 * @param reservationsVehicule
 	 */
-	public VehiculeSociete(Integer id, String immatriculation, String marque, String modele, @Max(value = 9) int places,
+	public VehiculeSociete(Integer id, String immatriculation, String marque, String modele, @Size(max = 9) int places,
 			String photo, boolean disponible, int statut, Categorie categorie,
 			List<ReservationVehicule> reservationsVehicule) {
 		super();

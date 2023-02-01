@@ -1,10 +1,12 @@
-package fr.diginamic.GP3Covoiturage.dto.dtoLight;
+package fr.diginamic.GP3Covoiturage.dto.dtoEdit;
+
 
 
 /**
  * @author Fekhreddine
  */
-public class RoleDtoLight {
+public class RoleDtoEdit {
+	
 	
 	/**
 	 * les entites de la classe
@@ -13,24 +15,22 @@ public class RoleDtoLight {
 	private Integer id;
 
 	private String name;
-	
-	
-	
 
+	
+	
 	/**
 	 * @constructor full
 	 */
-	public RoleDtoLight(Integer id, String name) {
+	public RoleDtoEdit(Integer id, String name) {
 		super();
 		this.id = id;
 		this.name = name;
 	}
 	
-	
 	/**
 	 * @constructor empty
 	 */
-	public RoleDtoLight() {}
+	public RoleDtoEdit( ) {}
 
 	/**
 	 * @return the id
@@ -59,6 +59,9 @@ public class RoleDtoLight {
 	public void setName(String name) {
 		this.name = name;
 	}
+		 
+	
+	
 
 	
 	
