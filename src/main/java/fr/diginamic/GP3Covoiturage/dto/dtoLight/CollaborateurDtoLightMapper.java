@@ -1,10 +1,16 @@
+/**
+ * 
+ */
 package fr.diginamic.GP3Covoiturage.dto.dtoLight;
 
 import fr.diginamic.GP3Covoiturage.models.Collaborateur;
 import fr.diginamic.GP3Covoiturage.utils.DateUtils;
 
+/**
+ * @author antPinot
+ *
+ */
 public class CollaborateurDtoLightMapper {
-	
 	
 	public static CollaborateurDtoLight toDto(Collaborateur collaborateur) {
 		CollaborateurDtoLight lightDto = new CollaborateurDtoLight(collaborateur.getId(), collaborateur.getMatricule(),
@@ -14,6 +20,5 @@ public class CollaborateurDtoLightMapper {
 				DateUtils.localDateToString(collaborateur.getDateCreation()));
 		return lightDto;
 	}
-
 
 }

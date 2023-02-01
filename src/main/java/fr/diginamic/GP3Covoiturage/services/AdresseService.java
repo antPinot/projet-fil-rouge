@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import fr.diginamic.GP3Covoiturage.dto.AdresseDto;
 import fr.diginamic.GP3Covoiturage.dto.AdresseDtoMapper;
+import fr.diginamic.GP3Covoiturage.exceptions.FunctionalException;
 import fr.diginamic.GP3Covoiturage.models.Adresse;
 import fr.diginamic.GP3Covoiturage.repositories.AdresseRepository;
 import jakarta.validation.Valid;
@@ -39,9 +40,10 @@ public class AdresseService {
 	 * @param id
 	 * @return
 	 * @throws RuntimeException
+	 * @throws FunctionalException 
 	 */
-	public AdresseDto findById(Integer id) throws RuntimeException {
-		Adresse model = adresseRepository.findById(id).orElseThrow(() -> new RuntimeException());
+	public AdresseDto findById(Integer id) throws FunctionalException {
+		Adresse model = adresseRepository.findById(id).orElseThrow(() -> new FunctionalException("L'adresse recherchée n'existe pas"));
 		return AdresseDtoMapper.toDto(model);
 	}
 

@@ -1,3 +1,6 @@
+/**
+ * 
+ */
 package fr.diginamic.GP3Covoiturage.dto.dtoLight;
 
 import fr.diginamic.GP3Covoiturage.models.VehiculeSociete;

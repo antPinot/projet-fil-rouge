@@ -42,7 +42,7 @@ public class DateUtils {
 	 * @return
 	 */
 	public static LocalDate stringToLocalDate(String formattedLocalDate) {
-		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/YYYY", Locale.FRANCE);
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy", Locale.FRANCE);
 		return LocalDate.parse(formattedLocalDate, dtf);
 	}
 	
@@ -51,7 +51,7 @@ public class DateUtils {
 	 * @return
 	 */
 	public static LocalDateTime stringToLocalDateTime(String formattedLocalDateTime) {
-		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/YYYY hh:mm", Locale.FRANCE);
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm", Locale.FRANCE);
 		return LocalDateTime.parse(formattedLocalDateTime, dtf);
 	}
 

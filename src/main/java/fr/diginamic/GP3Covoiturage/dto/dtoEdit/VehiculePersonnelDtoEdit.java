@@ -1,13 +1,15 @@
 /**
  * 
  */
-package fr.diginamic.GP3Covoiturage.dto.dtoLight;
+package fr.diginamic.GP3Covoiturage.dto.dtoEdit;
+
+import java.util.List;
 
 /**
  * @author antPinot
  *
  */
-public class VehiculeSocieteDtoLight {
+public class VehiculePersonnelDtoEdit {
 
 	private Integer id;
 
@@ -17,15 +19,11 @@ public class VehiculeSocieteDtoLight {
 
 	private String modele;
 
-	private int places;
+	private Integer places;
 
-	private String photo;
+	private Integer limitePlaces;
 
-	private boolean disponible;
-
-	private int statut;
-
-	private String categorie;
+	private List<Integer> collaborateursId;
 
 	/**
 	 * Constructeur
@@ -35,22 +33,18 @@ public class VehiculeSocieteDtoLight {
 	 * @param marque
 	 * @param modele
 	 * @param places
-	 * @param photo
-	 * @param disponible
-	 * @param statut
-	 * @param categorie
+	 * @param limitePlaces
+	 * @param collaborateursId
 	 */
-	public VehiculeSocieteDtoLight(Integer id, String immatriculation, String marque, String modele, int places,
-			String photo, boolean disponible, int statut, String categorie) {
+	public VehiculePersonnelDtoEdit(Integer id, String immatriculation, String marque, String modele, Integer places,
+			Integer limitePlaces, List<Integer> collaborateursId) {
 		this.id = id;
 		this.immatriculation = immatriculation;
 		this.marque = marque;
 		this.modele = modele;
 		this.places = places;
-		this.photo = photo;
-		this.disponible = disponible;
-		this.statut = statut;
-		this.categorie = categorie;
+		this.limitePlaces = limitePlaces;
+		this.collaborateursId = collaborateursId;
 	}
 
 	/**
@@ -130,7 +124,7 @@ public class VehiculeSocieteDtoLight {
 	 * 
 	 * @return the places
 	 */
-	public int getPlaces() {
+	public Integer getPlaces() {
 		return places;
 	}
 
@@ -139,80 +133,42 @@ public class VehiculeSocieteDtoLight {
 	 * 
 	 * @param places the places to set
 	 */
-	public void setPlaces(int places) {
+	public void setPlaces(Integer places) {
 		this.places = places;
 	}
 
 	/**
-	 * Getter pour l'attribut photo
+	 * Getter pour l'attribut limitePlaces
 	 * 
-	 * @return the photo
+	 * @return the limitePlaces
 	 */
-	public String getPhoto() {
-		return photo;
+	public Integer getLimitePlaces() {
+		return limitePlaces;
 	}
 
 	/**
-	 * Setter pour l'attribut photo
+	 * Setter pour l'attribut limitePlaces
 	 * 
-	 * @param photo the photo to set
+	 * @param limitePlaces the limitePlaces to set
 	 */
-	public void setPhoto(String photo) {
-		this.photo = photo;
+	public void setLimitePlaces(Integer limitePlaces) {
+		this.limitePlaces = limitePlaces;
 	}
 
-	/**
-	 * Getter pour l'attribut disponible
-	 * 
-	 * @return the disponible
+	/**Getter pour l'attribut collaborateursId
+	 * @return the collaborateursId
 	 */
-	public boolean isDisponible() {
-		return disponible;
+	public List<Integer> getCollaborateursId() {
+		return collaborateursId;
 	}
 
-	/**
-	 * Setter pour l'attribut disponible
-	 * 
-	 * @param disponible the disponible to set
+	/**Setter pour l'attribut collaborateursId
+	 * @param collaborateursId the collaborateursId to set
 	 */
-	public void setDisponible(boolean disponible) {
-		this.disponible = disponible;
+	public void setCollaborateursId(List<Integer> collaborateursId) {
+		this.collaborateursId = collaborateursId;
 	}
-
-	/**
-	 * Getter pour l'attribut statut
-	 * 
-	 * @return the statut
-	 */
-	public int getStatut() {
-		return statut;
-	}
-
-	/**
-	 * Setter pour l'attribut statut
-	 * 
-	 * @param statut the statut to set
-	 */
-	public void setStatut(int statut) {
-		this.statut = statut;
-	}
-
-	/**
-	 * Getter pour l'attribut categorie
-	 * 
-	 * @return the categorie
-	 */
-	public String getCategorie() {
-		return categorie;
-	}
-
-	/**
-	 * Setter pour l'attribut categorie
-	 * 
-	 * @param categorie the categorie to set
-	 */
-	public void setCategorie(String categorie) {
-		this.categorie = categorie;
-	}
+	
+	
 
 }

@@ -1,17 +1,13 @@
+/**
+ * 
+ */
 package fr.diginamic.GP3Covoiturage.dto.dtoEdit;
 
-import fr.diginamic.GP3Covoiturage.dto.dtoLight.AdresseDtoLight;
-import fr.diginamic.GP3Covoiturage.dto.dtoLight.CollaborateurDtoLight;
-import fr.diginamic.GP3Covoiturage.dto.dtoLight.VehiculePersonnelDtoLight;
-
 /**
- * @author Fekhreddine
+ * @author antPinot
+ *
  */
 public class CovoiturageDtoEdit {
-
-	/**
-	 * les entites de la classe
-	 */
 
 	private Integer id;
 
@@ -25,43 +21,46 @@ public class CovoiturageDtoEdit {
 
 	private Integer distance;
 
+	private Integer organisateurId;
+
+	private Integer vehiculePersonnelId;
+
+	private AdresseDtoEdit adresseDepart;
+
+	private AdresseDtoEdit adresseArrivee;
+
 	/**
-	 * relation many to one avec autres classes
+	 * Constructeur
 	 * 
-	 * organisateur et vehiculePersonnel sont des integers car on part sur le
-	 * postulat que pour creer un covoiturage collaborateur et vehicule personnel
-	 * doivent etre creees en bdd
-	 */
-
-	private Integer organisateur;
-
-	private Integer vehiculePersonnel;
-
-	private AdresseDtoLight adresseDepart;
-
-	private AdresseDtoLight adresseArrivee;
-
-	/**
-	 * constructeur avec les entites
+	 * @param id
+	 * @param dateDepart
+	 * @param placesRestantes
+	 * @param nbPersonnes
+	 * @param dureeTrajet
+	 * @param distance
+	 * @param organisateurId
+	 * @param vehiculePersonnelId
+	 * @param adresseDepart
+	 * @param adresseArrivee
 	 */
 	public CovoiturageDtoEdit(Integer id, String dateDepart, Integer placesRestantes, Integer nbPersonnes,
-			Integer dureeTrajet, Integer distance, Integer organisateur,
-			Integer vehiculePersonnel, AdresseDtoLight adresseDepart,
-			AdresseDtoLight adresseArrivee) {
-		super();
+			Integer dureeTrajet, Integer distance, Integer organisateurId, Integer vehiculePersonnelId,
+			AdresseDtoEdit adresseDepart, AdresseDtoEdit adresseArrivee) {
 		this.id = id;
 		this.dateDepart = dateDepart;
 		this.placesRestantes = placesRestantes;
 		this.nbPersonnes = nbPersonnes;
 		this.dureeTrajet = dureeTrajet;
 		this.distance = distance;
-		this.organisateur = organisateur;
-		this.vehiculePersonnel = vehiculePersonnel;
+		this.organisateurId = organisateurId;
+		this.vehiculePersonnelId = vehiculePersonnelId;
 		this.adresseDepart = adresseDepart;
 		this.adresseArrivee = adresseArrivee;
 	}
 
 	/**
+	 * Getter pour l'attribut id
+	 * 
 	 * @return the id
 	 */
 	public Integer getId() {
@@ -69,6 +68,8 @@ public class CovoiturageDtoEdit {
 	}
 
 	/**
+	 * Setter pour l'attribut id
+	 * 
 	 * @param id the id to set
 	 */
 	public void setId(Integer id) {
@@ -76,6 +77,8 @@ public class CovoiturageDtoEdit {
 	}
 
 	/**
+	 * Getter pour l'attribut dateDepart
+	 * 
 	 * @return the dateDepart
 	 */
 	public String getDateDepart() {
@@ -83,6 +86,8 @@ public class CovoiturageDtoEdit {
 	}
 
 	/**
+	 * Setter pour l'attribut dateDepart
+	 * 
 	 * @param dateDepart the dateDepart to set
 	 */
 	public void setDateDepart(String dateDepart) {
@@ -90,6 +95,8 @@ public class CovoiturageDtoEdit {
 	}
 
 	/**
+	 * Getter pour l'attribut placesRestantes
+	 * 
 	 * @return the placesRestantes
 	 */
 	public Integer getPlacesRestantes() {
@@ -97,6 +104,8 @@ public class CovoiturageDtoEdit {
 	}
 
 	/**
+	 * Setter pour l'attribut placesRestantes
+	 * 
 	 * @param placesRestantes the placesRestantes to set
 	 */
 	public void setPlacesRestantes(Integer placesRestantes) {
@@ -104,6 +113,8 @@ public class CovoiturageDtoEdit {
 	}
 
 	/**
+	 * Getter pour l'attribut nbPersonnes
+	 * 
 	 * @return the nbPersonnes
 	 */
 	public Integer getNbPersonnes() {
@@ -111,6 +122,8 @@ public class CovoiturageDtoEdit {
 	}
 
 	/**
+	 * Setter pour l'attribut nbPersonnes
+	 * 
 	 * @param nbPersonnes the nbPersonnes to set
 	 */
 	public void setNbPersonnes(Integer nbPersonnes) {
@@ -118,6 +131,8 @@ public class CovoiturageDtoEdit {
 	}
 
 	/**
+	 * Getter pour l'attribut dureeTrajet
+	 * 
 	 * @return the dureeTrajet
 	 */
 	public Integer getDureeTrajet() {
@@ -125,6 +140,8 @@ public class CovoiturageDtoEdit {
 	}
 
 	/**
+	 * Setter pour l'attribut dureeTrajet
+	 * 
 	 * @param dureeTrajet the dureeTrajet to set
 	 */
 	public void setDureeTrajet(Integer dureeTrajet) {
@@ -132,6 +149,8 @@ public class CovoiturageDtoEdit {
 	}
 
 	/**
+	 * Getter pour l'attribut distance
+	 * 
 	 * @return the distance
 	 */
 	public Integer getDistance() {
@@ -139,6 +158,8 @@ public class CovoiturageDtoEdit {
 	}
 
 	/**
+	 * Setter pour l'attribut distance
+	 * 
 	 * @param distance the distance to set
 	 */
 	public void setDistance(Integer distance) {
@@ -146,58 +167,74 @@ public class CovoiturageDtoEdit {
 	}
 
 	/**
-	 * @return the organisateur
+	 * Getter pour l'attribut organisateurId
+	 * 
+	 * @return the organisateurId
 	 */
-	public Integer getOrganisateur() {
-		return organisateur;
+	public Integer getOrganisateurId() {
+		return organisateurId;
 	}
 
 	/**
-	 * @param organisateur the organisateur to set
+	 * Setter pour l'attribut organisateurId
+	 * 
+	 * @param organisateurId the organisateurId to set
 	 */
-	public void setOrganisateur(Integer organisateur) {
-		this.organisateur = organisateur;
+	public void setOrganisateurId(Integer organisateurId) {
+		this.organisateurId = organisateurId;
 	}
 
 	/**
-	 * @return the vehiculePersonnel
+	 * Getter pour l'attribut vehiculePersonnelId
+	 * 
+	 * @return the vehiculePersonnelId
 	 */
-	public Integer getVehiculePersonnel() {
-		return vehiculePersonnel;
+	public Integer getVehiculePersonnelId() {
+		return vehiculePersonnelId;
 	}
 
 	/**
-	 * @param vehiculePersonnel the vehiculePersonnel to set
+	 * Setter pour l'attribut vehiculePersonnelId
+	 * 
+	 * @param vehiculePersonnelId the vehiculePersonnelId to set
 	 */
-	public void setVehiculePersonnel(Integer vehiculePersonnel) {
-		this.vehiculePersonnel = vehiculePersonnel;
+	public void setVehiculePersonnelId(Integer vehiculePersonnelId) {
+		this.vehiculePersonnelId = vehiculePersonnelId;
 	}
 
 	/**
+	 * Getter pour l'attribut adresseDepart
+	 * 
 	 * @return the adresseDepart
 	 */
-	public AdresseDtoLight getAdresseDepart() {
+	public AdresseDtoEdit getAdresseDepart() {
 		return adresseDepart;
 	}
 
 	/**
+	 * Setter pour l'attribut adresseDepart
+	 * 
 	 * @param adresseDepart the adresseDepart to set
 	 */
-	public void setAdresseDepart(AdresseDtoLight adresseDepart) {
+	public void setAdresseDepart(AdresseDtoEdit adresseDepart) {
 		this.adresseDepart = adresseDepart;
 	}
 
 	/**
+	 * Getter pour l'attribut adresseArrivee
+	 * 
 	 * @return the adresseArrivee
 	 */
-	public AdresseDtoLight getAdresseArrivee() {
+	public AdresseDtoEdit getAdresseArrivee() {
 		return adresseArrivee;
 	}
 
 	/**
+	 * Setter pour l'attribut adresseArrivee
+	 * 
 	 * @param adresseArrivee the adresseArrivee to set
 	 */
-	public void setAdresseArrivee(AdresseDtoLight adresseArrivee) {
+	public void setAdresseArrivee(AdresseDtoEdit adresseArrivee) {
 		this.adresseArrivee = adresseArrivee;
 	}
 

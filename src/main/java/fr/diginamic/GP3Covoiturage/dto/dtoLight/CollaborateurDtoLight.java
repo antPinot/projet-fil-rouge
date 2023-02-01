@@ -1,5 +1,6 @@
 package fr.diginamic.GP3Covoiturage.dto.dtoLight;
 
+
 /** Classe CollaborateurDto
  * 
  * @author Quentin

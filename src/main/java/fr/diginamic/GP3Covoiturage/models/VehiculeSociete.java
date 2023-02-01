@@ -13,6 +13,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Size;
 
 /** Classe VehiculeSociete 
@@ -38,7 +39,7 @@ public class VehiculeSociete {
 	private String modele;
 	
 	@Column(name="places", length = 1, nullable= false)
-	@Size(max = 9)
+	@Max(value = 9)
 	private int places;
 	
 	@Column(name="photo", length = 255, nullable= false)
