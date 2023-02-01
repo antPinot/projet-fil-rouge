@@ -70,7 +70,7 @@ public class CovoiturageController {
 	 * @method update
 	 */
 	@PutMapping("/{id}")
-	public CovoiturageDtoEdit updateCovoiturage(@PathVariable("id") Integer id, @RequestBody @Valid CovoiturageDtoEdit updateCovoiturage) {
+	public CovoiturageDtoEdit updateCovoiturage(@PathVariable("id") Integer id,@RequestBody @Valid CovoiturageDtoEdit updateCovoiturage) {
 		if (!id.equals(updateCovoiturage.getId())) {
 
 			throw new RuntimeException("probleme : covoiturage existe pas");
@@ -87,6 +87,7 @@ public class CovoiturageController {
 	@DeleteMapping("/{id}")
 	public void deleteCovoiturage(@PathVariable("id") Integer id) {
 		covoiturageService.delete(id);
+
 	}
 
 }

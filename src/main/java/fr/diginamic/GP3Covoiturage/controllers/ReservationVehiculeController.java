@@ -69,7 +69,8 @@ public class ReservationVehiculeController {
 	 * @return
 	 */
 	@PutMapping
-	public ReservationVehiculeDtoEdit update(@RequestBody @Valid ReservationVehiculeDtoEdit reservationVehiculeDtoToUpdate) {
+
+	public ReservationVehiculeDtoEdit update(@RequestBody @Valid  ReservationVehiculeDtoEdit reservationVehiculeDtoToUpdate) {
 		ReservationVehicule model = ReservationVehiculeDtoEditMapper.toModel(reservationVehiculeDtoToUpdate);
 		reservationVehiculeService.update(model);
 		return reservationVehiculeDtoToUpdate;
