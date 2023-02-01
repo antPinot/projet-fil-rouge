@@ -46,8 +46,8 @@ public class ReservationVehiculeController {
 	}
 	
 	@GetMapping("/{id}")
-	public ReservationVehiculeDto read(@PathVariable("id") Integer id) {
-		return ReservationVehiculeDtoMapper.toDto(reservationVehiculeService.findById(id));
+	public ReservationVehiculeDtoLight read(@PathVariable("id") Integer id) {
+		return ReservationVehiculeDtoLightMapper.toDto(reservationVehiculeService.findById(id));
 	}
 	
 	/**
