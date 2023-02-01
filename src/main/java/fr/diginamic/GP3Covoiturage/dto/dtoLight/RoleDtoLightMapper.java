@@ -4,6 +4,8 @@ import fr.diginamic.GP3Covoiturage.models.Role;
 
 /**
  * @author Fekhreddine
+ * 
+ * methode toDto qui transforme un modele en dto
  */
 public class RoleDtoLightMapper {
 
