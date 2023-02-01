@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import fr.diginamic.GP3Covoiturage.dto.ReservationVehiculeDto;
 import fr.diginamic.GP3Covoiturage.dto.ReservationVehiculeDtoMapper;
-import fr.diginamic.GP3Covoiturage.dto.dtoEdit.ReservationVehiculeEditDto;
-import fr.diginamic.GP3Covoiturage.dto.dtoEdit.ReservationVehiculeEditDtoMapper;
+import fr.diginamic.GP3Covoiturage.dto.dtoEdit.ReservationVehiculeDtoEdit;
+import fr.diginamic.GP3Covoiturage.dto.dtoEdit.ReservationVehiculeDtoEditMapper;
 import fr.diginamic.GP3Covoiturage.models.ReservationVehicule;
 import fr.diginamic.GP3Covoiturage.services.ReservationVehiculeService;
 
@@ -39,8 +39,8 @@ public class ReservationVehiculeController {
 	 * @return reservationVehiculeDtoToCreate
 	 */
 	@PostMapping
-	public ReservationVehiculeEditDto create(@RequestBody ReservationVehiculeEditDto reservationVehiculeDtoToCreate) {
-		ReservationVehicule model = ReservationVehiculeEditDtoMapper.toModel(reservationVehiculeDtoToCreate);
+	public ReservationVehiculeDtoEdit create(@RequestBody ReservationVehiculeDtoEdit reservationVehiculeDtoToCreate) {
+		ReservationVehicule model = ReservationVehiculeDtoEditMapper.toModel(reservationVehiculeDtoToCreate);
 		reservationVehiculeService.create(model);
 		return reservationVehiculeDtoToCreate;
 	}
@@ -57,8 +57,8 @@ public class ReservationVehiculeController {
 	 * @return
 	 */
 	@PutMapping
-	public ReservationVehiculeEditDto update(@RequestBody ReservationVehiculeEditDto reservationVehiculeDtoToUpdate) {
-		ReservationVehicule model = ReservationVehiculeEditDtoMapper.toModel(reservationVehiculeDtoToUpdate);
+	public ReservationVehiculeDtoEdit update(@RequestBody ReservationVehiculeDtoEdit reservationVehiculeDtoToUpdate) {
+		ReservationVehicule model = ReservationVehiculeDtoEditMapper.toModel(reservationVehiculeDtoToUpdate);
 		reservationVehiculeService.update(model);
 		return reservationVehiculeDtoToUpdate;
 	}

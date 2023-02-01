@@ -12,9 +12,9 @@ import fr.diginamic.GP3Covoiturage.utils.DateUtils;
  * @author antPinot
  *
  */
-public class ReservationVehiculeEditDtoMapper {
+public class ReservationVehiculeDtoEditMapper {
 	
-	public static ReservationVehicule toModel(ReservationVehiculeEditDto reservationVehiculeEditDto) {
+	public static ReservationVehicule toModel(ReservationVehiculeDtoEdit reservationVehiculeEditDto) {
 		Collaborateur collab = new Collaborateur();
 		collab.setId(reservationVehiculeEditDto.getCollaborateurId());
 		VehiculeSociete vehicule = new VehiculeSociete();
