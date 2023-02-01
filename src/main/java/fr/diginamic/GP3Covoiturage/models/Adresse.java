@@ -6,6 +6,7 @@ package fr.diginamic.GP3Covoiturage.models;
 import java.util.ArrayList;
 import java.util.List;
 
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -35,7 +36,7 @@ public class Adresse {
 	private Integer id;
 	
 	@Column(name = "numero")
-	@Max(999999)
+	@Max(value = 999999)
 	private Integer numero;
 	
 	@Column(columnDefinition = "varchar(3)", name = "complement_numero", length = 3)
@@ -48,7 +49,8 @@ public class Adresse {
 	private String voie;
 	
 	@Column(name = "code_postal", nullable = false)
-	@Max(99999)
+	@NotNull
+	@Max(value = 976999)
 	private Integer codePostal;
 	
 	@Column(columnDefinition = "varchar(100)", name = "departement", nullable = false)

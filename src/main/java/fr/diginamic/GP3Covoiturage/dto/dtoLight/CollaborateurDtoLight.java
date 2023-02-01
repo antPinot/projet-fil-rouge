@@ -1,7 +1,5 @@
-package fr.diginamic.GP3Covoiturage.dto;
+package fr.diginamic.GP3Covoiturage.dto.dtoLight;
 
-import java.util.ArrayList;
-import java.util.List;
 
 /** Classe CollaborateurDto
  * 
@@ -9,7 +7,7 @@ import java.util.List;
  */
 
 
-public class CollaborateurDto {
+public class CollaborateurDtoLight {
 	
 	private Integer id;
 	
@@ -31,17 +29,7 @@ public class CollaborateurDto {
 
 	private String dateCreation;
 	
-	private List<CovoiturageDto> annonces = new ArrayList<CovoiturageDto>();
-	
-	private List<ReservationVehiculeDto> reservationsVehicule = new ArrayList<ReservationVehiculeDto>();
-	
-	private List<VehiculePersonnelDto> vehiculesPersonnel = new ArrayList<VehiculePersonnelDto>();
-	
-	private List<RoleDto> roles = new ArrayList<RoleDto>();
-	
-	private List<CovoiturageDto> covoiturages = new ArrayList<CovoiturageDto>();
-	
-	public CollaborateurDto() {
+	public CollaborateurDtoLight() {
 		super();
 	}
 
@@ -59,9 +47,8 @@ public class CollaborateurDto {
 	 * @param roles
 	 * @param covoiturages
 	 */
-	public CollaborateurDto(Integer id, Integer matricule, String nom, String prenom, String dateNaissance, Integer telephone, String mail,
-			String login, String password, String dateCreation, List<CovoiturageDto> annonces, List<ReservationVehiculeDto> reservationsVehicule,
-			List<VehiculePersonnelDto> vehiculesPersonnel, List<RoleDto> roles, List<CovoiturageDto> covoiturages) {
+	public CollaborateurDtoLight(Integer id, Integer matricule, String nom, String prenom, String dateNaissance, Integer telephone, String mail,
+			String login, String password, String dateCreation) {
 		super();
 		this.id=id;
 		this.matricule = matricule;
@@ -73,11 +60,6 @@ public class CollaborateurDto {
 		this.login = login;
 		this.password = password;
 		this.dateCreation = dateCreation;
-		this.annonces = annonces;
-		this.reservationsVehicule = reservationsVehicule;
-		this.vehiculesPersonnel = vehiculesPersonnel;
-		this.roles = roles;
-		this.covoiturages = covoiturages;
 	}
 
 	/**Getter pour l'attribut id
@@ -219,80 +201,5 @@ public class CollaborateurDto {
 	public void setDateCreation(String dateCreation) {
 		this.dateCreation = dateCreation;
 	}
-
-	/**
-	 * Getter pour l'attribut annonces
-	 * @return the annonces
-	 */
-	public List<CovoiturageDto> getAnnonces() {
-		return annonces;
-	}
-
-	/**
-	 * Setter pour l'attribut annonces
-	 * @param annonces the annonces to set
-	 */
-	public void setAnnonces(List<CovoiturageDto> annonces) {
-		this.annonces = annonces;
-	}
-
-	/**
-	 * Getter pour l'attribut reservationsVehicule
-	 * @return the reservationsVehicule
-	 */
-	public List<ReservationVehiculeDto> getReservationsVehicule() {
-		return reservationsVehicule;
-	}
-
-	/**
-	 * Setter pour l'attribut reservationsVehicule
-	 * @param reservationsVehicule the reservationsVehicule to set
-	 */
-	public void setReservationsVehicule(List<ReservationVehiculeDto> reservationsVehicule) {
-		this.reservationsVehicule = reservationsVehicule;
-	}
-
-	/**Getter pour l'attribut vehiculesPersonnel
-	 * @return the vehiculesPersonnel
-	 */
-	public List<VehiculePersonnelDto> getVehiculesPersonnel() {
-		return vehiculesPersonnel;
-	}
-
-	/**Setter pour l'attribut vehiculesPersonnel
-	 * @param vehiculesPersonnel the vehiculesPersonnel to set
-	 */
-	public void setVehiculesPersonnel(List<VehiculePersonnelDto> vehiculesPersonnel) {
-		this.vehiculesPersonnel = vehiculesPersonnel;
-	}
-
-	/**Getter pour l'attribut roles
-	 * @return the roles
-	 */
-	public List<RoleDto> getRoles() {
-		return roles;
-	}
-
-	/**Setter pour l'attribut roles
-	 * @param roles the roles to set
-	 */
-	public void setRoles(List<RoleDto> roles) {
-		this.roles = roles;
-	}
-
-	/**Getter pour l'attribut covoiturages
-	 * @return the covoiturages
-	 */
-	public List<CovoiturageDto> getCovoiturages() {
-		return covoiturages;
-	}
-
-	/**Setter pour l'attribut covoiturages
-	 * @param covoiturages the covoiturages to set
-	 */
-	public void setCovoiturages(List<CovoiturageDto> covoiturages) {
-		this.covoiturages = covoiturages;
-	}
-	
 	
 }

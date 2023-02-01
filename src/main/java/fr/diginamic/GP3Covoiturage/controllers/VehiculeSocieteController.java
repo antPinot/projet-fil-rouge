@@ -14,8 +14,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import fr.diginamic.GP3Covoiturage.dto.VehiculeSocieteDto;
 import fr.diginamic.GP3Covoiturage.dto.VehiculeSocieteDtoMapper;
+import fr.diginamic.GP3Covoiturage.dto.dtoEdit.VehiculeSocieteEditDto;
+import fr.diginamic.GP3Covoiturage.dto.dtoEdit.VehiculeSocieteEditDtoMapper;
+import fr.diginamic.GP3Covoiturage.dto.dtoLight.VehiculeSocieteDtoLight;
+import fr.diginamic.GP3Covoiturage.dto.dtoLight.VehiculeSocieteDtoLightMapper;
 import fr.diginamic.GP3Covoiturage.models.VehiculeSociete;
 import fr.diginamic.GP3Covoiturage.services.VehiculeSocieteService;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("rest/vehicule-societe")
@@ -25,15 +30,15 @@ public class VehiculeSocieteController {
 	public VehiculeSocieteService vehiculeSocieteService;
 	
 	@PostMapping
-	public VehiculeSocieteDto create(@RequestBody VehiculeSocieteDto vehiculeSocieteToCreate) {
-		VehiculeSociete modelVehiculeSociete = VehiculeSocieteDtoMapper.toModel(vehiculeSocieteToCreate);
+	public VehiculeSocieteEditDto create(@RequestBody @Valid VehiculeSocieteEditDto vehiculeSocieteToCreate) {
+		VehiculeSociete modelVehiculeSociete = VehiculeSocieteEditDtoMapper.toModel(vehiculeSocieteToCreate);
 		vehiculeSocieteService.create(modelVehiculeSociete);
 		return vehiculeSocieteToCreate;
 	}
 	
-	@PutMapping
-	public VehiculeSocieteDto update(@RequestBody VehiculeSocieteDto vehiculeSocieteToUpdate) {
-		VehiculeSociete modelVehiculeSociete = VehiculeSocieteDtoMapper.toModel(vehiculeSocieteToUpdate);
+	@PutMapping("/{id}")
+	public VehiculeSocieteEditDto update(@RequestBody @Valid VehiculeSocieteEditDto vehiculeSocieteToUpdate) {
+		VehiculeSociete modelVehiculeSociete = VehiculeSocieteEditDtoMapper.toModel(vehiculeSocieteToUpdate);
 		vehiculeSocieteService.update(modelVehiculeSociete);
 		return vehiculeSocieteToUpdate;
 	}
@@ -44,8 +49,8 @@ public class VehiculeSocieteController {
 	}
 	
 	@GetMapping("/{id}")
-	public VehiculeSocieteDto findById(@PathVariable("id") Integer id) {
-		return VehiculeSocieteDtoMapper.toDto(vehiculeSocieteService.findById(id));
+	public VehiculeSocieteDtoLight findById(@PathVariable("id") Integer id) {
+		return VehiculeSocieteDtoLightMapper.toDto(vehiculeSocieteService.findById(id));
 	}
 	
 	@GetMapping()
