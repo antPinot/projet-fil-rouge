@@ -17,6 +17,8 @@ import fr.diginamic.GP3Covoiturage.dto.ReservationVehiculeDto;
 import fr.diginamic.GP3Covoiturage.dto.ReservationVehiculeDtoMapper;
 import fr.diginamic.GP3Covoiturage.dto.dtoEdit.ReservationVehiculeDtoEdit;
 import fr.diginamic.GP3Covoiturage.dto.dtoEdit.ReservationVehiculeDtoEditMapper;
+import fr.diginamic.GP3Covoiturage.dto.dtoLight.ReservationVehiculeDtoLight;
+import fr.diginamic.GP3Covoiturage.dto.dtoLight.ReservationVehiculeDtoLightMapper;
 import fr.diginamic.GP3Covoiturage.models.ReservationVehicule;
 import fr.diginamic.GP3Covoiturage.services.ReservationVehiculeService;
 
