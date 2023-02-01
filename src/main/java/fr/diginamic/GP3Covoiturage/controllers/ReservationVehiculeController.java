@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import fr.diginamic.GP3Covoiturage.dto.ReservationVehiculeDto;
 import fr.diginamic.GP3Covoiturage.dto.ReservationVehiculeDtoMapper;
+import fr.diginamic.GP3Covoiturage.dto.dtoEdit.ReservationVehiculeEditDto;
+import fr.diginamic.GP3Covoiturage.dto.dtoEdit.ReservationVehiculeEditDtoMapper;
 import fr.diginamic.GP3Covoiturage.models.ReservationVehicule;
 import fr.diginamic.GP3Covoiturage.services.ReservationVehiculeService;
 
@@ -30,9 +32,15 @@ public class ReservationVehiculeController {
 	@Autowired
 	public ReservationVehiculeService reservationVehiculeService;
 	
+	/**
+	 * Utilise un EditDto
+	 * 
+	 * @param reservationVehiculeDtoToCreate
+	 * @return reservationVehiculeDtoToCreate
+	 */
 	@PostMapping
-	public ReservationVehiculeDto create(@RequestBody ReservationVehiculeDto reservationVehiculeDtoToCreate) {
-		ReservationVehicule model = ReservationVehiculeDtoMapper.toModel(reservationVehiculeDtoToCreate);
+	public ReservationVehiculeEditDto create(@RequestBody ReservationVehiculeEditDto reservationVehiculeDtoToCreate) {
+		ReservationVehicule model = ReservationVehiculeEditDtoMapper.toModel(reservationVehiculeDtoToCreate);
 		reservationVehiculeService.create(model);
 		return reservationVehiculeDtoToCreate;
 	}
@@ -42,9 +50,15 @@ public class ReservationVehiculeController {
 		return ReservationVehiculeDtoMapper.toDto(reservationVehiculeService.findById(id));
 	}
 	
+	/**
+	 * Utilise un EditDto
+	 * 
+	 * @param reservationVehiculeDtoToUpdate
+	 * @return
+	 */
 	@PutMapping
-	public ReservationVehiculeDto update(@RequestBody ReservationVehiculeDto reservationVehiculeDtoToUpdate) {
-		ReservationVehicule model = ReservationVehiculeDtoMapper.toModel(reservationVehiculeDtoToUpdate);
+	public ReservationVehiculeEditDto update(@RequestBody ReservationVehiculeEditDto reservationVehiculeDtoToUpdate) {
+		ReservationVehicule model = ReservationVehiculeEditDtoMapper.toModel(reservationVehiculeDtoToUpdate);
 		reservationVehiculeService.update(model);
 		return reservationVehiculeDtoToUpdate;
 	}

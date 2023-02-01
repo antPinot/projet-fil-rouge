@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import fr.diginamic.GP3Covoiturage.models.ReservationVehicule;
 import fr.diginamic.GP3Covoiturage.repositories.ReservationVehiculeRepository;
+import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 
 /**
@@ -18,6 +19,7 @@ import jakarta.validation.Valid;
  */
 
 @Service
+@Transactional
 public class ReservationVehiculeService {
 
 	@Autowired

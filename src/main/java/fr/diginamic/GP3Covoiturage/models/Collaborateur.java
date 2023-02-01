@@ -4,6 +4,9 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -82,6 +85,15 @@ public class Collaborateur {
 	 * Constructeur
 	 * 
 	 * @param id
+	 */
+	public Collaborateur(Integer id) {
+		this.id = id;
+	}
+
+	/**
+	 * Constructeur
+	 * 
+	 * @param id
 	 * @param matricule
 	 * @param nom
 	 * @param prenom
@@ -97,10 +109,10 @@ public class Collaborateur {
 	 * @param roles
 	 * @param covoiturages
 	 */
-	public Collaborateur(Integer id, Integer matricule, String nom, String prenom, LocalDate dateNaissance, Integer telephone,
-			String mail, String login, String password, LocalDate dateCreation, List<Covoiturage> annonces,
-			List<ReservationVehicule> reservationsVehicule, List<VehiculePersonnel> vehiculespersonnels,
-			List<Role> roles, List<Covoiturage> covoiturages) {
+	public Collaborateur(Integer id, Integer matricule, String nom, String prenom, LocalDate dateNaissance,
+			Integer telephone, String mail, String login, String password, LocalDate dateCreation,
+			List<Covoiturage> annonces, List<ReservationVehicule> reservationsVehicule,
+			List<VehiculePersonnel> vehiculespersonnels, List<Role> roles, List<Covoiturage> covoiturages) {
 		this.id = id;
 		this.matricule = matricule;
 		this.nom = nom;

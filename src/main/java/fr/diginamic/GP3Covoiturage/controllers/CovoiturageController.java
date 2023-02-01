@@ -14,8 +14,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import fr.diginamic.GP3Covoiturage.dto.CovoiturageDto;
 import fr.diginamic.GP3Covoiturage.dto.CovoiturageDtoMapper;
+import fr.diginamic.GP3Covoiturage.dto.dtoEdit.CovoiturageDtoEdit;
+import fr.diginamic.GP3Covoiturage.dto.dtoEdit.CovoiturageDtoEditMapper;
 import fr.diginamic.GP3Covoiturage.models.Covoiturage;
 import fr.diginamic.GP3Covoiturage.services.CovoiturageService;
+import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 
 /**
@@ -33,8 +36,8 @@ public class CovoiturageController {
 	 * @method return a id
 	 */
 	@GetMapping("/{id}")
-	public Covoiturage findOne(@PathVariable("id") Integer id) {
-		return this.covoiturageService.findById(null);
+	public CovoiturageDto findOne(@PathVariable("id") Integer id) {
+		return CovoiturageDtoMapper.toDto(covoiturageService.findById(id));
 	}
 
 	/**
@@ -49,9 +52,10 @@ public class CovoiturageController {
 	 * @method create
 	 */
 	@PostMapping()
-	public CovoiturageDto createCovoiturage(@RequestBody @Valid CovoiturageDto createCovoiturage) {
+	@Transactional
+	public CovoiturageDtoEdit createCovoiturage(@RequestBody @Valid CovoiturageDtoEdit createCovoiturage) {
 
-		Covoiturage modelCovoit = CovoiturageDtoMapper.toModel(createCovoiturage);
+		Covoiturage modelCovoit = CovoiturageDtoEditMapper.toModel(createCovoiturage);
 		covoiturageService.create(modelCovoit);
 		return createCovoiturage;
 	}
@@ -60,13 +64,13 @@ public class CovoiturageController {
 	 * @method update
 	 */
 	@PutMapping("/{id}")
-	public CovoiturageDto updateCovoiturage(@PathVariable("id") Integer id, @Valid CovoiturageDto updateCovoiturage) {
+	public CovoiturageDtoEdit updateCovoiturage(@PathVariable("id") Integer id, @Valid CovoiturageDtoEdit updateCovoiturage) {
 		if (!id.equals(updateCovoiturage.getId())) {
 
 			throw new RuntimeException("probleme : covoiturage existe pas");
 		}
 
-		Covoiturage modelCovoit = CovoiturageDtoMapper.toModel(updateCovoiturage);
+		Covoiturage modelCovoit = CovoiturageDtoEditMapper.toModel(updateCovoiturage);
 		covoiturageService.update(modelCovoit);
 		return updateCovoiturage;
 	}

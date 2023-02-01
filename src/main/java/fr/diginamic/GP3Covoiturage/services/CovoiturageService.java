@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import fr.diginamic.GP3Covoiturage.dto.CovoiturageDto;
 import fr.diginamic.GP3Covoiturage.dto.CovoiturageDtoMapper;
+import fr.diginamic.GP3Covoiturage.models.Adresse;
 import fr.diginamic.GP3Covoiturage.models.Covoiturage;
 import fr.diginamic.GP3Covoiturage.repositories.CovoiturageRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -21,6 +22,10 @@ public class CovoiturageService {
 
 	@Autowired
 	CovoiturageRepository covoiturageRepository;
+	
+	@Autowired
+	AdresseService adresseService;
+	
 
 	/**
 	 * @method create()
@@ -30,6 +35,16 @@ public class CovoiturageService {
 
 		if (createCovoiturage.getId() != null) {
 			throw new RuntimeException("erreur : id est deja present");
+		}
+		
+		if(createCovoiturage.getAdresseDepart().getId() == null) {
+			Adresse adresseDepart = adresseService.create(createCovoiturage.getAdresseDepart());
+			createCovoiturage.setAdresseDepart(adresseDepart);
+		}
+		
+		if(createCovoiturage.getAdresseArrivee().getId() == null) {
+			Adresse adresseArrivee = adresseService.create(createCovoiturage.getAdresseArrivee());
+			createCovoiturage.setAdresseArrivee(adresseArrivee);
 		}
 		
 		return this.covoiturageRepository.save(createCovoiturage);

@@ -21,7 +21,7 @@ public class VehiculeSocieteDtoMapper {
 		return dto;		
 	}
 	
-	public static VehiculeSociete toModel(VehiculeSocieteDto vehiculeSocieteDto) {
+	/*public static VehiculeSociete toModel(VehiculeSocieteDto vehiculeSocieteDto) {
 		
 		VehiculeSociete model = new VehiculeSociete(vehiculeSocieteDto.getId(),
 				vehiculeSocieteDto.getImmatriculation(),
@@ -35,6 +35,6 @@ public class VehiculeSocieteDtoMapper {
 				ReservationVehiculeDtoMapper.listToModels(vehiculeSocieteDto.getReservationsVehicule()));
 		
 		return model;		
-	}
+	}*/
 	
 }

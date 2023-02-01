@@ -8,9 +8,11 @@ import org.springframework.stereotype.Service;
 import fr.diginamic.GP3Covoiturage.models.Collaborateur;
 import fr.diginamic.GP3Covoiturage.repositories.CollaborateurRepository;
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 
 @Service
+@Transactional
 public class CollaborateurService {
 	
 	@Autowired
