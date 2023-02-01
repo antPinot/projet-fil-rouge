@@ -11,7 +11,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.Max;
 
 /** Classe VehiculePersonnel
  * 
@@ -36,7 +36,7 @@ public class VehiculePersonnel {
 	private String modele;
 	
 	@Column(name="places", length = 1, nullable= false)
-	@Size(max = 9)
+	@Max(value = 9)
 	private Integer places;
 	
 	@Column(name="limitePlace", length = 1, nullable= false)
@@ -62,7 +62,7 @@ public class VehiculePersonnel {
 	 * @param covoiturages
 	 * @param collaborateurs
 	 */
-	public VehiculePersonnel(Integer id, String immatriculation, String marque, String modele, @Size(max = 9) Integer places,
+	public VehiculePersonnel(Integer id, String immatriculation, String marque, String modele, @Max(value = 9) Integer places,
 			Integer limitePlace, List<Covoiturage> covoiturages, List<Collaborateur> collaborateurs) {
 		super();
 		this.id = id;

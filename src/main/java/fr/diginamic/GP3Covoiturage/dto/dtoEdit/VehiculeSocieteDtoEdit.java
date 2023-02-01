@@ -1,64 +1,29 @@
-package fr.diginamic.GP3Covoiturage.models;
+package fr.diginamic.GP3Covoiturage.dto.dtoEdit;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import fr.diginamic.GP3Covoiturage.enums.Categorie;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
-import jakarta.validation.constraints.Max;
-
-/** Classe VehiculeSociete 
+/** Classe CollaborateurDto
  * 
  * @author Quentin
  */
 
-@Entity
-@Table(name="VehiculeSociete")
-public class VehiculeSociete {
+public class VehiculeSocieteDtoEdit {
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	
-	@Column(name="immatriculation", length = 9, nullable= false, unique= true)
+
 	private String immatriculation;
-	
-	@Column(name="marque", length = 100, nullable= false)
+
 	private String marque;
-	
-	@Column(name="modele", length = 100, nullable= false)
+
 	private String modele;
-	
-	@Column(name="places", length = 1, nullable= false)
-	@Max(value = 9)
+
 	private int places;
-	
-	@Column(name="photo", length = 255, nullable= false)
+
 	private String photo;
-	
-	@Column(name="disponible", nullable= false)
+
 	private boolean disponible;
-	
-	@Column(name="statut", length = 1, nullable= false)
+
 	private int statut;
-	
-	@Enumerated(EnumType.STRING)
-	private Categorie categorie;
-	
-	@OneToMany(mappedBy = "vehiculeSociete")
-	private List<ReservationVehicule> reservationsVehicule = new ArrayList<ReservationVehicule>();
-	
-	public VehiculeSociete() {
-		super();
-	}
+
+	private String categorie;
 
 	/**
 	 * @param id
@@ -70,11 +35,9 @@ public class VehiculeSociete {
 	 * @param disponible
 	 * @param statut
 	 * @param categorie
-	 * @param reservationsVehicule
 	 */
-	public VehiculeSociete(Integer id, String immatriculation, String marque, String modele, @Max(value = 9) int places,
-			String photo, boolean disponible, int statut, Categorie categorie,
-			List<ReservationVehicule> reservationsVehicule) {
+	public VehiculeSocieteDtoEdit(Integer id, String immatriculation, String marque, String modele, int places,
+			String photo, boolean disponible, int statut, String categorie) {
 		super();
 		this.id = id;
 		this.immatriculation = immatriculation;
@@ -85,7 +48,6 @@ public class VehiculeSociete {
 		this.disponible = disponible;
 		this.statut = statut;
 		this.categorie = categorie;
-		this.reservationsVehicule = reservationsVehicule;
 	}
 
 	/**
@@ -188,7 +150,7 @@ public class VehiculeSociete {
 	 * Getter pour l'attribut disponible
 	 * @return the disponible
 	 */
-	public boolean getDisponible() {
+	public boolean isDisponible() {
 		return disponible;
 	}
 
@@ -220,7 +182,7 @@ public class VehiculeSociete {
 	 * Getter pour l'attribut categorie
 	 * @return the categorie
 	 */
-	public Categorie getCategorie() {
+	public String getCategorie() {
 		return categorie;
 	}
 
@@ -228,24 +190,8 @@ public class VehiculeSociete {
 	 * Setter pour l'attribut categorie
 	 * @param categorie the categorie to set
 	 */
-	public void setCategorie(Categorie categorie) {
+	public void setCategorie(String categorie) {
 		this.categorie = categorie;
 	}
 
-	/**
-	 * Getter pour l'attribut reservationsVehicule
-	 * @return the reservationsVehicule
-	 */
-	public List<ReservationVehicule> getReservationsVehicule() {
-		return reservationsVehicule;
-	}
-
-	/**
-	 * Setter pour l'attribut reservationsVehicule
-	 * @param reservationsVehicule the reservationsVehicule to set
-	 */
-	public void setReservationsVehicule(List<ReservationVehicule> reservationsVehicule) {
-		this.reservationsVehicule = reservationsVehicule;
-	}
-	
 }

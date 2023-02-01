@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import fr.diginamic.GP3Covoiturage.dto.VehiculeSocieteDto;
 import fr.diginamic.GP3Covoiturage.dto.VehiculeSocieteDtoMapper;
+import fr.diginamic.GP3Covoiturage.dto.dtoEdit.VehiculeSocieteDtoEdit;
 import fr.diginamic.GP3Covoiturage.models.VehiculeSociete;
 import fr.diginamic.GP3Covoiturage.services.VehiculeSocieteService;
 
@@ -25,8 +26,8 @@ public class VehiculeSocieteController {
 	public VehiculeSocieteService vehiculeSocieteService;
 	
 	@PostMapping
-	public VehiculeSocieteDto create(@RequestBody VehiculeSocieteDto vehiculeSocieteToCreate) {
-		VehiculeSociete modelVehiculeSociete = VehiculeSocieteDtoMapper.toModel(vehiculeSocieteToCreate);
+	public VehiculeSocieteDto create(@RequestBody VehiculeSocieteDtoEdit vehiculeSocieteToCreate) {
+		VehiculeSociete modelVehiculeSociete = VehiculeSocieteDtoEditMapper.toModel(vehiculeSocieteToCreate);
 		vehiculeSocieteService.create(modelVehiculeSociete);
 		return vehiculeSocieteToCreate;
 	}
