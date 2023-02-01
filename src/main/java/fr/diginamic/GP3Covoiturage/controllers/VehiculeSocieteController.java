@@ -1,5 +1,6 @@
 package fr.diginamic.GP3Covoiturage.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,8 +55,11 @@ public class VehiculeSocieteController {
 	}
 	
 	@GetMapping()
-	public List<VehiculeSociete> findAllVehiculeSociete() {
-		return vehiculeSocieteService.findAll();
+	public List<VehiculeSocieteDtoLight> findAllVehiculeSociete() {
+		List<VehiculeSociete> models = vehiculeSocieteService.findAll();
+		List<VehiculeSocieteDtoLight> dtos = new ArrayList<>();
+		models.forEach(m -> dtos.add(VehiculeSocieteDtoLightMapper.toDto(m)));
+		return dtos;
 	}
 
 }

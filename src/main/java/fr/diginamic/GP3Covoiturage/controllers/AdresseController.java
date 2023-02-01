@@ -3,6 +3,9 @@
  */
 package fr.diginamic.GP3Covoiturage.controllers;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -55,6 +58,14 @@ public class AdresseController {
 			return null;
 		}
 	}
+	
+	@GetMapping
+	public List<AdresseDtoLight> readAll(){
+		List<Adresse> models = adresseService.findAll();
+		List<AdresseDtoLight> dtos = new ArrayList<>();
+		models.forEach(m -> dtos.add(AdresseDtoLightMapper.toDto(m)));
+		return dtos;
+	}
 
 	/**
 	 * @param adresseToUpdate
@@ -71,7 +82,11 @@ public class AdresseController {
 	 */
 	@DeleteMapping("/{id}")
 	public void delete(@PathVariable("id") Integer id) {
-		adresseService.delete(id);
+		try {
+			adresseService.delete(id);
+		} catch (FunctionalException e) {
+			System.out.println(e.getMessage());
+		}
 	}
 
 }

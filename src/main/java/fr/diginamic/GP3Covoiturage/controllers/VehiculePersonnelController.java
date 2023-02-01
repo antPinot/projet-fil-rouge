@@ -16,6 +16,8 @@ import fr.diginamic.GP3Covoiturage.dto.VehiculePersonnelDto;
 import fr.diginamic.GP3Covoiturage.dto.VehiculePersonnelDtoMapper;
 import fr.diginamic.GP3Covoiturage.dto.dtoEdit.VehiculePersonnelDtoEdit;
 import fr.diginamic.GP3Covoiturage.dto.dtoEdit.VehiculePersonnelDtoEditMapper;
+import fr.diginamic.GP3Covoiturage.dto.dtoLight.VehiculePersonnelDtoLight;
+import fr.diginamic.GP3Covoiturage.dto.dtoLight.VehiculePersonnelDtoLightMapper;
 import fr.diginamic.GP3Covoiturage.models.VehiculePersonnel;
 import fr.diginamic.GP3Covoiturage.services.VehiculePersonnelService;
 
@@ -46,8 +48,8 @@ public class VehiculePersonnelController {
 	}
 	
 	@GetMapping("/{id}")
-	public VehiculePersonnelDto findById(@PathVariable("id") Integer id) {
-		return VehiculePersonnelDtoMapper.toDto(vehiculePersonnelService.findById(id));
+	public VehiculePersonnelDtoLight findById(@PathVariable("id") Integer id) {
+		return VehiculePersonnelDtoLightMapper.toDto(vehiculePersonnelService.findById(id));
 	}
 	
 	@GetMapping()

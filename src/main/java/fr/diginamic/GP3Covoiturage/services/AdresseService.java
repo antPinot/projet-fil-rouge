@@ -43,6 +43,10 @@ public class AdresseService {
 	public Adresse findById(Integer id) throws FunctionalException {
 		return adresseRepository.findById(id).orElseThrow(() -> new FunctionalException("L'adresse recherchée n'existe pas"));
 	}
+	
+	public List<Adresse> findAll(){
+		return adresseRepository.findAll();
+	}
 
 	/** Update */
 	public Adresse update(@Valid Adresse adresseToUpdate) {
@@ -55,15 +59,16 @@ public class AdresseService {
 
 	/**
 	 * Delete
+	 * @throws FunctionalException 
 	 * 
 	 * @throws AdresseNotFoundException
 	 */
-	public void delete(Integer id) throws RuntimeException {
+	public void delete(Integer id) throws FunctionalException {
 		Optional<Adresse> adresseToDelete = adresseRepository.findById(id);
 		if (adresseToDelete.isPresent()) {
 			adresseRepository.delete(adresseToDelete.get());
 		} else {
-			throw new RuntimeException();
+			throw new FunctionalException("Il n'y a pas d'entité à effacer");
 		}
 	}
 

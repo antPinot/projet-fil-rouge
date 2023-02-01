@@ -3,6 +3,9 @@
  */
 package fr.diginamic.GP3Covoiturage.controllers;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,14 +16,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import fr.diginamic.GP3Covoiturage.dto.ReservationVehiculeDto;
-import fr.diginamic.GP3Covoiturage.dto.ReservationVehiculeDtoMapper;
 import fr.diginamic.GP3Covoiturage.dto.dtoEdit.ReservationVehiculeDtoEdit;
 import fr.diginamic.GP3Covoiturage.dto.dtoEdit.ReservationVehiculeDtoEditMapper;
 import fr.diginamic.GP3Covoiturage.dto.dtoLight.ReservationVehiculeDtoLight;
 import fr.diginamic.GP3Covoiturage.dto.dtoLight.ReservationVehiculeDtoLightMapper;
 import fr.diginamic.GP3Covoiturage.models.ReservationVehicule;
 import fr.diginamic.GP3Covoiturage.services.ReservationVehiculeService;
+import jakarta.validation.Valid;
 
 /**
  * @author antPinot
@@ -41,7 +43,7 @@ public class ReservationVehiculeController {
 	 * @return reservationVehiculeDtoToCreate
 	 */
 	@PostMapping
-	public ReservationVehiculeDtoEdit create(@RequestBody ReservationVehiculeDtoEdit reservationVehiculeDtoToCreate) {
+	public ReservationVehiculeDtoEdit create(@RequestBody @Valid ReservationVehiculeDtoEdit reservationVehiculeDtoToCreate) {
 		ReservationVehicule model = ReservationVehiculeDtoEditMapper.toModel(reservationVehiculeDtoToCreate);
 		reservationVehiculeService.create(model);
 		return reservationVehiculeDtoToCreate;
@@ -52,6 +54,14 @@ public class ReservationVehiculeController {
 		return ReservationVehiculeDtoLightMapper.toDto(reservationVehiculeService.findById(id));
 	}
 	
+	@GetMapping
+	public List<ReservationVehiculeDtoLight> readAll(){
+		List<ReservationVehicule> models = reservationVehiculeService.findAll();
+		List<ReservationVehiculeDtoLight> dtos = new ArrayList<>();
+		models.forEach(m -> dtos.add(ReservationVehiculeDtoLightMapper.toDto(m)));
+		return dtos;
+	}
+	
 	/**
 	 * Utilise un EditDto
 	 * 
@@ -59,7 +69,7 @@ public class ReservationVehiculeController {
 	 * @return
 	 */
 	@PutMapping
-	public ReservationVehiculeDtoEdit update(@RequestBody ReservationVehiculeDtoEdit reservationVehiculeDtoToUpdate) {
+	public ReservationVehiculeDtoEdit update(@RequestBody @Valid ReservationVehiculeDtoEdit reservationVehiculeDtoToUpdate) {
 		ReservationVehicule model = ReservationVehiculeDtoEditMapper.toModel(reservationVehiculeDtoToUpdate);
 		reservationVehiculeService.update(model);
 		return reservationVehiculeDtoToUpdate;
