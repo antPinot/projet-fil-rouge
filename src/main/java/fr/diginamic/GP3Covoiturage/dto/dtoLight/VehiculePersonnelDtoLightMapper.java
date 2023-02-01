@@ -5,21 +5,16 @@ import fr.diginamic.GP3Covoiturage.models.VehiculePersonnel;
 /**
  * @author Fekhreddine
  */
-public class VehiculePersonnelDtolightMapper {
-	
-	
+public class VehiculePersonnelDtoLightMapper {
+
 	public static VehiculePersonnelDtoLight toDto(VehiculePersonnel vehiculePersonnel) {
-		
+
 		VehiculePersonnelDtoLight lightDto = new VehiculePersonnelDtoLight(vehiculePersonnel.getId(),
-				vehiculePersonnel.getImmatriculation(),
-				vehiculePersonnel.getMarque(),
-				vehiculePersonnel.getModele(),
-				vehiculePersonnel.getLimitePlace(),
-				vehiculePersonnel.getPlaces());
-		
-		
+				vehiculePersonnel.getImmatriculation(), vehiculePersonnel.getMarque(), vehiculePersonnel.getModele(),
+				vehiculePersonnel.getLimitePlace(), vehiculePersonnel.getPlaces());
+
 		return lightDto;
-		
+
 	}
 
 }
