@@ -9,7 +9,7 @@ package fr.diginamic.GP3Covoiturage.dto.dtoEdit;
  * @author antPinot
  *
  */
-public class ReservationVehiculeEditDto {
+public class ReservationVehiculeDtoEdit {
 
 	private Integer id;
 

@@ -3,6 +3,7 @@
  */
 package fr.diginamic.GP3Covoiturage.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +41,10 @@ public class ReservationVehiculeService {
 	/** Read */
 	public ReservationVehicule findById(Integer id) {
 		return reservationVehiculeRepository.findById(id).orElseThrow(() -> new RuntimeException());
+	}
+	
+	public List<ReservationVehicule> findAll(){
+		return reservationVehiculeRepository.findAll();
 	}
 
 	/** Update */

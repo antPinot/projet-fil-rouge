@@ -14,7 +14,7 @@ public class CovoiturageDtoLightMapper {
 				DateUtils.localDateTimeToString(covoiturage.getDateDepart()), covoiturage.getPlacesRestantes(),
 				covoiturage.getNbPersonnes(), covoiturage.getDureeTrajet(), covoiturage.getDistance(),
 				CollaborateurDtoLightMapper.toDto(covoiturage.getOrganisateur()),
-				VehiculePersonnelDtolightMapper.toDto(covoiturage.getVehiculePersonnel()),
+				VehiculePersonnelDtoLightMapper.toDto(covoiturage.getVehiculePersonnel()),
 				AdresseDtoLightMapper.toDto(covoiturage.getAdresseArrivee()),
 				AdresseDtoLightMapper.toDto(covoiturage.getAdresseDepart()));
 

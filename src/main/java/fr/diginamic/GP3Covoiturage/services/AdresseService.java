@@ -7,10 +7,9 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
-import fr.diginamic.GP3Covoiturage.dto.AdresseDto;
-import fr.diginamic.GP3Covoiturage.dto.AdresseDtoMapper;
 import fr.diginamic.GP3Covoiturage.exceptions.FunctionalException;
 import fr.diginamic.GP3Covoiturage.models.Adresse;
 import fr.diginamic.GP3Covoiturage.repositories.AdresseRepository;
@@ -42,9 +41,16 @@ public class AdresseService {
 	 * @throws RuntimeException
 	 * @throws FunctionalException 
 	 */
-	public AdresseDto findById(Integer id) throws FunctionalException {
-		Adresse model = adresseRepository.findById(id).orElseThrow(() -> new FunctionalException("L'adresse recherchée n'existe pas"));
-		return AdresseDtoMapper.toDto(model);
+	public Adresse findById(Integer id) throws FunctionalException {
+		return adresseRepository.findById(id).orElseThrow(() -> new FunctionalException("L'adresse recherchée n'existe pas"));
+	}
+	
+	public List<Adresse> findAll(){
+		return adresseRepository.findAll();
+	}
+	
+	public List<Adresse> findExistingAdresse(Integer numero, String complementNumero, String voie, Integer codePostal, String departement, String pays, String ville){
+		return adresseRepository.findExistingAdresse(numero, complementNumero, voie, codePostal, departement, pays, ville);
 	}
 
 	/** Update */
@@ -58,15 +64,16 @@ public class AdresseService {
 
 	/**
 	 * Delete
+	 * @throws FunctionalException 
 	 * 
 	 * @throws AdresseNotFoundException
 	 */
-	public void delete(Integer id) throws RuntimeException {
+	public void delete(Integer id) throws FunctionalException {
 		Optional<Adresse> adresseToDelete = adresseRepository.findById(id);
 		if (adresseToDelete.isPresent()) {
 			adresseRepository.delete(adresseToDelete.get());
 		} else {
-			throw new RuntimeException();
+			throw new FunctionalException("Il n'y a pas d'entité à effacer");
 		}
 	}
 
