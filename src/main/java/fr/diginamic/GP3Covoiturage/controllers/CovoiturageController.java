@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import fr.diginamic.GP3Covoiturage.dto.CovoiturageDto;
@@ -19,6 +20,7 @@ import fr.diginamic.GP3Covoiturage.dto.dtoEdit.CovoiturageDtoEdit;
 import fr.diginamic.GP3Covoiturage.dto.dtoEdit.CovoiturageDtoEditMapper;
 import fr.diginamic.GP3Covoiturage.dto.dtoLight.CovoiturageDtoLight;
 import fr.diginamic.GP3Covoiturage.dto.dtoLight.CovoiturageDtoLightMapper;
+import fr.diginamic.GP3Covoiturage.exceptions.FunctionalException;
 import fr.diginamic.GP3Covoiturage.models.Covoiturage;
 import fr.diginamic.GP3Covoiturage.services.CovoiturageService;
 import jakarta.transaction.Transactional;
@@ -52,6 +54,21 @@ public class CovoiturageController {
 		List<CovoiturageDtoLight> dtos = new ArrayList<>();
 		models.forEach(m -> dtos.add(CovoiturageDtoLightMapper.toDto(m)));
 		return dtos;
+	}
+	
+	@GetMapping("/")
+	public List<CovoiturageDtoLight> readByCollaborateur(@RequestParam Integer collaborateurId, @RequestParam String state){
+		List<Covoiturage> models;
+		try {
+			models = covoiturageService.findEnCoursByCollaborateurs(collaborateurId, state);
+			List<CovoiturageDtoLight> dtos = new ArrayList<>();
+			models.forEach(m -> dtos.add(CovoiturageDtoLightMapper.toDto(m)));
+			return dtos;
+		} catch (FunctionalException e) {
+			System.out.println(e.getMessage());
+			return null;
+		}
+		
 	}
 
 	/**

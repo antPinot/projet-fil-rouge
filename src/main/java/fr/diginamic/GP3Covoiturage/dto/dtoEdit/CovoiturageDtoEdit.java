@@ -3,6 +3,8 @@
  */
 package fr.diginamic.GP3Covoiturage.dto.dtoEdit;
 
+import java.util.List;
+
 /**
  * @author antPinot
  *
@@ -29,6 +31,8 @@ public class CovoiturageDtoEdit {
 
 	private AdresseDtoEdit adresseArrivee;
 
+	private List<Integer> collaborateursId;
+
 	/**
 	 * Constructeur
 	 * 
@@ -42,10 +46,11 @@ public class CovoiturageDtoEdit {
 	 * @param vehiculePersonnelId
 	 * @param adresseDepart
 	 * @param adresseArrivee
+	 * @param collaborateursId
 	 */
 	public CovoiturageDtoEdit(Integer id, String dateDepart, Integer placesRestantes, Integer nbPersonnes,
 			Integer dureeTrajet, Integer distance, Integer organisateurId, Integer vehiculePersonnelId,
-			AdresseDtoEdit adresseDepart, AdresseDtoEdit adresseArrivee) {
+			AdresseDtoEdit adresseDepart, AdresseDtoEdit adresseArrivee, List<Integer> collaborateursId) {
 		this.id = id;
 		this.dateDepart = dateDepart;
 		this.placesRestantes = placesRestantes;
@@ -56,6 +61,7 @@ public class CovoiturageDtoEdit {
 		this.vehiculePersonnelId = vehiculePersonnelId;
 		this.adresseDepart = adresseDepart;
 		this.adresseArrivee = adresseArrivee;
+		this.collaborateursId = collaborateursId;
 	}
 
 	/**
@@ -236,6 +242,24 @@ public class CovoiturageDtoEdit {
 	 */
 	public void setAdresseArrivee(AdresseDtoEdit adresseArrivee) {
 		this.adresseArrivee = adresseArrivee;
+	}
+
+	/**
+	 * Getter pour l'attribut collaborateursId
+	 * 
+	 * @return the collaborateursId
+	 */
+	public List<Integer> getCollaborateursId() {
+		return collaborateursId;
+	}
+
+	/**
+	 * Setter pour l'attribut collaborateursId
+	 * 
+	 * @param collaborateursId the collaborateursId to set
+	 */
+	public void setCollaborateursId(List<Integer> collaborateursId) {
+		this.collaborateursId = collaborateursId;
 	}
 
 }

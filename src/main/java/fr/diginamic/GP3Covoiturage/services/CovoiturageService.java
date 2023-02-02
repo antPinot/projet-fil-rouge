@@ -11,6 +11,7 @@ import fr.diginamic.GP3Covoiturage.dto.CovoiturageDto;
 import fr.diginamic.GP3Covoiturage.dto.CovoiturageDtoMapper;
 import fr.diginamic.GP3Covoiturage.dto.dtoLight.AdresseDtoLight;
 import fr.diginamic.GP3Covoiturage.dto.dtoLight.AdresseDtoLightMapper;
+import fr.diginamic.GP3Covoiturage.exceptions.FunctionalException;
 import fr.diginamic.GP3Covoiturage.models.Adresse;
 import fr.diginamic.GP3Covoiturage.models.Covoiturage;
 import fr.diginamic.GP3Covoiturage.repositories.CovoiturageRepository;
@@ -29,6 +30,9 @@ public class CovoiturageService {
 
 	@Autowired
 	AdresseService adresseService;
+	
+	@Autowired
+	CollaborateurService collaborateurService;
 
 	/**
 	 * @method create()
@@ -117,6 +121,17 @@ public class CovoiturageService {
 	public List<Covoiturage> findAll() {
 
 		return covoiturageRepository.findAll();
+	}
+	
+	public List<Covoiturage> findEnCoursByCollaborateurs(Integer id, String state) throws FunctionalException{
+		switch (state) {
+		case "en-cours":
+			return covoiturageRepository.findEnCoursByCollaborateur(id);
+		case "historique":
+			return covoiturageRepository.findHistoriqueByCollaborateur(id);
+		default:
+			throw new FunctionalException("Requête Invalide");
+		}
 	}
 
 	/**

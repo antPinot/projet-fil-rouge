@@ -12,8 +12,6 @@ import fr.diginamic.GP3Covoiturage.models.Adresse;
 import fr.diginamic.GP3Covoiturage.models.Collaborateur;
 import fr.diginamic.GP3Covoiturage.models.Covoiturage;
 
-
-
 /**
  * @author Fekhreddine
  */
@@ -31,7 +29,7 @@ public interface CovoiturageRepository extends JpaRepository<Covoiturage, Intege
     
     public List<Covoiturage> findByPlacesRestantes(Integer placesRestantes);
     
-   public List<Covoiturage> findByOrganisateur(Collaborateur organisateur);
+    public List<Covoiturage> findByOrganisateur(Collaborateur organisateur);
     
    //public List<Covoiturage> findByCollaborateurs(List<Collaborateur> collaborateurs); //ici query avec un join
    
@@ -40,7 +38,13 @@ public interface CovoiturageRepository extends JpaRepository<Covoiturage, Intege
     * @method qui selectionne tous les covoiturages
     * par collaborateur
     */
-   @Query("SELECT DISTINCT c FROM Covoiturage c JOIN c.collaborateurs col WHERE col =:collaborateur")
-	public List<Covoiturage> findByAllCoivoituragesByCollaborateurs(@Param("collaborateur") Collaborateur collaborateur);
-	
+   @Query("SELECT DISTINCT c FROM Covoiturage c JOIN c.collaborateurs col WHERE col.id = :collaborateurId")
+   public List<Covoiturage> findByAllCoivoituragesByCollaborateurs(@Param("collaborateurId") Integer id);
+   
+   @Query("SELECT DISTINCT c FROM Covoiturage c JOIN c.collaborateurs col WHERE col.id = :collaborateurId AND c.dateDepart > CURRENT_DATE")
+   public List<Covoiturage> findEnCoursByCollaborateur(@Param("collaborateurId") Integer id);
+   
+   @Query("SELECT DISTINCT c FROM Covoiturage c JOIN c.collaborateurs col WHERE col.id = :collaborateurId AND c.dateDepart < CURRENT_DATE")
+   public List<Covoiturage> findHistoriqueByCollaborateur(@Param("collaborateurId") Integer id);
+   
 }
