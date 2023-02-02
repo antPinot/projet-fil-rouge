@@ -3,6 +3,9 @@
  */
 package fr.diginamic.GP3Covoiturage.controllers;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,10 +16,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import fr.diginamic.GP3Covoiturage.dto.AdresseDto;
-import fr.diginamic.GP3Covoiturage.dto.AdresseDtoMapper;
+
 import fr.diginamic.GP3Covoiturage.dto.dtoEdit.AdresseDtoEdit;
 import fr.diginamic.GP3Covoiturage.dto.dtoEdit.AdresseDtoEditMapper;
+import fr.diginamic.GP3Covoiturage.dto.dtoLight.AdresseDtoLight;
+import fr.diginamic.GP3Covoiturage.dto.dtoLight.AdresseDtoLightMapper;
 import fr.diginamic.GP3Covoiturage.exceptions.FunctionalException;
 import fr.diginamic.GP3Covoiturage.models.Adresse;
 import fr.diginamic.GP3Covoiturage.services.AdresseService;
@@ -46,20 +50,28 @@ public class AdresseController {
 	}
 	
 	@GetMapping("/{id}")
-	public AdresseDto read(@PathVariable("id") Integer id) {
+	public AdresseDtoLight read(@PathVariable("id") Integer id) {
 		try {
-			return adresseService.findById(id);
+			return AdresseDtoLightMapper.toDto(adresseService.findById(id));
 		} catch (FunctionalException e) {
 			System.out.println(e.getMessage()); 
 			return null;
 		}
+	}
+	
+	@GetMapping
+	public List<AdresseDtoLight> readAll(){
+		List<Adresse> models = adresseService.findAll();
+		List<AdresseDtoLight> dtos = new ArrayList<>();
+		models.forEach(m -> dtos.add(AdresseDtoLightMapper.toDto(m)));
+		return dtos;
 	}
 
 	/**
 	 * @param adresseToUpdate
 	 */
 	@PutMapping
-	public AdresseDtoEdit update(@RequestBody AdresseDtoEdit adresseToUpdate) {
+	public AdresseDtoEdit update(@RequestBody @Valid AdresseDtoEdit adresseToUpdate) {
 		Adresse model = AdresseDtoEditMapper.toModel(adresseToUpdate);
 		adresseService.update(model);
 		return adresseToUpdate;
@@ -70,7 +82,11 @@ public class AdresseController {
 	 */
 	@DeleteMapping("/{id}")
 	public void delete(@PathVariable("id") Integer id) {
-		adresseService.delete(id);
+		try {
+			adresseService.delete(id);
+		} catch (FunctionalException e) {
+			System.out.println(e.getMessage());
+		}
 	}
 
 }

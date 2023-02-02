@@ -7,7 +7,7 @@ package fr.diginamic.GP3Covoiturage.dto.dtoEdit;
  * @author antPinot
  *
  */
-public class VehiculeSocieteEditDto {
+public class VehiculeSocieteDtoEdit {
 
 	private Integer id;
 
@@ -38,7 +38,7 @@ public class VehiculeSocieteEditDto {
 	 * @param statut
 	 * @param categorie
 	 */
-	public VehiculeSocieteEditDto(Integer id, String immatriculation, String marque, String modele, int places,
+	public VehiculeSocieteDtoEdit(Integer id, String immatriculation, String marque, String modele, int places,
 			String photo, boolean disponible, int statut, String categorie) {
 		this.id = id;
 		this.immatriculation = immatriculation;

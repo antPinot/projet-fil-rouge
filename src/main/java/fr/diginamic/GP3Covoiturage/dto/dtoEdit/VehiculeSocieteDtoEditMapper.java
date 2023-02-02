@@ -10,9 +10,9 @@ import fr.diginamic.GP3Covoiturage.models.VehiculeSociete;
  * @author antPinot
  *
  */
-public class VehiculeSocieteEditDtoMapper {
+public class VehiculeSocieteDtoEditMapper {
 	
-	public static VehiculeSociete toModel(VehiculeSocieteEditDto vehiculeSocieteEditDto) {
+	public static VehiculeSociete toModel(VehiculeSocieteDtoEdit vehiculeSocieteEditDto) {
 		VehiculeSociete model = new VehiculeSociete();
 		model.setId(vehiculeSocieteEditDto.getId());
 		model.setImmatriculation(vehiculeSocieteEditDto.getImmatriculation());

@@ -81,7 +81,7 @@ public class RoleController {
 	 * @method update
 	 */
 	@PutMapping("/{id}")
-	public @Valid RoleDtoEdit updateRole(@PathVariable("id") Integer id, @Valid RoleDtoEdit updateRole) {
+	public @Valid RoleDtoEdit updateRole(@PathVariable("id") Integer id,@RequestBody @Valid RoleDtoEdit updateRole) {
 		if (!id.equals(updateRole.getId())) {
 
 			throw new RuntimeException("probleme : covoiturage existe pas");
@@ -96,7 +96,7 @@ public class RoleController {
 	 * @method delete
 	 */
 	@DeleteMapping("/{id}")
-	public void deleteRole(@PathVariable("id") Integer id, @RequestBody @Valid Role deleteRole) {
+	public void deleteRole(@PathVariable("id") Integer id,   Role deleteRole) {
 		if (!id.equals(deleteRole.getId())) {
 			throw new RuntimeException("Erreur : Covoiturage pas present en bdd");
 		}
