@@ -8,6 +8,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
@@ -46,7 +48,8 @@ public class VehiculePersonnel {
 	@OneToMany(mappedBy = "vehiculePersonnel")
 	private List<Covoiturage> covoiturages = new ArrayList<Covoiturage>();
 	
-	@ManyToMany(mappedBy = "vehiculesPersonnel")
+	@ManyToMany
+	@JoinTable(name = "Collaborateur_VehiculePersonnel", joinColumns = @JoinColumn(name = "id_vehiculePersonnel", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "id_collaborateur", referencedColumnName = "id"))
 	private List<Collaborateur> collaborateurs = new ArrayList<Collaborateur>();
 
 	public VehiculePersonnel() {
