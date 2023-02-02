@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
 import fr.diginamic.GP3Covoiturage.exceptions.FunctionalException;
@@ -46,6 +47,10 @@ public class AdresseService {
 	
 	public List<Adresse> findAll(){
 		return adresseRepository.findAll();
+	}
+	
+	public List<Adresse> findExistingAdresse(Integer numero, String complementNumero, String voie, Integer codePostal, String departement, String pays, String ville){
+		return adresseRepository.findExistingAdresse(numero, complementNumero, voie, codePostal, departement, pays, ville);
 	}
 
 	/** Update */
