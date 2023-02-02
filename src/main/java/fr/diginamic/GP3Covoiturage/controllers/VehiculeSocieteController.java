@@ -1,5 +1,6 @@
 package fr.diginamic.GP3Covoiturage.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import fr.diginamic.GP3Covoiturage.dto.VehiculeSocieteDto;
 import fr.diginamic.GP3Covoiturage.dto.VehiculeSocieteDtoMapper;
-import fr.diginamic.GP3Covoiturage.dto.dtoEdit.VehiculeSocieteEditDto;
-import fr.diginamic.GP3Covoiturage.dto.dtoEdit.VehiculeSocieteEditDtoMapper;
+import fr.diginamic.GP3Covoiturage.dto.dtoEdit.VehiculeSocieteDtoEdit;
+import fr.diginamic.GP3Covoiturage.dto.dtoEdit.VehiculeSocieteDtoEditMapper;
 import fr.diginamic.GP3Covoiturage.dto.dtoLight.VehiculeSocieteDtoLight;
 import fr.diginamic.GP3Covoiturage.dto.dtoLight.VehiculeSocieteDtoLightMapper;
 import fr.diginamic.GP3Covoiturage.models.VehiculeSociete;
@@ -30,15 +31,15 @@ public class VehiculeSocieteController {
 	public VehiculeSocieteService vehiculeSocieteService;
 	
 	@PostMapping
-	public VehiculeSocieteEditDto create(@RequestBody @Valid VehiculeSocieteEditDto vehiculeSocieteToCreate) {
-		VehiculeSociete modelVehiculeSociete = VehiculeSocieteEditDtoMapper.toModel(vehiculeSocieteToCreate);
+	public VehiculeSocieteDtoEdit create(@RequestBody @Valid VehiculeSocieteDtoEdit vehiculeSocieteToCreate) {
+		VehiculeSociete modelVehiculeSociete = VehiculeSocieteDtoEditMapper.toModel(vehiculeSocieteToCreate);
 		vehiculeSocieteService.create(modelVehiculeSociete);
 		return vehiculeSocieteToCreate;
 	}
 	
 	@PutMapping("/{id}")
-	public VehiculeSocieteEditDto update(@RequestBody @Valid VehiculeSocieteEditDto vehiculeSocieteToUpdate) {
-		VehiculeSociete modelVehiculeSociete = VehiculeSocieteEditDtoMapper.toModel(vehiculeSocieteToUpdate);
+	public VehiculeSocieteDtoEdit update(@RequestBody @Valid VehiculeSocieteDtoEdit vehiculeSocieteToUpdate) {
+		VehiculeSociete modelVehiculeSociete = VehiculeSocieteDtoEditMapper.toModel(vehiculeSocieteToUpdate);
 		vehiculeSocieteService.update(modelVehiculeSociete);
 		return vehiculeSocieteToUpdate;
 	}
@@ -54,8 +55,11 @@ public class VehiculeSocieteController {
 	}
 	
 	@GetMapping()
-	public List<VehiculeSociete> findAllVehiculeSociete() {
-		return vehiculeSocieteService.findAll();
+	public List<VehiculeSocieteDtoLight> findAllVehiculeSociete() {
+		List<VehiculeSociete> models = vehiculeSocieteService.findAll();
+		List<VehiculeSocieteDtoLight> dtos = new ArrayList<>();
+		models.forEach(m -> dtos.add(VehiculeSocieteDtoLightMapper.toDto(m)));
+		return dtos;
 	}
 
 }

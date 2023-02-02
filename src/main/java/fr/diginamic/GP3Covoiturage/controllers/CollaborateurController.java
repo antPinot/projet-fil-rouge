@@ -1,5 +1,6 @@
 package fr.diginamic.GP3Covoiturage.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,43 +15,65 @@ import org.springframework.web.bind.annotation.RestController;
 
 import fr.diginamic.GP3Covoiturage.dto.CollaborateurDto;
 import fr.diginamic.GP3Covoiturage.dto.CollaborateurDtoMapper;
+import fr.diginamic.GP3Covoiturage.dto.dtoEdit.CollaborateurDtoEdit;
+import fr.diginamic.GP3Covoiturage.dto.dtoEdit.CollaborateurDtoEditMapper;
+import fr.diginamic.GP3Covoiturage.dto.dtoLight.CollaborateurDtoLight;
+import fr.diginamic.GP3Covoiturage.dto.dtoLight.CollaborateurDtoLightMapper;
 import fr.diginamic.GP3Covoiturage.models.Collaborateur;
 import fr.diginamic.GP3Covoiturage.services.CollaborateurService;
 
 @RestController
 @RequestMapping("/rest/collaborateur")
 public class CollaborateurController {
-	
+
 	@Autowired
 	public CollaborateurService collaborateurService;
-	
+
 	@PostMapping
-	public CollaborateurDto create(@RequestBody CollaborateurDto collaborateurToCreate) {
-		Collaborateur modelCollab = CollaborateurDtoMapper.toModel(collaborateurToCreate);
+	public CollaborateurDtoEdit create(@RequestBody CollaborateurDtoEdit collaborateurToCreate) {
+		Collaborateur modelCollab = CollaborateurDtoEditMapper.toModel(collaborateurToCreate);
 		collaborateurService.create(modelCollab);
 		return collaborateurToCreate;
 	}
-	
+
 	@PutMapping
-	public CollaborateurDto update(@RequestBody CollaborateurDto collaborateurToUpdate) {
-		Collaborateur modelCollab = CollaborateurDtoMapper.toModel(collaborateurToUpdate);
+	public CollaborateurDtoEdit update(@RequestBody CollaborateurDtoEdit collaborateurToUpdate) {
+		Collaborateur modelCollab = CollaborateurDtoEditMapper.toModel(collaborateurToUpdate);
 		collaborateurService.update(modelCollab);
 		return collaborateurToUpdate;
 	}
-	
+
 	@DeleteMapping("/{id}")
 	public void delete(@PathVariable("id") Integer id) {
 		collaborateurService.delete(id);
 	}
-	
+
 	@GetMapping("/{id}")
-	public CollaborateurDto findById(@PathVariable("id") Integer id) {
-		return CollaborateurDtoMapper.toDto(collaborateurService.findById(id));
+	public CollaborateurDtoLight findById(@PathVariable("id") Integer id) {
+		Collaborateur collaborateur = collaborateurService.findById(id);
+
+		if (collaborateur == null) {
+
+			throw new RuntimeException("probleme : id collaborateur existe pas");
+		}
+
+		CollaborateurDtoLight collaborateurDtoLight = CollaborateurDtoLightMapper.toDto(collaborateur);
+
+		return collaborateurDtoLight;
+
 	}
-	
+
 	@GetMapping()
-	public List<Collaborateur> findAllCollaborateur() {
-		return collaborateurService.findAll();
+	public List<CollaborateurDtoLight> findAllCollaborateur() {
+		List<Collaborateur> collaborateurs =  collaborateurService.findAll();
+		List<CollaborateurDtoLight> collaborateurDtoLights = new ArrayList<>();
+		
+		for(Collaborateur c : collaborateurs) {
+			
+			collaborateurDtoLights.add(CollaborateurDtoLightMapper.toDto(c));
+			
+		}
+		return collaborateurDtoLights;
 	}
-	
+
 }
