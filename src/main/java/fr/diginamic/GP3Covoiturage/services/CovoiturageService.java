@@ -51,7 +51,7 @@ public class CovoiturageService {
 			createCovoiturage.setAdresseArrivee(adresseArrivee);
 		} else {
 
-			createCovoiturage.setAdresseArrivee(adresseArrivee);
+			createCovoiturage.setAdresseArrivee(query1.get(0));
 		}
 
 		// Attention à l'ordre des paramètres de la méthode findExistingAdresse
@@ -92,7 +92,7 @@ public class CovoiturageService {
 					updateCovoiturage.setAdresseArrivee(adresseArrivee);
 				} else {
 
-					updateCovoiturage.setAdresseArrivee(adresseArrivee);
+					updateCovoiturage.setAdresseArrivee(query1.get(0));
 				}
 
 				// Attention à l'ordre des paramètres de la méthode findExistingAdresse
