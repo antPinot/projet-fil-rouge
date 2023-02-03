@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.properties.bind.DefaultValue;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,7 +23,9 @@ import fr.diginamic.GP3Covoiturage.dto.dtoLight.CovoiturageDtoLight;
 import fr.diginamic.GP3Covoiturage.dto.dtoLight.CovoiturageDtoLightMapper;
 import fr.diginamic.GP3Covoiturage.exceptions.FunctionalException;
 import fr.diginamic.GP3Covoiturage.models.Covoiturage;
+import fr.diginamic.GP3Covoiturage.models.VehiculePersonnel;
 import fr.diginamic.GP3Covoiturage.services.CovoiturageService;
+import fr.diginamic.GP3Covoiturage.services.VehiculePersonnelService;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 
@@ -55,12 +58,12 @@ public class CovoiturageController {
 		models.forEach(m -> dtos.add(CovoiturageDtoLightMapper.toDto(m)));
 		return dtos;
 	}
-	
+
 	@GetMapping("/")
-	public List<CovoiturageDtoLight> readByCollaborateur(@RequestParam Integer collaborateurId, @RequestParam String state){
-		List<Covoiturage> models;
+	public List<CovoiturageDtoLight> readByCollaborateur(@RequestParam Integer collaborateurId,
+			@RequestParam String state) {
 		try {
-			models = covoiturageService.findEnCoursByCollaborateurs(collaborateurId, state);
+			List<Covoiturage> models = covoiturageService.findEnCoursByCollaborateurs(collaborateurId, state);
 			List<CovoiturageDtoLight> dtos = new ArrayList<>();
 			models.forEach(m -> dtos.add(CovoiturageDtoLightMapper.toDto(m)));
 			return dtos;
@@ -68,18 +71,40 @@ public class CovoiturageController {
 			System.out.println(e.getMessage());
 			return null;
 		}
-		
+
+	}
+
+	@GetMapping("/criteres")
+	public List<CovoiturageDtoLight> readByCriteres(@RequestParam(defaultValue = "none") String adresseDepart,
+			@RequestParam(defaultValue = "none") String adresseArrivee,
+			@RequestParam(defaultValue = "none") String dateDepart) {
+		try {
+			List<Covoiturage> models = covoiturageService.findByCriteres(adresseDepart, adresseArrivee, dateDepart);
+			List<CovoiturageDtoLight> dtos = new ArrayList<>();
+			models.forEach(m -> dtos.add(CovoiturageDtoLightMapper.toDto(m)));
+			return dtos;
+		} catch (FunctionalException e) {
+			System.out.println(e.getMessage());
+			return null;
+		}
+
 	}
 
 	/**
+	 * @throws FunctionalException
 	 * @method create
 	 */
 	@PostMapping()
 	@Transactional
 	public CovoiturageDtoEdit createCovoiturage(@RequestBody @Valid CovoiturageDtoEdit createCovoiturage) {
 
-		Covoiturage modelCovoit = CovoiturageDtoEditMapper.toModel(createCovoiturage);
-		covoiturageService.create(modelCovoit);
+		try {
+			Covoiturage modelCovoit = CovoiturageDtoEditMapper.toModel(createCovoiturage);
+			covoiturageService.create(modelCovoit);
+		} catch (FunctionalException e) {
+			System.out.println(e.getMessage());
+			return null;
+		}
 		return createCovoiturage;
 	}
 
@@ -87,7 +112,8 @@ public class CovoiturageController {
 	 * @method update
 	 */
 	@PutMapping("/{id}")
-	public CovoiturageDtoEdit updateCovoiturage(@PathVariable("id") Integer id,@RequestBody @Valid CovoiturageDtoEdit updateCovoiturage) {
+	public CovoiturageDtoEdit updateCovoiturage(@PathVariable("id") Integer id,
+			@RequestBody @Valid CovoiturageDtoEdit updateCovoiturage) {
 		if (!id.equals(updateCovoiturage.getId())) {
 
 			throw new RuntimeException("probleme : covoiturage existe pas");
@@ -96,6 +122,16 @@ public class CovoiturageController {
 		Covoiturage modelCovoit = CovoiturageDtoEditMapper.toModel(updateCovoiturage);
 		covoiturageService.update(modelCovoit);
 		return updateCovoiturage;
+	}
+	
+	@PutMapping("/reserver/{id}/{collaborateurId}")
+	public void reserverCovoiturage(@PathVariable("id") Integer id, @PathVariable("collaborateurId") Integer collaborateurId) {
+		covoiturageService.reserverCovoiturage(id, collaborateurId);
+	}
+
+	@PutMapping("/annuler-participation/{id}")
+	public void annulerParticipation(@PathVariable("id") Integer id, @RequestParam Integer collaborateurId) {
+		covoiturageService.annulerParticipation(id, collaborateurId);
 	}
 
 	/**

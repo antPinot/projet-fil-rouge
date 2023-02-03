@@ -31,8 +31,19 @@ public interface CovoiturageRepository extends JpaRepository<Covoiturage, Intege
     
     public List<Covoiturage> findByOrganisateur(Collaborateur organisateur);
     
+    public List<Covoiturage> findByAdresseDepartAndAdresseArrivee(Adresse adresseDepart, Adresse adresseArrivee);
+    
+    public List<Covoiturage> findByAdresseDepartAndAdresseArriveeAndDateDepart(Adresse adresseDepart, Adresse adresseArrivee, LocalDateTime dateDepart);
+    
+    public List<Covoiturage> findByAdresseDepartAndDateDepart(Adresse adresseDepart, LocalDateTime dateDepart);
+    
+    public List<Covoiturage> findByAdresseArriveeAndDateDepart(Adresse adresseArrivee, LocalDateTime dateDepart);
+    
    //public List<Covoiturage> findByCollaborateurs(List<Collaborateur> collaborateurs); //ici query avec un join
    
+    
+    @Query("SELECT c FROM Covoiturage c WHERE c.dateDepart BETWEEN :startOfDay AND :endOfDay")
+    public List<Covoiturage> findBeetweenStartOfDaytAndEndOfDay(@Param("startOfDay")LocalDateTime startOfDay, @Param("endOfDay") LocalDateTime endOfDay);
    
    /**
     * @method qui selectionne tous les covoiturages
