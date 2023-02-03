@@ -11,12 +11,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import fr.diginamic.GP3Covoiturage.dto.VehiculeSocieteDto;
 import fr.diginamic.GP3Covoiturage.dto.VehiculeSocieteDtoMapper;
 import fr.diginamic.GP3Covoiturage.dto.dtoEdit.VehiculeSocieteDtoEdit;
 import fr.diginamic.GP3Covoiturage.dto.dtoEdit.VehiculeSocieteDtoEditMapper;
+import fr.diginamic.GP3Covoiturage.dto.dtoLight.ReservationVehiculeDtoLight;
+import fr.diginamic.GP3Covoiturage.dto.dtoLight.ReservationVehiculeDtoLightMapper;
 import fr.diginamic.GP3Covoiturage.dto.dtoLight.VehiculeSocieteDtoLight;
 import fr.diginamic.GP3Covoiturage.dto.dtoLight.VehiculeSocieteDtoLightMapper;
 import fr.diginamic.GP3Covoiturage.models.VehiculeSociete;
@@ -61,5 +64,27 @@ public class VehiculeSocieteController {
 		models.forEach(m -> dtos.add(VehiculeSocieteDtoLightMapper.toDto(m)));
 		return dtos;
 	}
+	
+	
+	
+	
+	/** Get METHODE 
+	 * 
+	 *   EN PENDING
+	 *  
+	 *  **/
+	@GetMapping("/searchVehiculeSocietes")
+	public List<VehiculeSocieteDtoLight> searchVehiculeSociete(@RequestParam Integer id,@RequestParam(value = "dateDepart") String dateDepart,
+			@RequestParam(value = "dateRetour") String dateRetour){
+		
+		
+		List<VehiculeSociete> vehiculeSocietes = vehiculeSocieteService.getVehiculesSocietesDispo( id, dateDepart,
+				dateRetour);
+		List<VehiculeSocieteDtoLight> dtos = new ArrayList<>();
+		
+		
+		vehiculeSocietes.forEach(m -> dtos.add(VehiculeSocieteDtoLightMapper.toDto(m)) );
+		return dtos;
+				}
 
 }
