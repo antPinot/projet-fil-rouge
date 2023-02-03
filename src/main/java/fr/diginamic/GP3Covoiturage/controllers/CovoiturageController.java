@@ -125,13 +125,15 @@ public class CovoiturageController {
 	}
 	
 	@PutMapping("/reserver/{id}/{collaborateurId}")
-	public void reserverCovoiturage(@PathVariable("id") Integer id, @PathVariable("collaborateurId") Integer collaborateurId) {
+	public CovoiturageDtoLight reserverCovoiturage(@PathVariable("id") Integer id, @PathVariable("collaborateurId") Integer collaborateurId) {
 		covoiturageService.reserverCovoiturage(id, collaborateurId);
+		return CovoiturageDtoLightMapper.toDto(covoiturageService.findById(id));
 	}
 
-	@PutMapping("/annuler-participation/{id}")
-	public void annulerParticipation(@PathVariable("id") Integer id, @RequestParam Integer collaborateurId) {
+	@PutMapping("/annuler-participation/{id}/{collaborateurId}")
+	public CovoiturageDtoLight annulerParticipation(@PathVariable("id") Integer id, @PathVariable("collaborateurId") Integer collaborateurId) {
 		covoiturageService.annulerParticipation(id, collaborateurId);
+		return CovoiturageDtoLightMapper.toDto(covoiturageService.findById(id));
 	}
 
 	/**

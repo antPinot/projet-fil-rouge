@@ -9,6 +9,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import fr.diginamic.GP3Covoiturage.exceptions.FunctionalException;
+import fr.diginamic.GP3Covoiturage.models.Covoiturage;
 import fr.diginamic.GP3Covoiturage.models.ReservationVehicule;
 import fr.diginamic.GP3Covoiturage.repositories.ReservationVehiculeRepository;
 import jakarta.transaction.Transactional;
@@ -45,6 +47,17 @@ public class ReservationVehiculeService {
 	
 	public List<ReservationVehicule> findAll(){
 		return reservationVehiculeRepository.findAll();
+	}
+	
+	public List<ReservationVehicule> findByCollaborateur(Integer id, String state) throws FunctionalException {
+		switch (state) {
+		case "en-cours":
+			return reservationVehiculeRepository.findEnCoursByCollaborateur(id);
+		case "historique":
+			return reservationVehiculeRepository.findHistoriqueByCollaborateur(id);
+		default:
+			throw new FunctionalException("Requête Invalide");
+		}
 	}
 
 	/** Update */

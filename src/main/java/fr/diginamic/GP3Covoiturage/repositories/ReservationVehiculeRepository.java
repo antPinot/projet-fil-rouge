@@ -12,6 +12,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import fr.diginamic.GP3Covoiturage.models.Collaborateur;
+import fr.diginamic.GP3Covoiturage.models.Covoiturage;
 import fr.diginamic.GP3Covoiturage.models.ReservationVehicule;
 import fr.diginamic.GP3Covoiturage.models.VehiculeSociete;
 
@@ -66,6 +67,12 @@ public interface ReservationVehiculeRepository extends JpaRepository<Reservation
 	 * @return liste de ReservationVehicule
 	 */
 	public List<ReservationVehicule> findByVehiculeSociete(VehiculeSociete vehiculeSociete);
+	
+	 @Query("SELECT DISTINCT r FROM ReservationVehicule r WHERE r.collaborateur.id = :collaborateurId AND r.dateRetour > CURRENT_DATE")
+	public List<ReservationVehicule> findEnCoursByCollaborateur(@Param("collaborateurId") Integer id);
+	   
+	   @Query("SELECT DISTINCT r FROM ReservationVehicule r WHERE r.collaborateur.id = :collaborateurId AND r.dateRetour < CURRENT_DATE")
+	public List<ReservationVehicule> findHistoriqueByCollaborateur(@Param("collaborateurId") Integer id);
 	
 
 }

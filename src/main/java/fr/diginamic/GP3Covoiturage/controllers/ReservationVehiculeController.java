@@ -14,12 +14,17 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import fr.diginamic.GP3Covoiturage.dto.dtoEdit.ReservationVehiculeDtoEdit;
 import fr.diginamic.GP3Covoiturage.dto.dtoEdit.ReservationVehiculeDtoEditMapper;
+import fr.diginamic.GP3Covoiturage.dto.dtoLight.CovoiturageDtoLight;
+import fr.diginamic.GP3Covoiturage.dto.dtoLight.CovoiturageDtoLightMapper;
 import fr.diginamic.GP3Covoiturage.dto.dtoLight.ReservationVehiculeDtoLight;
 import fr.diginamic.GP3Covoiturage.dto.dtoLight.ReservationVehiculeDtoLightMapper;
+import fr.diginamic.GP3Covoiturage.exceptions.FunctionalException;
+import fr.diginamic.GP3Covoiturage.models.Covoiturage;
 import fr.diginamic.GP3Covoiturage.models.ReservationVehicule;
 import fr.diginamic.GP3Covoiturage.services.ReservationVehiculeService;
 import jakarta.validation.Valid;
@@ -52,6 +57,21 @@ public class ReservationVehiculeController {
 	@GetMapping("/{id}")
 	public ReservationVehiculeDtoLight read(@PathVariable("id") Integer id) {
 		return ReservationVehiculeDtoLightMapper.toDto(reservationVehiculeService.findById(id));
+	}
+	
+	@GetMapping("/")
+	public List<ReservationVehiculeDtoLight> readByCollaborateur(@RequestParam Integer collaborateurId,
+			@RequestParam String state) {
+		try {
+			List<ReservationVehicule> models = reservationVehiculeService.findByCollaborateur(collaborateurId, state);
+			List<ReservationVehiculeDtoLight> dtos = new ArrayList<>();
+			models.forEach(m -> dtos.add(ReservationVehiculeDtoLightMapper.toDto(m)));
+			return dtos;
+		} catch (FunctionalException e) {
+			System.out.println(e.getMessage());
+			return null;
+		}
+
 	}
 	
 	@GetMapping
