@@ -67,9 +67,7 @@ public class ReservationVehiculeController {
 			@RequestBody @Valid ReservationVehiculeDtoEdit reservationVehiculeDtoToCreate) {
 		ReservationVehicule model = ReservationVehiculeDtoEditMapper.toModel(reservationVehiculeDtoToCreate);
 		reservationVehiculeService.create(model);
-		//return reservationVehiculeDtoToCreate;
-		org.springframework.http.HttpHeaders headers = new org.springframework.http.HttpHeaders();
-		return new ResponseEntity<String>("Hey", headers, HttpStatus.OK);
+		return reservationVehiculeDtoToCreate;
 	}
 
 	@GetMapping("/{id}")
@@ -150,7 +148,8 @@ public class ReservationVehiculeController {
 		try {
 			reservationVehiculeService.saveReserv(modelReser);
 			return reservationVehiculeDtoEdit;
-
+			
+		//
 		} catch (FunctionalException e) {
 			// TODO Auto-generated catch block
 			System.err.println(e.getMessage());
