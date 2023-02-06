@@ -78,11 +78,11 @@ public interface VehiculeSocieteRepository extends JpaRepository<VehiculeSociete
 	public List<VehiculeSociete> findByCollaborateurNom(@Param("nom") String nom);
 
 	/**
-	 * pas sur que cela marche
+	 *  
 	 * 
 	 * Query qui va afficher tout les vehicules qui ne sont
 	 * 
-	 * pas dispos entre deux dates
+	 * pas dispos entre deux dates precises
 	 * 
 	 * @param id
 	 * 

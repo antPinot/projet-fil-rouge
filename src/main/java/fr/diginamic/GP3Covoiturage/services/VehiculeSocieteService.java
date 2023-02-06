@@ -62,7 +62,7 @@ public class VehiculeSocieteService {
 	 * Visualiser les vehicules de services
 	 * 
 	 * 
-	 * METHODE A VERIFIER VIA POSTMAN
+	 * 
 	 * 
 	 * METHODE QUI MARCHE VOIR SI ID IL FAUT LE DEGAGER
 	 * 
@@ -72,15 +72,14 @@ public class VehiculeSocieteService {
 		LocalDateTime time1 = DateUtils.stringToLocalDateTime(dateDepart);
 		LocalDateTime time2 = DateUtils.stringToLocalDateTime(dateRetour);
 
-		return  vehiculeSocieteRepository.VehiculesDispo( id, time1, time2);
+		return vehiculeSocieteRepository.VehiculesDispo(id, time1, time2);
 
 	}
 
 	/**
 	 * Creer un nouveau vehicule de services
 	 * 
-	 * 
-	 * METHODE A VERIFIER VIA POSTMAN
+	 * @author Fekhreddine METHODE FONCTIONNEL VIA POSTMAN
 	 * 
 	 * @throws FunctionalException
 	 * 
@@ -88,12 +87,48 @@ public class VehiculeSocieteService {
 
 	public VehiculeSociete createVehicule(VehiculeSociete vehiculeSociete) throws FunctionalException {
 
-		if (vehiculeSociete.getDisponible() == false) {
+		if (!vehiculeSociete.getDisponible()) {
 
 			throw new FunctionalException("Erreur : Le vehicule n'est pas disponible");
 		}
+
+		int statut = vehiculeSociete.getStatut();
+
+		if (statut != -1 && statut != 0 && statut != 1) {
+			throw new FunctionalException("Erreur : Le statut doit être soit -1, 0 ou 1");
+		}
 		return vehiculeSocieteRepository.save(vehiculeSociete);
 	}
-}
 
-/** Modifier un vehicule de service et gerer son cycle de vie **/
+
+
+	/**
+	 * @author Fekhreddine
+	 * 
+	 * @throws FunctionalException
+	 * 
+	 *    Modifier un vehicule de service et gerer son
+	 *    cycle de vie
+	 **/
+
+	public VehiculeSociete updateVehicule(VehiculeSociete vehiculeSociete) throws FunctionalException {
+
+		VehiculeSociete existingVehicule = vehiculeSocieteRepository.findById(vehiculeSociete.getId())
+				.orElseThrow(() -> new FunctionalException("Erreur : Le véhicule n'existe pas"));
+
+		if (!existingVehicule.getDisponible()) {
+			throw new FunctionalException("Erreur : Le véhicule n'est pas disponible");
+		}
+
+		int statut = vehiculeSociete.getStatut();
+		if (statut != -1 && statut != 0 && statut != 1) {
+			throw new FunctionalException("Erreur : Le statut doit être soit -1, 0 ou 1");
+		}
+
+		existingVehicule.setDisponible(vehiculeSociete.getDisponible());
+		existingVehicule.setStatut(vehiculeSociete.getStatut());
+
+		return vehiculeSocieteRepository.save(vehiculeSociete);
+	}
+
+}
