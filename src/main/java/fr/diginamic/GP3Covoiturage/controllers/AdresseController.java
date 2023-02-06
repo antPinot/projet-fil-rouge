@@ -21,7 +21,6 @@ import fr.diginamic.GP3Covoiturage.dto.dtoEdit.AdresseDtoEdit;
 import fr.diginamic.GP3Covoiturage.dto.dtoEdit.AdresseDtoEditMapper;
 import fr.diginamic.GP3Covoiturage.dto.dtoLight.AdresseDtoLight;
 import fr.diginamic.GP3Covoiturage.dto.dtoLight.AdresseDtoLightMapper;
-import fr.diginamic.GP3Covoiturage.exceptions.FunctionalException;
 import fr.diginamic.GP3Covoiturage.models.Adresse;
 import fr.diginamic.GP3Covoiturage.services.AdresseService;
 import jakarta.validation.Valid;
@@ -36,7 +35,7 @@ import jakarta.validation.Valid;
 public class AdresseController {
 
 	@Autowired
-	public AdresseService adresseService;
+	private AdresseService adresseService;
 
 	/** Create 
 	 **
@@ -51,12 +50,7 @@ public class AdresseController {
 	
 	@GetMapping("/{id}")
 	public AdresseDtoLight read(@PathVariable("id") Integer id) {
-		try {
-			return AdresseDtoLightMapper.toDto(adresseService.findById(id));
-		} catch (FunctionalException e) {
-			System.out.println(e.getMessage()); 
-			return null;
-		}
+		return AdresseDtoLightMapper.toDto(adresseService.findById(id));
 	}
 	
 	@GetMapping
@@ -82,11 +76,7 @@ public class AdresseController {
 	 */
 	@DeleteMapping("/{id}")
 	public void delete(@PathVariable("id") Integer id) {
-		try {
-			adresseService.delete(id);
-		} catch (FunctionalException e) {
-			System.out.println(e.getMessage());
-		}
+		adresseService.delete(id);
 	}
 
 }

@@ -1,18 +1,15 @@
 package fr.diginamic.GP3Covoiturage.services;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.ListCrudRepository;
 import org.springframework.stereotype.Service;
 
 import fr.diginamic.GP3Covoiturage.exceptions.FunctionalException;
+
 import fr.diginamic.GP3Covoiturage.models.ReservationVehicule;
 import fr.diginamic.GP3Covoiturage.models.VehiculeSociete;
-import fr.diginamic.GP3Covoiturage.repositories.ReservationVehiculeRepository;
 import fr.diginamic.GP3Covoiturage.repositories.VehiculeSocieteRepository;
 import fr.diginamic.GP3Covoiturage.utils.DateUtils;
 import jakarta.persistence.EntityNotFoundException;
@@ -24,10 +21,11 @@ import jakarta.validation.Valid;
 public class VehiculeSocieteService {
 
 	@Autowired
-	public VehiculeSocieteRepository vehiculeSocieteRepository;
-
+	private VehiculeSocieteRepository vehiculeSocieteRepository;
+	
 	@Autowired
-	public ReservationVehiculeRepository reservationVehiculeRepository;
+	private ReservationVehiculeService reservationVehiculeService;
+	
 
 	public VehiculeSociete create(@Valid VehiculeSociete vehiculeSocieteToCreate) {
 		if (vehiculeSocieteToCreate.getId() != null) {
@@ -40,6 +38,14 @@ public class VehiculeSocieteService {
 		if (vehiculeSocieteToUpdate.getId() == null) {
 			throw new RuntimeException("Id n'est pas valide");
 		}
+		
+		//Vehicule n'est pas en service
+		if (vehiculeSocieteToUpdate.getStatut() != 1) {
+			List<ReservationVehicule> reservations = reservationVehiculeService.findEnCoursByVehiculeSociete(vehiculeSocieteToUpdate);
+			reservations.forEach(r -> reservationVehiculeService.delete(r.getId()));
+			// Méthode d'envoi de mail à réaliser
+		}
+		
 		return vehiculeSocieteRepository.save(vehiculeSocieteToUpdate);
 	}
 
