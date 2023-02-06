@@ -98,7 +98,9 @@ public class CovoiturageService {
 		if (covoiturageToBook.getOrganisateur().getId().equals(collaborateurId)) {
 			throw new BadRequestException("Vous êtes déjà le chauffeur de ce covoiturage");
 		}
-
+		
+		// Ctrl nb places à mettre en place
+		
 		covoiturageToBook.getCollaborateurs().add(new Collaborateur(collaborateurId));
 		covoiturageToBook.setNbPersonnes(covoiturageToBook.getNbPersonnes() + 1);
 		covoiturageToBook.setPlacesRestantes(covoiturageToBook.getPlacesRestantes() - 1);
@@ -113,14 +115,20 @@ public class CovoiturageService {
 	 * @return
 	 */
 	public Covoiturage annulerParticipation(Integer id, Integer collaborateurId) {
+		
+		//Manque t'il un ctrl pour covoiturage en cours ? (non)
+		
+		List<Collaborateur> collaborateursToRemove = new ArrayList<>();
 		Covoiturage covoiturageToUpdate = findById(id);
 		for (Collaborateur collaborateur : covoiturageToUpdate.getCollaborateurs()) {
 			if (collaborateur.getId().equals(collaborateurId)) {
-				covoiturageToUpdate.getCollaborateurs().remove(collaborateur);
+				collaborateursToRemove.add(collaborateur);
 				covoiturageToUpdate.setPlacesRestantes(covoiturageToUpdate.getPlacesRestantes() + 1);
 				covoiturageToUpdate.setNbPersonnes(covoiturageToUpdate.getNbPersonnes() - 1);
 			}
 		}
+		covoiturageToUpdate.getCollaborateurs().removeAll(collaborateursToRemove);
+		
 		return covoiturageRepository.save(covoiturageToUpdate);
 	}
 

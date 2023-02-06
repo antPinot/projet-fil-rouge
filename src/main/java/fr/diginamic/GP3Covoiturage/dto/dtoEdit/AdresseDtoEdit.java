@@ -3,6 +3,11 @@
  */
 package fr.diginamic.GP3Covoiturage.dto.dtoEdit;
 
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+
 /**
  * @author antPinot
  *
@@ -10,19 +15,31 @@ package fr.diginamic.GP3Covoiturage.dto.dtoEdit;
 public class AdresseDtoEdit {
 
 	private Integer id;
-
+	
+	@Max(value = 999999)
 	private Integer numero;
-
+	
+	@Size(max = 3)
 	private String complementNumero;
-
+	
+	@NotBlank
+	@Size(max = 255)
 	private String voie;
-
+	
+	@NotNull
+	@Max(value = 976999)
 	private Integer codePostal;
-
+	
+	@NotBlank
+	@Size(max = 100)
 	private String departement;
-
+	
+	@NotBlank
+	@Size(max = 50)
 	private String pays;
-
+	
+	@NotBlank
+	@Size(max = 58)
 	private String ville;
 
 	/**
