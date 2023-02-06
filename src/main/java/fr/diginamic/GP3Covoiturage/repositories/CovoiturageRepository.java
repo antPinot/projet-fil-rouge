@@ -49,6 +49,7 @@ public interface CovoiturageRepository extends JpaRepository<Covoiturage, Intege
     * @method qui selectionne tous les covoiturages
     * par collaborateur
     */
+
    @Query("SELECT DISTINCT c FROM Covoiturage c JOIN c.collaborateurs col WHERE col.id = :collaborateurId")
    public List<Covoiturage> findByAllCoivoituragesByCollaborateurs(@Param("collaborateurId") Integer id);
    
@@ -58,4 +59,14 @@ public interface CovoiturageRepository extends JpaRepository<Covoiturage, Intege
    @Query("SELECT DISTINCT c FROM Covoiturage c JOIN c.collaborateurs col WHERE col.id = :collaborateurId AND c.dateDepart < CURRENT_DATE")
    public List<Covoiturage> findHistoriqueByCollaborateur(@Param("collaborateurId") Integer id);
    
+  /*
+   @Query("SELECT DISTINCT c FROM Covoiturage c JOIN c.collaborateurs col WHERE col =:collaborateur")
+	public List<Covoiturage> findByAllCoivoituragesByCollaborateurs(@Param("collaborateur") Collaborateur collaborateur);*/
+   
+   @Query("SELECT DISTINCT c FROM Covoiturage c WHERE c.dateDepart > CURRENT_DATE AND c.organisateur.id = :organisateurId")
+   public List<Covoiturage> findByAllCoivoituragesEnCoursByOrganisateurs(@Param("organisateurId") Integer id);
+   
+   @Query("SELECT DISTINCT c FROM Covoiturage c WHERE c.dateDepart < CURRENT_DATE AND c.organisateur.id = :organisateurId")
+   public List<Covoiturage> findByAllCoivoituragesPasseByOrganisateurs(@Param("organisateurId") Integer id);
+
 }

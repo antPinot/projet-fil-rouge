@@ -3,7 +3,9 @@ package fr.diginamic.GP3Covoiturage.services;
 import java.lang.reflect.Field;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+
 import java.time.LocalTime;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,8 +16,11 @@ import fr.diginamic.GP3Covoiturage.dto.CovoiturageDto;
 import fr.diginamic.GP3Covoiturage.dto.CovoiturageDtoMapper;
 import fr.diginamic.GP3Covoiturage.dto.dtoLight.AdresseDtoLight;
 import fr.diginamic.GP3Covoiturage.dto.dtoLight.AdresseDtoLightMapper;
+
 import fr.diginamic.GP3Covoiturage.exceptions.BadRequestException;
 import fr.diginamic.GP3Covoiturage.exceptions.EntityNotFoundException;
+import fr.diginamic.GP3Covoiturage.exceptions.FunctionalException;
+
 import fr.diginamic.GP3Covoiturage.models.Adresse;
 import fr.diginamic.GP3Covoiturage.models.Collaborateur;
 import fr.diginamic.GP3Covoiturage.models.Covoiturage;
@@ -63,13 +68,19 @@ public class CovoiturageService {
 	 * @method update()
 	 */
 	public Covoiturage update(@Valid Covoiturage updateCovoiturage) {
-
+		
 		if (updateCovoiturage.getId() == null) {
 			throw new RuntimeException("erreur : le covoiturage n'est pas encore créer");
 		}
+    
 		CovoiturageUtils.adresseChecker(updateCovoiturage);
 		CovoiturageUtils.updatePlaces(updateCovoiturage);
+		
+		if (updateCovoiturage.getNbPersonnes() != 1) {
 
+			throw new RuntimeException("Erreur : le covoiturage possède déja des participants il ne peut donc pas être modifié");
+		}
+				
 		return this.covoiturageRepository.save(updateCovoiturage);
 	}
 
@@ -169,6 +180,37 @@ public class CovoiturageService {
 			throw new RuntimeException("erreur : id covoiturage pas present");
 		}
 		this.covoiturageRepository.deleteById(id);
+	}
+	
+	public void deleteAfterDate(Integer id, LocalDate dateDepart) {
+		
+		LocalDate ajd = LocalDate.now();
+		if (dateDepart.isEqual(ajd) || dateDepart.isAfter(ajd)) {
+			
+		}
+		this.covoiturageRepository.deleteById(id);
+	}
+	
+	public List<Covoiturage> findCovoitByOrganisateur(Integer id, String statut) throws FunctionalException {
+		switch (statut) {
+			case "En-cours":
+				return covoiturageRepository.findByAllCoivoituragesEnCoursByOrganisateurs(id);
+			case "Historique":
+				return covoiturageRepository.findByAllCoivoituragesPasseByOrganisateurs(id);
+		default:
+			throw new FunctionalException("Vous n'avez pas dit le mot magique");
+		}
+	}
+	
+	public void annulerCovoit(Integer id, Collaborateur idOrganisateur) {
+		Collaborateur organisateur = new Collaborateur();
+		for (Covoiturage covoit : organisateur.getAnnonces()) {
+			if (organisateur.getId().equals(idOrganisateur)) {
+				if (organisateur.getAnnonces().equals(id) && covoit.getDateDepart().isAfter(LocalDateTime.now()) ) {
+					covoiturageRepository.delete(organisateur.getAnnonces().get(id));
+				}
+			}
+		}
 	}
 
 }

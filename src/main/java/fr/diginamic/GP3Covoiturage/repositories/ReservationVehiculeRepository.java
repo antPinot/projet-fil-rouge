@@ -67,6 +67,17 @@ public interface ReservationVehiculeRepository extends JpaRepository<Reservation
 	 * @return liste de ReservationVehicule
 	 */
 	public List<ReservationVehicule> findByVehiculeSociete(VehiculeSociete vehiculeSociete);
+
+	
+	
+	
+	
+	/**
+	 * Renvoie une liste de réservation de véhicule associée à un véhicule de société
+	 * 
+	 * @param vehiculeSociete dateDepart et dateArrivee
+	 * @return liste de ReservationVehicule a une date precises
+	 */
 	
 	@Query("SELECT r FROM ReservationVehicule r WHERE r.vehiculeSociete = :vehicule AND r.dateRetour > CURRENT_DATE")
 	public List<ReservationVehicule> findEnCoursByVehiculeSociete(@Param("vehicule") VehiculeSociete vehiculeSociete);
@@ -77,5 +88,10 @@ public interface ReservationVehiculeRepository extends JpaRepository<Reservation
 	   @Query("SELECT DISTINCT r FROM ReservationVehicule r WHERE r.collaborateur.id = :collaborateurId AND r.dateRetour < CURRENT_DATE")
 	public List<ReservationVehicule> findHistoriqueByCollaborateur(@Param("collaborateurId") Integer id);
 	
+	@Query("SELECT r FROM ReservationVehicule r WHERE ( (r.dateDepart BETWEEN :dateDepart AND :dateRetour) AND (r.dateRetour BETWEEN :dateDepart AND :dateRetour)) AND r.vehiculeSociete.id = :id")
+	public List<ReservationVehicule> BLABLA(@Param("id")
+			Integer id,@Param("dateDepart") LocalDateTime dateDepart,@Param("dateRetour") LocalDateTime dateRetour
+			);
+
 
 }
