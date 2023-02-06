@@ -1,24 +1,32 @@
 package fr.diginamic.GP3Covoiturage.dto.dtoEdit;
 
-/** Classe CollaborateurDto
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
+
+/**
+ * Classe CollaborateurDto
  * 
  * @author Quentin
  */
 
 public class CollaborateurDtoEdit {
-	
+
 	private Integer id;
-	
+
 	private Integer matricule;
 
+	@Size(max = 50, message = "Votre nom doit être inférieur à 50 caractères")
 	private String nom;
-
+	
+	@Size(max = 50, message = "Votre prénom doit être inférieur à 50 caractères")
 	private String prenom;
 
 	private String dateNaissance;
 
 	private Integer telephone;
 
+	@Pattern(regexp = "^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@"
+			+ "[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$", message = "Email invalide")
 	private String mail;
 
 	private String login;
@@ -56,6 +64,7 @@ public class CollaborateurDtoEdit {
 
 	/**
 	 * Getter pour l'attribut id
+	 * 
 	 * @return the id
 	 */
 	public Integer getId() {
@@ -64,6 +73,7 @@ public class CollaborateurDtoEdit {
 
 	/**
 	 * Setter pour l'attribut id
+	 * 
 	 * @param id the id to set
 	 */
 	public void setId(Integer id) {
@@ -72,6 +82,7 @@ public class CollaborateurDtoEdit {
 
 	/**
 	 * Getter pour l'attribut matricule
+	 * 
 	 * @return the matricule
 	 */
 	public Integer getMatricule() {
@@ -80,6 +91,7 @@ public class CollaborateurDtoEdit {
 
 	/**
 	 * Setter pour l'attribut matricule
+	 * 
 	 * @param matricule the matricule to set
 	 */
 	public void setMatricule(Integer matricule) {
@@ -88,6 +100,7 @@ public class CollaborateurDtoEdit {
 
 	/**
 	 * Getter pour l'attribut nom
+	 * 
 	 * @return the nom
 	 */
 	public String getNom() {
@@ -96,6 +109,7 @@ public class CollaborateurDtoEdit {
 
 	/**
 	 * Setter pour l'attribut nom
+	 * 
 	 * @param nom the nom to set
 	 */
 	public void setNom(String nom) {
@@ -104,6 +118,7 @@ public class CollaborateurDtoEdit {
 
 	/**
 	 * Getter pour l'attribut prenom
+	 * 
 	 * @return the prenom
 	 */
 	public String getPrenom() {
@@ -112,6 +127,7 @@ public class CollaborateurDtoEdit {
 
 	/**
 	 * Setter pour l'attribut prenom
+	 * 
 	 * @param prenom the prenom to set
 	 */
 	public void setPrenom(String prenom) {
@@ -120,6 +136,7 @@ public class CollaborateurDtoEdit {
 
 	/**
 	 * Getter pour l'attribut dateNaissance
+	 * 
 	 * @return the dateNaissance
 	 */
 	public String getDateNaissance() {
@@ -128,6 +145,7 @@ public class CollaborateurDtoEdit {
 
 	/**
 	 * Setter pour l'attribut dateNaissance
+	 * 
 	 * @param dateNaissance the dateNaissance to set
 	 */
 	public void setDateNaissance(String dateNaissance) {
@@ -136,6 +154,7 @@ public class CollaborateurDtoEdit {
 
 	/**
 	 * Getter pour l'attribut telephone
+	 * 
 	 * @return the telephone
 	 */
 	public Integer getTelephone() {
@@ -144,6 +163,7 @@ public class CollaborateurDtoEdit {
 
 	/**
 	 * Setter pour l'attribut telephone
+	 * 
 	 * @param telephone the telephone to set
 	 */
 	public void setTelephone(Integer telephone) {
@@ -152,6 +172,7 @@ public class CollaborateurDtoEdit {
 
 	/**
 	 * Getter pour l'attribut mail
+	 * 
 	 * @return the mail
 	 */
 	public String getMail() {
@@ -160,6 +181,7 @@ public class CollaborateurDtoEdit {
 
 	/**
 	 * Setter pour l'attribut mail
+	 * 
 	 * @param mail the mail to set
 	 */
 	public void setMail(String mail) {
@@ -168,6 +190,7 @@ public class CollaborateurDtoEdit {
 
 	/**
 	 * Getter pour l'attribut login
+	 * 
 	 * @return the login
 	 */
 	public String getLogin() {
@@ -176,6 +199,7 @@ public class CollaborateurDtoEdit {
 
 	/**
 	 * Setter pour l'attribut login
+	 * 
 	 * @param login the login to set
 	 */
 	public void setLogin(String login) {
@@ -184,6 +208,7 @@ public class CollaborateurDtoEdit {
 
 	/**
 	 * Getter pour l'attribut password
+	 * 
 	 * @return the password
 	 */
 	public String getPassword() {
@@ -192,6 +217,7 @@ public class CollaborateurDtoEdit {
 
 	/**
 	 * Setter pour l'attribut password
+	 * 
 	 * @param password the password to set
 	 */
 	public void setPassword(String password) {
@@ -200,6 +226,7 @@ public class CollaborateurDtoEdit {
 
 	/**
 	 * Getter pour l'attribut dateCreation
+	 * 
 	 * @return the dateCreation
 	 */
 	public String getDateCreation() {
@@ -208,6 +235,7 @@ public class CollaborateurDtoEdit {
 
 	/**
 	 * Setter pour l'attribut dateCreation
+	 * 
 	 * @param dateCreation the dateCreation to set
 	 */
 	public void setDateCreation(String dateCreation) {

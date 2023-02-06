@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import fr.diginamic.GP3Covoiturage.models.Covoiturage;
+import fr.diginamic.GP3Covoiturage.models.ReservationVehicule;
 import fr.diginamic.GP3Covoiturage.models.VehiculeSociete;
 import fr.diginamic.GP3Covoiturage.repositories.VehiculeSocieteRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -16,7 +18,10 @@ import jakarta.validation.Valid;
 public class VehiculeSocieteService {
 	
 	@Autowired
-	public VehiculeSocieteRepository vehiculeSocieteRepository;
+	private VehiculeSocieteRepository vehiculeSocieteRepository;
+	
+	@Autowired
+	private ReservationVehiculeService reservationVehiculeService;
 	
 	public VehiculeSociete create(@Valid VehiculeSociete vehiculeSocieteToCreate) {
 		if(vehiculeSocieteToCreate.getId() != null) {
@@ -29,6 +34,13 @@ public class VehiculeSocieteService {
 		if (vehiculeSocieteToUpdate.getId() == null) {
 			throw new RuntimeException("Id n'est pas valide");
 		}
+		
+		//Vehicule n'est pas en service
+		if (vehiculeSocieteToUpdate.getStatut() != 1) {
+			List<ReservationVehicule> reservations = reservationVehiculeService.findEnCoursByVehiculeSociete(vehiculeSocieteToUpdate);
+			reservations.forEach(r -> reservationVehiculeService.delete(r.getId()));
+		}
+		
 		return vehiculeSocieteRepository.save(vehiculeSocieteToUpdate);
 	}
 	

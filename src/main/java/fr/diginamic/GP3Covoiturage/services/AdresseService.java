@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
-import fr.diginamic.GP3Covoiturage.exceptions.FunctionalException;
+import fr.diginamic.GP3Covoiturage.exceptions.EntityNotFoundException;
 import fr.diginamic.GP3Covoiturage.models.Adresse;
 import fr.diginamic.GP3Covoiturage.repositories.AdresseRepository;
 import jakarta.validation.Valid;
@@ -41,8 +41,8 @@ public class AdresseService {
 	 * @throws RuntimeException
 	 * @throws FunctionalException 
 	 */
-	public Adresse findById(Integer id) throws FunctionalException {
-		return adresseRepository.findById(id).orElseThrow(() -> new FunctionalException("L'adresse recherchée n'existe pas"));
+	public Adresse findById(Integer id) throws EntityNotFoundException  {
+		return adresseRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("L'adresse recherchée n'existe pas"));
 	}
 	
 	public List<Adresse> findAll(){
@@ -68,12 +68,12 @@ public class AdresseService {
 	 * 
 	 * @throws AdresseNotFoundException
 	 */
-	public void delete(Integer id) throws FunctionalException {
+	public void delete(Integer id) throws EntityNotFoundException {
 		Optional<Adresse> adresseToDelete = adresseRepository.findById(id);
 		if (adresseToDelete.isPresent()) {
 			adresseRepository.delete(adresseToDelete.get());
 		} else {
-			throw new FunctionalException("Il n'y a pas d'entité à effacer");
+			throw new EntityNotFoundException("Il n'y a pas d'entité à effacer");
 		}
 	}
 

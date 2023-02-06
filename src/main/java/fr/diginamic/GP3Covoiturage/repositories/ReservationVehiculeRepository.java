@@ -68,6 +68,9 @@ public interface ReservationVehiculeRepository extends JpaRepository<Reservation
 	 */
 	public List<ReservationVehicule> findByVehiculeSociete(VehiculeSociete vehiculeSociete);
 	
+	@Query("SELECT r FROM ReservationVehicule r WHERE r.vehiculeSociete = :vehicule AND r.dateRetour > CURRENT_DATE")
+	public List<ReservationVehicule> findEnCoursByVehiculeSociete(@Param("vehicule") VehiculeSociete vehiculeSociete);
+	
 	 @Query("SELECT DISTINCT r FROM ReservationVehicule r WHERE r.collaborateur.id = :collaborateurId AND r.dateRetour > CURRENT_DATE")
 	public List<ReservationVehicule> findEnCoursByCollaborateur(@Param("collaborateurId") Integer id);
 	   

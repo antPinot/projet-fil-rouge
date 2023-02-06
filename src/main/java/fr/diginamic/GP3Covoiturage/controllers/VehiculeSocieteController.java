@@ -28,7 +28,7 @@ import jakarta.validation.Valid;
 public class VehiculeSocieteController {
 	
 	@Autowired
-	public VehiculeSocieteService vehiculeSocieteService;
+	private VehiculeSocieteService vehiculeSocieteService;
 	
 	@PostMapping
 	public VehiculeSocieteDtoEdit create(@RequestBody @Valid VehiculeSocieteDtoEdit vehiculeSocieteToCreate) {

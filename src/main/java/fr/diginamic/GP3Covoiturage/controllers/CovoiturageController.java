@@ -21,7 +21,6 @@ import fr.diginamic.GP3Covoiturage.dto.dtoEdit.CovoiturageDtoEdit;
 import fr.diginamic.GP3Covoiturage.dto.dtoEdit.CovoiturageDtoEditMapper;
 import fr.diginamic.GP3Covoiturage.dto.dtoLight.CovoiturageDtoLight;
 import fr.diginamic.GP3Covoiturage.dto.dtoLight.CovoiturageDtoLightMapper;
-import fr.diginamic.GP3Covoiturage.exceptions.FunctionalException;
 import fr.diginamic.GP3Covoiturage.models.Covoiturage;
 import fr.diginamic.GP3Covoiturage.models.VehiculePersonnel;
 import fr.diginamic.GP3Covoiturage.services.CovoiturageService;
@@ -62,32 +61,20 @@ public class CovoiturageController {
 	@GetMapping("/")
 	public List<CovoiturageDtoLight> readByCollaborateur(@RequestParam Integer collaborateurId,
 			@RequestParam String state) {
-		try {
 			List<Covoiturage> models = covoiturageService.findEnCoursByCollaborateurs(collaborateurId, state);
 			List<CovoiturageDtoLight> dtos = new ArrayList<>();
 			models.forEach(m -> dtos.add(CovoiturageDtoLightMapper.toDto(m)));
 			return dtos;
-		} catch (FunctionalException e) {
-			System.out.println(e.getMessage());
-			return null;
-		}
-
 	}
 
 	@GetMapping("/criteres")
-	public List<CovoiturageDtoLight> readByCriteres(@RequestParam(defaultValue = "none") String adresseDepart,
+	public List<CovoiturageDtoLight> readByCriteres(@RequestParam Integer collaborateurId, @RequestParam(defaultValue = "none") String adresseDepart,
 			@RequestParam(defaultValue = "none") String adresseArrivee,
 			@RequestParam(defaultValue = "none") String dateDepart) {
-		try {
-			List<Covoiturage> models = covoiturageService.findByCriteres(adresseDepart, adresseArrivee, dateDepart);
+			List<Covoiturage> models = covoiturageService.findByCriteres(collaborateurId, adresseDepart, adresseArrivee, dateDepart);
 			List<CovoiturageDtoLight> dtos = new ArrayList<>();
 			models.forEach(m -> dtos.add(CovoiturageDtoLightMapper.toDto(m)));
 			return dtos;
-		} catch (FunctionalException e) {
-			System.out.println(e.getMessage());
-			return null;
-		}
-
 	}
 
 	/**
@@ -98,13 +85,8 @@ public class CovoiturageController {
 	@Transactional
 	public CovoiturageDtoEdit createCovoiturage(@RequestBody @Valid CovoiturageDtoEdit createCovoiturage) {
 
-		try {
-			Covoiturage modelCovoit = CovoiturageDtoEditMapper.toModel(createCovoiturage);
-			covoiturageService.create(modelCovoit);
-		} catch (FunctionalException e) {
-			System.out.println(e.getMessage());
-			return null;
-		}
+		Covoiturage modelCovoit = CovoiturageDtoEditMapper.toModel(createCovoiturage);
+		covoiturageService.create(modelCovoit);
 		return createCovoiturage;
 	}
 
