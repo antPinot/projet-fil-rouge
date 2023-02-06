@@ -3,22 +3,38 @@
  */
 package fr.diginamic.GP3Covoiturage.dto.dtoEdit;
 
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.stereotype.Component;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
+
 /**
  * DTO pour sauvegarder ou créer une réservation
  * 
  * @author antPinot
  *
  */
+
+@Component
 public class ReservationVehiculeDtoEdit {
-
+	
+	
 	private Integer id;
-
+	
+	@NotNull
+	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
 	private String dateDepart;
-
+	
+	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
 	private String dateRetour;
-
+	
+	@NotNull
 	private Integer collaborateurId;
-
+	
+	@NotNull
 	private Integer vehiculeSocieteId;
 
 	/**

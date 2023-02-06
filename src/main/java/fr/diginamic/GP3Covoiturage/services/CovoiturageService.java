@@ -3,6 +3,9 @@ package fr.diginamic.GP3Covoiturage.services;
 import java.lang.reflect.Field;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+
+import java.time.LocalTime;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,12 +16,17 @@ import fr.diginamic.GP3Covoiturage.dto.CovoiturageDto;
 import fr.diginamic.GP3Covoiturage.dto.CovoiturageDtoMapper;
 import fr.diginamic.GP3Covoiturage.dto.dtoLight.AdresseDtoLight;
 import fr.diginamic.GP3Covoiturage.dto.dtoLight.AdresseDtoLightMapper;
+
+import fr.diginamic.GP3Covoiturage.exceptions.BadRequestException;
+import fr.diginamic.GP3Covoiturage.exceptions.EntityNotFoundException;
 import fr.diginamic.GP3Covoiturage.exceptions.FunctionalException;
+
 import fr.diginamic.GP3Covoiturage.models.Adresse;
 import fr.diginamic.GP3Covoiturage.models.Collaborateur;
 import fr.diginamic.GP3Covoiturage.models.Covoiturage;
 import fr.diginamic.GP3Covoiturage.repositories.CovoiturageRepository;
-import jakarta.persistence.EntityNotFoundException;
+import fr.diginamic.GP3Covoiturage.utils.CovoiturageUtils;
+import fr.diginamic.GP3Covoiturage.utils.DateUtils;
 import jakarta.validation.Valid;
 
 /**
@@ -34,42 +42,24 @@ public class CovoiturageService {
 	@Autowired
 	AdresseService adresseService;
 
+	@Autowired
+	CollaborateurService collaborateurService;
+
+	@Autowired
+	VehiculePersonnelService vehiculePersonnelService;
+
 	/**
+	 * @throws FunctionalException
 	 * @method create()
 	 */
 
-	public Covoiturage create(@Valid Covoiturage createCovoiturage) {
+	public Covoiturage create(@Valid Covoiturage createCovoiturage) throws BadRequestException {
 
 		if (createCovoiturage.getId() != null) {
 			throw new RuntimeException("erreur : id est deja present");
 		}
-
-		// methode pour AdresseArrivée
-		Adresse adresseArrivee = createCovoiturage.getAdresseArrivee();
-		List<Adresse> query1 = adresseService.findExistingAdresse(adresseArrivee.getNumero(),
-				adresseArrivee.getComplementNumero(), adresseArrivee.getVoie(), adresseArrivee.getCodePostal(),
-				adresseArrivee.getDepartement(), adresseArrivee.getPays(), adresseArrivee.getVille());
-
-		if (query1.isEmpty()) {
-			adresseService.create(adresseArrivee);
-			createCovoiturage.setAdresseArrivee(adresseArrivee);
-		} else {
-
-			createCovoiturage.setAdresseArrivee(query1.get(0));
-		}
-
-		// Attention à l'ordre des paramètres de la méthode findExistingAdresse
-		Adresse adresseDepart = createCovoiturage.getAdresseDepart();
-		List<Adresse> query = adresseService.findExistingAdresse(adresseDepart.getNumero(),
-				adresseDepart.getComplementNumero(), adresseDepart.getVoie(), adresseDepart.getCodePostal(),
-				adresseDepart.getDepartement(), adresseDepart.getPays(), adresseDepart.getVille());
-
-		if (query.isEmpty()) {
-			adresseService.create(adresseDepart);
-			createCovoiturage.setAdresseDepart(adresseDepart);
-		} else {
-			createCovoiturage.setAdresseDepart(query.get(0));
-		}
+		CovoiturageUtils.adresseChecker(createCovoiturage);
+		CovoiturageUtils.placesChecker(createCovoiturage);
 
 		return this.covoiturageRepository.save(createCovoiturage);
 	}
@@ -80,43 +70,58 @@ public class CovoiturageService {
 	public Covoiturage update(@Valid Covoiturage updateCovoiturage) {
 		
 		if (updateCovoiturage.getId() == null) {
-
 			throw new RuntimeException("erreur : le covoiturage n'est pas encore créer");
 		}
+    
+		CovoiturageUtils.adresseChecker(updateCovoiturage);
+		CovoiturageUtils.updatePlaces(updateCovoiturage);
 		
 		if (updateCovoiturage.getNbPersonnes() != 1) {
 
 			throw new RuntimeException("Erreur : le covoiturage possède déja des participants il ne peut donc pas être modifié");
 		}
 				
-		// methode pour AdresseArrivée
-				Adresse adresseArrivee = updateCovoiturage.getAdresseArrivee();
-				List<Adresse> query1 = adresseService.findExistingAdresse(adresseArrivee.getNumero(),
-						adresseArrivee.getComplementNumero(), adresseArrivee.getVoie(), adresseArrivee.getCodePostal(),
-						adresseArrivee.getDepartement(), adresseArrivee.getPays(), adresseArrivee.getVille());
-
-				if (query1.isEmpty()) {
-					adresseService.create(adresseArrivee);
-					updateCovoiturage.setAdresseArrivee(adresseArrivee);
-				} else {
-
-					updateCovoiturage.setAdresseArrivee(query1.get(0));
-				}
-
-				// Attention à l'ordre des paramètres de la méthode findExistingAdresse
-				Adresse adresseDepart = updateCovoiturage.getAdresseDepart();
-				List<Adresse> query = adresseService.findExistingAdresse(adresseDepart.getNumero(),
-						adresseDepart.getComplementNumero(), adresseDepart.getVoie(), adresseDepart.getCodePostal(),
-						adresseDepart.getDepartement(), adresseDepart.getPays(), adresseDepart.getVille());
-
-				if (query.isEmpty()) {
-					adresseService.create(adresseDepart);
-					updateCovoiturage.setAdresseDepart(adresseDepart);
-				} else {
-					updateCovoiturage.setAdresseDepart(query.get(0));
-				}
-				
 		return this.covoiturageRepository.save(updateCovoiturage);
+	}
+
+	/**
+	 * Associe un collaborateur à un covoiturage en tant que participant
+	 * 
+	 * @param id
+	 * @param collaborateurId
+	 * @return
+	 */
+	public Covoiturage reserverCovoiturage(Integer id, Integer collaborateurId) {
+		Covoiturage covoiturageToBook = findById(id);
+
+		// Vérification que le demandeur n'est pas le chauffeur
+		if (covoiturageToBook.getOrganisateur().getId().equals(collaborateurId)) {
+			throw new BadRequestException("Vous êtes déjà le chauffeur de ce covoiturage");
+		}
+
+		covoiturageToBook.getCollaborateurs().add(new Collaborateur(collaborateurId));
+		covoiturageToBook.setNbPersonnes(covoiturageToBook.getNbPersonnes() + 1);
+		covoiturageToBook.setPlacesRestantes(covoiturageToBook.getPlacesRestantes() - 1);
+		return covoiturageRepository.save(covoiturageToBook);
+	}
+
+	/**
+	 * Annule la participation d'un collaborateur à un covoiturage
+	 * 
+	 * @param id
+	 * @param collaborateurId
+	 * @return
+	 */
+	public Covoiturage annulerParticipation(Integer id, Integer collaborateurId) {
+		Covoiturage covoiturageToUpdate = findById(id);
+		for (Collaborateur collaborateur : covoiturageToUpdate.getCollaborateurs()) {
+			if (collaborateur.getId().equals(collaborateurId)) {
+				covoiturageToUpdate.getCollaborateurs().remove(collaborateur);
+				covoiturageToUpdate.setPlacesRestantes(covoiturageToUpdate.getPlacesRestantes() + 1);
+				covoiturageToUpdate.setNbPersonnes(covoiturageToUpdate.getNbPersonnes() - 1);
+			}
+		}
+		return covoiturageRepository.save(covoiturageToUpdate);
 	}
 
 	/**
@@ -127,11 +132,43 @@ public class CovoiturageService {
 		return covoiturageRepository.findAll();
 	}
 
+	public List<Covoiturage> findEnCoursByCollaborateurs(Integer id, String state) throws BadRequestException {
+		switch (state) {
+		case "en-cours":
+			return covoiturageRepository.findEnCoursByCollaborateur(id);
+		case "historique":
+			return covoiturageRepository.findHistoriqueByCollaborateur(id);
+		default:
+			throw new BadRequestException("Requête Invalide");
+		}
+	}
+
+	public List<Covoiturage> findByCriteres(Integer collaborateurId, String adresseDepart, String adresseArrivee,
+			String dateDepart) throws BadRequestException {
+		if (adresseDepart.equals("none") && adresseArrivee.equals("none") && dateDepart.equals("none")) {
+			throw new BadRequestException("Veuillez saisir au moins un critère de recherche");
+		} else if (adresseDepart.equals("none") && adresseArrivee.equals("none")) {
+			LocalDate dateDepartTime = DateUtils.stringToLocalDate(dateDepart);
+			List<Covoiturage> covoiturages = covoiturageRepository.findBeetweenStartOfDaytAndEndOfDay(
+					dateDepartTime.atTime(LocalTime.MIDNIGHT), dateDepartTime.atTime(LocalTime.MAX));
+
+			// Retrait des covoiturages dont le collaborateur est chauffeur ou participant
+
+			CovoiturageUtils.filtrerAffichage(collaborateurId, covoiturages);
+
+			return covoiturages;
+			
+		} else {
+			throw new BadRequestException("Requête Invalide");
+		}
+
+	}
+
 	/**
 	 * @method findById()
 	 */
 	public Covoiturage findById(Integer id) {
-		return this.covoiturageRepository.findById(id).orElseThrow(EntityNotFoundException::new);
+		return this.covoiturageRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Le covoiturage recherché n'existe pas"));
 	}
 
 	/**

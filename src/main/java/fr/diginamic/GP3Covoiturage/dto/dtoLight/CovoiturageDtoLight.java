@@ -1,5 +1,7 @@
 package fr.diginamic.GP3Covoiturage.dto.dtoLight;
 
+import java.util.List;
+
 import fr.diginamic.GP3Covoiturage.dto.AdresseDto;
 import fr.diginamic.GP3Covoiturage.dto.CollaborateurDto;
 import fr.diginamic.GP3Covoiturage.dto.VehiculePersonnelDto;
@@ -37,13 +39,27 @@ public class CovoiturageDtoLight {
 
 	private AdresseDtoLight adresseArrivee;
 
+	private List<CollaborateurDtoLight> collaborateurs;
+
 	/**
-	 * constructeur avec les entites
+	 * Constructeur
+	 * 
+	 * @param id
+	 * @param dateDepart
+	 * @param placesRestantes
+	 * @param nbPersonnes
+	 * @param dureeTrajet
+	 * @param distance
+	 * @param organisateur
+	 * @param vehiculePersonnel
+	 * @param adresseDepart
+	 * @param adresseArrivee
+	 * @param collaborateurs
 	 */
 	public CovoiturageDtoLight(Integer id, String dateDepart, Integer placesRestantes, Integer nbPersonnes,
 			Integer dureeTrajet, Integer distance, CollaborateurDtoLight organisateur,
-			VehiculePersonnelDtoLight vehiculePersonnel, AdresseDtoLight adresseDepart, AdresseDtoLight adresseArrivee) {
-		super();
+			VehiculePersonnelDtoLight vehiculePersonnel, AdresseDtoLight adresseDepart, AdresseDtoLight adresseArrivee,
+			List<CollaborateurDtoLight> collaborateurs) {
 		this.id = id;
 		this.dateDepart = dateDepart;
 		this.placesRestantes = placesRestantes;
@@ -54,6 +70,7 @@ public class CovoiturageDtoLight {
 		this.vehiculePersonnel = vehiculePersonnel;
 		this.adresseDepart = adresseDepart;
 		this.adresseArrivee = adresseArrivee;
+		this.collaborateurs = collaborateurs;
 	}
 
 	/**
@@ -200,6 +217,24 @@ public class CovoiturageDtoLight {
 	 */
 	public void setAdresseArrivee(AdresseDtoLight adresseArrivee) {
 		this.adresseArrivee = adresseArrivee;
+	}
+
+	/**
+	 * Getter pour l'attribut collaborateurs
+	 * 
+	 * @return the collaborateurs
+	 */
+	public List<CollaborateurDtoLight> getCollaborateurs() {
+		return collaborateurs;
+	}
+
+	/**
+	 * Setter pour l'attribut collaborateurs
+	 * 
+	 * @param collaborateurs the collaborateurs to set
+	 */
+	public void setCollaborateurs(List<CollaborateurDtoLight> collaborateurs) {
+		this.collaborateurs = collaborateurs;
 	}
 
 }

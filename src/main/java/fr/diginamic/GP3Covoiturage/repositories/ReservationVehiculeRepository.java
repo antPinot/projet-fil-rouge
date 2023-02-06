@@ -12,6 +12,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import fr.diginamic.GP3Covoiturage.models.Collaborateur;
+import fr.diginamic.GP3Covoiturage.models.Covoiturage;
 import fr.diginamic.GP3Covoiturage.models.ReservationVehicule;
 import fr.diginamic.GP3Covoiturage.models.VehiculeSociete;
 
@@ -77,6 +78,15 @@ public interface ReservationVehiculeRepository extends JpaRepository<Reservation
 	 * @param vehiculeSociete dateDepart et dateArrivee
 	 * @return liste de ReservationVehicule a une date precises
 	 */
+	
+	@Query("SELECT r FROM ReservationVehicule r WHERE r.vehiculeSociete = :vehicule AND r.dateRetour > CURRENT_DATE")
+	public List<ReservationVehicule> findEnCoursByVehiculeSociete(@Param("vehicule") VehiculeSociete vehiculeSociete);
+	
+	 @Query("SELECT DISTINCT r FROM ReservationVehicule r WHERE r.collaborateur.id = :collaborateurId AND r.dateRetour > CURRENT_DATE")
+	public List<ReservationVehicule> findEnCoursByCollaborateur(@Param("collaborateurId") Integer id);
+	   
+	   @Query("SELECT DISTINCT r FROM ReservationVehicule r WHERE r.collaborateur.id = :collaborateurId AND r.dateRetour < CURRENT_DATE")
+	public List<ReservationVehicule> findHistoriqueByCollaborateur(@Param("collaborateurId") Integer id);
 	
 	@Query("SELECT r FROM ReservationVehicule r WHERE ( (r.dateDepart BETWEEN :dateDepart AND :dateRetour) AND (r.dateRetour BETWEEN :dateDepart AND :dateRetour)) AND r.vehiculeSociete.id = :id")
 	public List<ReservationVehicule> BLABLA(@Param("id")

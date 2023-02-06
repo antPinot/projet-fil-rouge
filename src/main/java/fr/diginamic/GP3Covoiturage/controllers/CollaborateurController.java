@@ -21,6 +21,7 @@ import fr.diginamic.GP3Covoiturage.dto.dtoLight.CollaborateurDtoLight;
 import fr.diginamic.GP3Covoiturage.dto.dtoLight.CollaborateurDtoLightMapper;
 import fr.diginamic.GP3Covoiturage.models.Collaborateur;
 import fr.diginamic.GP3Covoiturage.services.CollaborateurService;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/rest/collaborateur")
@@ -30,7 +31,7 @@ public class CollaborateurController {
 	public CollaborateurService collaborateurService;
 
 	@PostMapping
-	public CollaborateurDtoEdit create(@RequestBody CollaborateurDtoEdit collaborateurToCreate) {
+	public CollaborateurDtoEdit create(@RequestBody @Valid CollaborateurDtoEdit collaborateurToCreate) {
 		Collaborateur modelCollab = CollaborateurDtoEditMapper.toModel(collaborateurToCreate);
 		collaborateurService.create(modelCollab);
 		return collaborateurToCreate;

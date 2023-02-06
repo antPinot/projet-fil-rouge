@@ -10,9 +10,13 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import fr.diginamic.GP3Covoiturage.exceptions.BadRequestException;
+import fr.diginamic.GP3Covoiturage.models.Covoiturage;
+
 import com.fasterxml.jackson.core.json.ReaderBasedJsonParser;
 
 import fr.diginamic.GP3Covoiturage.exceptions.FunctionalException;
+
 import fr.diginamic.GP3Covoiturage.models.ReservationVehicule;
 import fr.diginamic.GP3Covoiturage.models.VehiculeSociete;
 import fr.diginamic.GP3Covoiturage.repositories.ReservationVehiculeRepository;
@@ -47,7 +51,9 @@ public class ReservationVehiculeService {
 		if (reservationToCreate.getDateDepart().isBefore(reservationToCreate.getDateRetour())) {
 			return reservationVehiculeRepository.save(reservationToCreate);
 		}
-		return null; // Exception à générer pour invalidité de date
+
+		throw new BadRequestException("Votre saisie de date est invalide"); //Exception à générer pour invalidité de date
+
 	}
 
 	/** Read */
@@ -57,6 +63,21 @@ public class ReservationVehiculeService {
 
 	public List<ReservationVehicule> findAll() {
 		return reservationVehiculeRepository.findAll();
+	}
+	
+	public List<ReservationVehicule> findByCollaborateur(Integer id, String state) throws BadRequestException {
+		switch (state) {
+		case "en-cours":
+			return reservationVehiculeRepository.findEnCoursByCollaborateur(id);
+		case "historique":
+			return reservationVehiculeRepository.findHistoriqueByCollaborateur(id);
+		default:
+			throw new BadRequestException("Requête Invalide");
+		}
+	}
+	
+	public List<ReservationVehicule> findEnCoursByVehiculeSociete(VehiculeSociete vehiculeSociete){
+		return reservationVehiculeRepository.findEnCoursByVehiculeSociete(vehiculeSociete);
 	}
 
 	/** Update */
