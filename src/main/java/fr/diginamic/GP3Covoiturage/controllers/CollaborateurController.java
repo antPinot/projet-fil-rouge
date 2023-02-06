@@ -13,8 +13,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import fr.diginamic.GP3Covoiturage.dto.CollaborateurDto;
-import fr.diginamic.GP3Covoiturage.dto.CollaborateurDtoMapper;
 import fr.diginamic.GP3Covoiturage.dto.dtoEdit.CollaborateurDtoEdit;
 import fr.diginamic.GP3Covoiturage.dto.dtoEdit.CollaborateurDtoEditMapper;
 import fr.diginamic.GP3Covoiturage.dto.dtoLight.CollaborateurDtoLight;

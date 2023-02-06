@@ -13,8 +13,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import fr.diginamic.GP3Covoiturage.dto.VehiculePersonnelDto;
-import fr.diginamic.GP3Covoiturage.dto.VehiculePersonnelDtoMapper;
 import fr.diginamic.GP3Covoiturage.dto.dtoEdit.VehiculePersonnelDtoEdit;
 import fr.diginamic.GP3Covoiturage.dto.dtoEdit.VehiculePersonnelDtoEditMapper;
 import fr.diginamic.GP3Covoiturage.dto.dtoLight.VehiculePersonnelDtoLight;

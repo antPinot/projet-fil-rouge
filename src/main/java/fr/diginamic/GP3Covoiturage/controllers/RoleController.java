@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,15 +13,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import fr.diginamic.GP3Covoiturage.dto.CovoiturageDto;
-import fr.diginamic.GP3Covoiturage.dto.CovoiturageDtoMapper;
-import fr.diginamic.GP3Covoiturage.dto.RoleDto;
-import fr.diginamic.GP3Covoiturage.dto.RoleDtoMapper;
 import fr.diginamic.GP3Covoiturage.dto.dtoEdit.RoleDtoEdit;
 import fr.diginamic.GP3Covoiturage.dto.dtoEdit.RoleDtoEditMapper;
 import fr.diginamic.GP3Covoiturage.dto.dtoLight.RoleDtoLight;
 import fr.diginamic.GP3Covoiturage.dto.dtoLight.RoleDtoLightMapper;
-import fr.diginamic.GP3Covoiturage.models.Covoiturage;
 import fr.diginamic.GP3Covoiturage.models.Role;
 import fr.diginamic.GP3Covoiturage.services.RoleService;
 import jakarta.validation.Valid;

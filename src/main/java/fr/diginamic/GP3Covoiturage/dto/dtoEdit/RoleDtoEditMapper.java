@@ -1,6 +1,5 @@
 package fr.diginamic.GP3Covoiturage.dto.dtoEdit;
 
-import fr.diginamic.GP3Covoiturage.dto.RoleDto;
 import fr.diginamic.GP3Covoiturage.models.Role;
 
 /**

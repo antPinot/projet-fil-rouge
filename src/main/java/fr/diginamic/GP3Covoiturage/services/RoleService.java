@@ -5,10 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import fr.diginamic.GP3Covoiturage.dto.CovoiturageDtoMapper;
-import fr.diginamic.GP3Covoiturage.dto.RoleDto;
-import fr.diginamic.GP3Covoiturage.dto.RoleDtoMapper;
-import fr.diginamic.GP3Covoiturage.models.Covoiturage;
 import fr.diginamic.GP3Covoiturage.models.Role;
 import fr.diginamic.GP3Covoiturage.repositories.RoleRepository;
 import jakarta.persistence.EntityNotFoundException;

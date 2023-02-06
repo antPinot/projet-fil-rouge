@@ -79,7 +79,7 @@ public class CovoiturageUtils {
 	public static void filtrerAffichage(Integer collaborateurId, List<Covoiturage> covoiturages) {
 		List<Covoiturage> covoituragesToRemove = new ArrayList<>();
 		for (Covoiturage covoiturage : covoiturages) {
-			if (covoiturage.getOrganisateur().getId().equals(collaborateurId)) {
+			if (covoiturage.getOrganisateur().getId().equals(collaborateurId) || covoiturage.getPlacesRestantes() == 0) {
 				covoituragesToRemove.add(covoiturage);
 			} else {
 				for (Collaborateur collaborateur : covoiturage.getCollaborateurs()) {
