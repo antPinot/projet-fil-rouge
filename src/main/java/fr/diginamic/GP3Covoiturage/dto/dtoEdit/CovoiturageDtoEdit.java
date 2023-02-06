@@ -5,6 +5,10 @@ package fr.diginamic.GP3Covoiturage.dto.dtoEdit;
 
 import java.util.List;
 
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+
 /**
  * @author antPinot
  *
@@ -12,24 +16,31 @@ import java.util.List;
 public class CovoiturageDtoEdit {
 
 	private Integer id;
-
+	
+	@NotBlank
 	private String dateDepart;
-
+	
+	@NotNull
 	private Integer placesRestantes;
-
+	
+	@NotNull
 	private Integer nbPersonnes;
-
+	
+	@NotNull
 	private Integer dureeTrajet;
-
+	
+	@NotNull
 	private Integer distance;
-
+	
+	@NotNull
 	private Integer organisateurId;
-
+	
+	@NotNull
 	private Integer vehiculePersonnelId;
+	
+	private @Valid AdresseDtoEdit adresseDepart;
 
-	private AdresseDtoEdit adresseDepart;
-
-	private AdresseDtoEdit adresseArrivee;
+	private @Valid AdresseDtoEdit adresseArrivee;
 
 	private List<Integer> collaborateursId;
 
