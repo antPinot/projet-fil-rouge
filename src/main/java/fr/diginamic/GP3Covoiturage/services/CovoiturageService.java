@@ -15,13 +15,13 @@ import fr.diginamic.GP3Covoiturage.dto.CovoiturageDtoMapper;
 import fr.diginamic.GP3Covoiturage.dto.dtoLight.AdresseDtoLight;
 import fr.diginamic.GP3Covoiturage.dto.dtoLight.AdresseDtoLightMapper;
 import fr.diginamic.GP3Covoiturage.exceptions.BadRequestException;
+import fr.diginamic.GP3Covoiturage.exceptions.EntityNotFoundException;
 import fr.diginamic.GP3Covoiturage.models.Adresse;
 import fr.diginamic.GP3Covoiturage.models.Collaborateur;
 import fr.diginamic.GP3Covoiturage.models.Covoiturage;
 import fr.diginamic.GP3Covoiturage.repositories.CovoiturageRepository;
 import fr.diginamic.GP3Covoiturage.utils.CovoiturageUtils;
 import fr.diginamic.GP3Covoiturage.utils.DateUtils;
-import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
 
 /**
@@ -157,7 +157,7 @@ public class CovoiturageService {
 	 * @method findById()
 	 */
 	public Covoiturage findById(Integer id) {
-		return this.covoiturageRepository.findById(id).orElseThrow(EntityNotFoundException::new);
+		return this.covoiturageRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Le covoiturage recherché n'existe pas"));
 	}
 
 	/**

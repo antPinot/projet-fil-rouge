@@ -39,6 +39,7 @@ public class VehiculeSocieteService {
 		if (vehiculeSocieteToUpdate.getStatut() != 1) {
 			List<ReservationVehicule> reservations = reservationVehiculeService.findEnCoursByVehiculeSociete(vehiculeSocieteToUpdate);
 			reservations.forEach(r -> reservationVehiculeService.delete(r.getId()));
+			// Méthode d'envoi de mail à réaliser
 		}
 		
 		return vehiculeSocieteRepository.save(vehiculeSocieteToUpdate);
