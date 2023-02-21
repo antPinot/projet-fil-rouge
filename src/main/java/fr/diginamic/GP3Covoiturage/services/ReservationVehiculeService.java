@@ -4,6 +4,7 @@
 package fr.diginamic.GP3Covoiturage.services;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -143,17 +144,21 @@ public class ReservationVehiculeService {
 
 		// listes des reservations en fonctions des dates
 		List<ReservationVehicule> existingReservations = reservationVehiculeRepository.BLABLA(
-				reservationVehicule.getId(), reservationVehicule.getDateDepart(), reservationVehicule.getDateRetour());
+				vehicule.getId(), reservationVehicule.getDateDepart(), reservationVehicule.getDateRetour());
+		
+		List<ReservationVehicule> reservationAutreCollaborateur = new ArrayList<>();
 
 		if (!existingReservations.isEmpty()) {
-			System.out.println("Erreur : Véhicule déjà réservé pour cette période");
-			return null;
+			for (ReservationVehicule existingReservation : existingReservations) {
+				if (existingReservation.getCollaborateur().getId() != reservationVehicule.getCollaborateur().getId()) {
+					reservationAutreCollaborateur.add(existingReservation);
+				}
+			}
 		}
-
-		reservationVehicule.setVehiculeSociete(vehicule);
-		reservationVehicule.setDateDepart(reservationVehicule.getDateDepart());
-		reservationVehicule.setDateRetour(reservationVehicule.getDateRetour());
-		reservationVehicule.setCollaborateur(reservationVehicule.getCollaborateur());
+		
+		if (!reservationAutreCollaborateur.isEmpty()) {
+			throw new FunctionalException("Votre modification chevauche une autre réservation");
+		}
 
 		return reservationVehiculeRepository.save(reservationVehicule);
 	}
