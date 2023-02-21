@@ -23,7 +23,6 @@ import fr.diginamic.GP3Covoiturage.services.VehiculePersonnelService;
 
 @RestController
 @RequestMapping("rest/vehicule-personnel")
-@CrossOrigin(origins = "http://localhost:4200")
 public class VehiculePersonnelController {
 	
 	@Autowired
