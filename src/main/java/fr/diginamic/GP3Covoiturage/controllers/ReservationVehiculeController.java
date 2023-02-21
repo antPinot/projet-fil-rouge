@@ -158,7 +158,7 @@ public class ReservationVehiculeController {
 
 		ReservationVehicule modelReser = ReservationVehiculeDtoEditMapper.toModel(reservationVehiculeDtoEdit);
 		try {
-			reservationVehiculeService.saveReserv(modelReser);
+			reservationVehiculeService.updateReserv(modelReser);
 			return reservationVehiculeDtoEdit;
 
 		} catch (FunctionalException e) {
