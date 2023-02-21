@@ -50,5 +50,9 @@ public class VehiculePersonnelService {
 	public List<VehiculePersonnel> findAll() {
 		return vehiculePersonnelRepository.findAll();
 	}
+	
+	public List<VehiculePersonnel> findByCollaborateurId(Integer id){
+		return vehiculePersonnelRepository.findByCollaborateurId(id);
+	}
 
 }
