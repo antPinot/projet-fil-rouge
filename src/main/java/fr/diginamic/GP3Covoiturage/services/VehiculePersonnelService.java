@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import fr.diginamic.GP3Covoiturage.exceptions.BadRequestException;
 import fr.diginamic.GP3Covoiturage.models.VehiculePersonnel;
 import fr.diginamic.GP3Covoiturage.repositories.VehiculePersonnelRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -20,6 +21,11 @@ public class VehiculePersonnelService {
 		if(vehiculePersonnelToCreate.getId() != null) {
 			throw new RuntimeException("Id doit être null");
 		}
+		
+		if(vehiculePersonnelToCreate.getLimitePlace() > vehiculePersonnelToCreate.getPlaces()) {
+			throw new BadRequestException("Veuillez saisir une limite de places inférieure au nombre de places du véhicule");
+		}
+		
 		return vehiculePersonnelRepository.save(vehiculePersonnelToCreate);
 	}
 	
