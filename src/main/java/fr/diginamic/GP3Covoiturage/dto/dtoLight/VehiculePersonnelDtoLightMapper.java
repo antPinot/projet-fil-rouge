@@ -11,7 +11,7 @@ public class VehiculePersonnelDtoLightMapper {
 
 		VehiculePersonnelDtoLight lightDto = new VehiculePersonnelDtoLight(vehiculePersonnel.getId(),
 				vehiculePersonnel.getImmatriculation(), vehiculePersonnel.getMarque(), vehiculePersonnel.getModele(),
-				vehiculePersonnel.getLimitePlace(), vehiculePersonnel.getPlaces());
+				vehiculePersonnel.getPlaces(), vehiculePersonnel.getLimitePlace());
 
 		return lightDto;
 

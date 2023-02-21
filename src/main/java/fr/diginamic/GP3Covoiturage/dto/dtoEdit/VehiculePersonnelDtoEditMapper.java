@@ -28,7 +28,7 @@ public class VehiculePersonnelDtoEditMapper {
 		model.setMarque(vehiculePersonnelDtoEdit.getMarque());
 		model.setModele(vehiculePersonnelDtoEdit.getModele());
 		model.setPlaces(vehiculePersonnelDtoEdit.getPlaces());
-		model.setLimitePlace(vehiculePersonnelDtoEdit.getLimitePlaces());
+		model.setLimitePlace(vehiculePersonnelDtoEdit.getLimitePlace());
 		model.setCollaborateurs(collaborateurs);
 		
 		return model;

@@ -11,8 +11,8 @@ public class AdresseDtoLightMapper {
 
 	public static AdresseDtoLight toDto(Adresse adresse) {
 
-		AdresseDtoLight lightDto = new AdresseDtoLight(adresse.getId(), adresse.getNumero(), adresse.getVoie(),
-				adresse.getComplementNumero(), adresse.getCodePostal(), adresse.getVille(), adresse.getDepartement(),
+		AdresseDtoLight lightDto = new AdresseDtoLight(adresse.getId(), adresse.getNumero(),
+				adresse.getComplementNumero(), adresse.getVoie(), adresse.getCodePostal(), adresse.getVille(), adresse.getDepartement(),
 				adresse.getPays());
 
 		return lightDto;
