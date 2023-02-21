@@ -3,6 +3,13 @@
  */
 package fr.diginamic.GP3Covoiturage.dto.dtoEdit;
 
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
+
 /**
  * @author antPinot
  *
@@ -11,20 +18,35 @@ public class VehiculeSocieteDtoEdit {
 
 	private Integer id;
 
+	@NotBlank
+	@Pattern(regexp = "^[A-Z]{2}[-][0-9]{3}[-][A-Z]{2}$", message = "Veuillez saisir une immatriculation au format AA-123-BB")
 	private String immatriculation;
-
+	
+	@NotBlank
+	@Size(max = 100, message = "Max. 100 caractères")
 	private String marque;
-
+	
+	@NotBlank
+	@Size(max = 100, message = "Max. 100 caractères")
 	private String modele;
-
-	private int places;
-
+	
+	@NotNull
+	@Max(value = 9, message = "Seuls les véhicules de 9 places ou moins peuvent être inscrits")
+	private Integer places;
+	
+	@NotBlank
+	@Size(max = 255, message = "Max. 255 caractères")
 	private String photo;
-
+	
+	@NotNull
 	private boolean disponible;
-
-	private int statut;
-
+	
+	@NotNull
+	@Min(value = -2)
+	@Max(value = 2)
+	private Integer statut;
+	
+	@NotBlank
 	private String categorie;
 
 	/**Constructeur

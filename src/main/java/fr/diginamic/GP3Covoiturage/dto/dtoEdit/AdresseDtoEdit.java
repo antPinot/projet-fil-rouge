@@ -3,26 +3,47 @@
  */
 package fr.diginamic.GP3Covoiturage.dto.dtoEdit;
 
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+
 /**
  * @author antPinot
  *
  */
 public class AdresseDtoEdit {
+	
 
 	private Integer id;
-
+	
+	@Min(value = 1, message = "Veuillez saisir un numéro compris entre 1 et 999999")
+	@Max(value = 999999, message = "Veuillez saisir un numéro compris entre 1 et 999999")
 	private Integer numero;
-
+	
+	@Size(max = 3, message = "Max 3 lettres")
 	private String complementNumero;
-
+	
+	@NotBlank
+	@Size(max = 255, message = "Max. 255 caractères")
 	private String voie;
-
+	
+	@NotNull
+	@Max(value = 976999)
+	//@Pattern(regexp = "^(?:(?:(?:0[1-9]|[1-8]\\d|9[0-4])(?:\\d{3})?)|97[1-8]|98[4-9]|‌​‌​2[abAB])$", message = "Veuillez saisir un code postal au format valide")
 	private Integer codePostal;
-
+	
+	@NotBlank
+	@Size(max = 100, message = "Max. 100 caractères")
 	private String departement;
-
+	
+	@NotBlank
+	@Size(max = 50, message = "Max. 100 caractères")
 	private String pays;
-
+	
+	@NotBlank
+	@Size(max = 58, message = "Max. 58 caractères")
 	private String ville;
 
 	/**

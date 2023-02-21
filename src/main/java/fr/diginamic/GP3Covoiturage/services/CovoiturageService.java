@@ -1,6 +1,5 @@
 package fr.diginamic.GP3Covoiturage.services;
 
-import java.lang.reflect.Field;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -12,16 +11,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import fr.diginamic.GP3Covoiturage.dto.CovoiturageDto;
-import fr.diginamic.GP3Covoiturage.dto.CovoiturageDtoMapper;
-import fr.diginamic.GP3Covoiturage.dto.dtoLight.AdresseDtoLight;
-import fr.diginamic.GP3Covoiturage.dto.dtoLight.AdresseDtoLightMapper;
-
 import fr.diginamic.GP3Covoiturage.exceptions.BadRequestException;
 import fr.diginamic.GP3Covoiturage.exceptions.EntityNotFoundException;
 import fr.diginamic.GP3Covoiturage.exceptions.FunctionalException;
 
-import fr.diginamic.GP3Covoiturage.models.Adresse;
 import fr.diginamic.GP3Covoiturage.models.Collaborateur;
 import fr.diginamic.GP3Covoiturage.models.Covoiturage;
 import fr.diginamic.GP3Covoiturage.repositories.CovoiturageRepository;
@@ -36,23 +29,31 @@ import jakarta.validation.Valid;
 @Service
 public class CovoiturageService {
 
+	/** covoiturageRepository : Accès aux entités Covoiturage en BDD*/
 	@Autowired
 	CovoiturageRepository covoiturageRepository;
-
+	
+	
+	/** adresseService : Accès aux méthodes de service de la classe Adresse*/
 	@Autowired
 	AdresseService adresseService;
 
+	/** collaborateurService : Accès aux méthodes de service de la classe Collaborateur */
 	@Autowired
 	CollaborateurService collaborateurService;
 
+	/** vehiculePersonnelService : Accès aux méthodes de service de la classe VehiculePersonnel */
 	@Autowired
 	VehiculePersonnelService vehiculePersonnelService;
 
 	/**
-	 * @throws FunctionalException
-	 * @method create()
+	 * Création d'une annonce de covoiturage : Vérifie si les adresses sont en bases
+	 * et si le nombre de places définies est cohérent
+	 * 
+	 * @param createCovoiturage
+	 * @return
+	 * @throws BadRequestException
 	 */
-
 	public Covoiturage create(@Valid Covoiturage createCovoiturage) throws BadRequestException {
 
 		if (createCovoiturage.getId() != null) {
@@ -64,8 +65,14 @@ public class CovoiturageService {
 		return this.covoiturageRepository.save(createCovoiturage);
 	}
 
+	
 	/**
-	 * @method update()
+	 * Modification d'une annonce de covoiturage:  Vérifie si les adresses sont en bases,
+	 * si le nombre de places définies est cohérent et s'il possède des particpants auquel cas il ne 
+	 * peut être modifié
+	 * 
+	 * @param updateCovoiturage
+	 * @return
 	 */
 	public Covoiturage update(@Valid Covoiturage updateCovoiturage) {
 		
@@ -99,10 +106,12 @@ public class CovoiturageService {
 		if (covoiturageToBook.getOrganisateur().getId().equals(collaborateurId)) {
 			throw new BadRequestException("Vous êtes déjà le chauffeur de ce covoiturage");
 		}
-
+		
 		covoiturageToBook.getCollaborateurs().add(new Collaborateur(collaborateurId));
 		covoiturageToBook.setNbPersonnes(covoiturageToBook.getNbPersonnes() + 1);
 		covoiturageToBook.setPlacesRestantes(covoiturageToBook.getPlacesRestantes() - 1);
+		
+		
 		return covoiturageRepository.save(covoiturageToBook);
 	}
 
@@ -114,18 +123,25 @@ public class CovoiturageService {
 	 * @return
 	 */
 	public Covoiturage annulerParticipation(Integer id, Integer collaborateurId) {
+		
+		
+		List<Collaborateur> collaborateursToRemove = new ArrayList<>();
 		Covoiturage covoiturageToUpdate = findById(id);
 		for (Collaborateur collaborateur : covoiturageToUpdate.getCollaborateurs()) {
 			if (collaborateur.getId().equals(collaborateurId)) {
-				covoiturageToUpdate.getCollaborateurs().remove(collaborateur);
+				collaborateursToRemove.add(collaborateur);
 				covoiturageToUpdate.setPlacesRestantes(covoiturageToUpdate.getPlacesRestantes() + 1);
 				covoiturageToUpdate.setNbPersonnes(covoiturageToUpdate.getNbPersonnes() - 1);
 			}
 		}
+		covoiturageToUpdate.getCollaborateurs().removeAll(collaborateursToRemove);
+		
 		return covoiturageRepository.save(covoiturageToUpdate);
 	}
 
 	/**
+	 * Liste tous les covoiturages en base de données
+	 * 
 	 * @method findAll()
 	 */
 	public List<Covoiturage> findAll() {
@@ -133,6 +149,16 @@ public class CovoiturageService {
 		return covoiturageRepository.findAll();
 	}
 
+	/**
+	 * 
+	 * Retrouve les covoiturages pour un collaborateur donné en fonction de l'état
+	 * "en-cours" (futur) ou "historique" (passé)
+	 * 
+	 * @param id
+	 * @param state
+	 * @return
+	 * @throws BadRequestException
+	 */
 	public List<Covoiturage> findEnCoursByCollaborateurs(Integer id, String state) throws BadRequestException {
 		switch (state) {
 		case "en-cours":
@@ -144,12 +170,26 @@ public class CovoiturageService {
 		}
 	}
 
+	/**
+	 * 
+	 * Recherche un covoiturage en fonction de 3 critères : L'adresse de départ, l'adresse d'arrivée
+	 * et la date départ
+	 * 
+	 * @param collaborateurId
+	 * @param adresseDepart
+	 * @param adresseArrivee
+	 * @param dateDepart
+	 * @return
+	 * @throws BadRequestException
+	 */
 	public List<Covoiturage> findByCriteres(Integer collaborateurId, String adresseDepart, String adresseArrivee,
 			String dateDepart) throws BadRequestException {
 		if (adresseDepart.equals("none") && adresseArrivee.equals("none") && dateDepart.equals("none")) {
 			throw new BadRequestException("Veuillez saisir au moins un critère de recherche");
 		} else if (adresseDepart.equals("none") && adresseArrivee.equals("none")) {
 			LocalDate dateDepartTime = DateUtils.stringToLocalDate(dateDepart);
+			
+			// Recherche les covoiturages compris entre le début et la fin d'une journée donnée
 			List<Covoiturage> covoiturages = covoiturageRepository.findBeetweenStartOfDaytAndEndOfDay(
 					dateDepartTime.atTime(LocalTime.MIDNIGHT), dateDepartTime.atTime(LocalTime.MAX));
 
@@ -165,15 +205,22 @@ public class CovoiturageService {
 
 	}
 
+	
 	/**
-	 * @method findById()
+	 * Méthode qui retrouve un covoiturage en fonction de son id
+	 * 
+	 * @param id
+	 * @return
 	 */
 	public Covoiturage findById(Integer id) {
 		return this.covoiturageRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Le covoiturage recherché n'existe pas"));
 	}
 
+
 	/**
-	 * @method delete()
+	 * Méthode qui efface un covoiturage en base en fonction de son id
+	 * 
+	 * @param id
 	 */
 	public void delete(Integer id) {
 
@@ -192,6 +239,16 @@ public class CovoiturageService {
 		this.covoiturageRepository.deleteById(id);
 	}
 	
+	/**
+	 * 
+	 * Recherche une annonce de covoiturage en fonction d'un chauffeur et d'un
+	 * statut "en-cours" (futur) ou "passé"(historique) 
+	 * 
+	 * @param id
+	 * @param statut
+	 * @return
+	 * @throws FunctionalException
+	 */
 	public List<Covoiturage> findCovoitByOrganisateur(Integer id, String statut) throws FunctionalException {
 		switch (statut) {
 			case "En-cours":

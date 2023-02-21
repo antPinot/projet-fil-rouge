@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.properties.bind.DefaultValue;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,17 +15,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import fr.diginamic.GP3Covoiturage.dto.CovoiturageDto;
-import fr.diginamic.GP3Covoiturage.dto.CovoiturageDtoMapper;
 import fr.diginamic.GP3Covoiturage.dto.dtoEdit.CovoiturageDtoEdit;
 import fr.diginamic.GP3Covoiturage.dto.dtoEdit.CovoiturageDtoEditMapper;
 import fr.diginamic.GP3Covoiturage.dto.dtoLight.CovoiturageDtoLight;
 import fr.diginamic.GP3Covoiturage.dto.dtoLight.CovoiturageDtoLightMapper;
 import fr.diginamic.GP3Covoiturage.models.Collaborateur;
 import fr.diginamic.GP3Covoiturage.models.Covoiturage;
-import fr.diginamic.GP3Covoiturage.models.VehiculePersonnel;
 import fr.diginamic.GP3Covoiturage.services.CovoiturageService;
-import fr.diginamic.GP3Covoiturage.services.VehiculePersonnelService;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 
@@ -51,6 +47,7 @@ public class CovoiturageController {
 	/**
 	 * @method return list
 	 */
+
 	@GetMapping()
 	public List<CovoiturageDtoLight> getListCovoiturages() {
 		List<Covoiturage> models = covoiturageService.findAll();
@@ -62,20 +59,22 @@ public class CovoiturageController {
 	@GetMapping("/")
 	public List<CovoiturageDtoLight> readByCollaborateur(@RequestParam Integer collaborateurId,
 			@RequestParam String state) {
-			List<Covoiturage> models = covoiturageService.findEnCoursByCollaborateurs(collaborateurId, state);
-			List<CovoiturageDtoLight> dtos = new ArrayList<>();
-			models.forEach(m -> dtos.add(CovoiturageDtoLightMapper.toDto(m)));
-			return dtos;
+		List<Covoiturage> models = covoiturageService.findEnCoursByCollaborateurs(collaborateurId, state);
+		List<CovoiturageDtoLight> dtos = new ArrayList<>();
+		models.forEach(m -> dtos.add(CovoiturageDtoLightMapper.toDto(m)));
+		return dtos;
 	}
-
+	
 	@GetMapping("/criteres")
-	public List<CovoiturageDtoLight> readByCriteres(@RequestParam Integer collaborateurId, @RequestParam(defaultValue = "none") String adresseDepart,
+	public List<CovoiturageDtoLight> readByCriteres(@RequestParam Integer collaborateurId,
+			@RequestParam(defaultValue = "none") String adresseDepart,
 			@RequestParam(defaultValue = "none") String adresseArrivee,
 			@RequestParam(defaultValue = "none") String dateDepart) {
-			List<Covoiturage> models = covoiturageService.findByCriteres(collaborateurId, adresseDepart, adresseArrivee, dateDepart);
-			List<CovoiturageDtoLight> dtos = new ArrayList<>();
-			models.forEach(m -> dtos.add(CovoiturageDtoLightMapper.toDto(m)));
-			return dtos;
+		List<Covoiturage> models = covoiturageService.findByCriteres(collaborateurId, adresseDepart, adresseArrivee,
+				dateDepart);
+		List<CovoiturageDtoLight> dtos = new ArrayList<>();
+		models.forEach(m -> dtos.add(CovoiturageDtoLightMapper.toDto(m)));
+		return dtos;
 	}
 
 	/**
@@ -106,15 +105,17 @@ public class CovoiturageController {
 		covoiturageService.update(modelCovoit);
 		return updateCovoiturage;
 	}
-	
+
 	@PutMapping("/reserver/{id}/{collaborateurId}")
-	public CovoiturageDtoLight reserverCovoiturage(@PathVariable("id") Integer id, @PathVariable("collaborateurId") Integer collaborateurId) {
+	public CovoiturageDtoLight reserverCovoiturage(@PathVariable("id") Integer id,
+			@PathVariable("collaborateurId") Integer collaborateurId) {
 		covoiturageService.reserverCovoiturage(id, collaborateurId);
 		return CovoiturageDtoLightMapper.toDto(covoiturageService.findById(id));
 	}
 
 	@PutMapping("/annuler-participation/{id}/{collaborateurId}")
-	public CovoiturageDtoLight annulerParticipation(@PathVariable("id") Integer id, @PathVariable("collaborateurId") Integer collaborateurId) {
+	public CovoiturageDtoLight annulerParticipation(@PathVariable("id") Integer id,
+			@PathVariable("collaborateurId") Integer collaborateurId) {
 		covoiturageService.annulerParticipation(id, collaborateurId);
 		return CovoiturageDtoLightMapper.toDto(covoiturageService.findById(id));
 	}
