@@ -21,6 +21,7 @@ import fr.diginamic.GP3Covoiturage.dto.dtoEdit.CovoiturageDtoEdit;
 import fr.diginamic.GP3Covoiturage.dto.dtoEdit.CovoiturageDtoEditMapper;
 import fr.diginamic.GP3Covoiturage.dto.dtoLight.CovoiturageDtoLight;
 import fr.diginamic.GP3Covoiturage.dto.dtoLight.CovoiturageDtoLightMapper;
+import fr.diginamic.GP3Covoiturage.models.Collaborateur;
 import fr.diginamic.GP3Covoiturage.models.Covoiturage;
 import fr.diginamic.GP3Covoiturage.models.VehiculePersonnel;
 import fr.diginamic.GP3Covoiturage.services.CovoiturageService;
@@ -117,13 +118,29 @@ public class CovoiturageController {
 		covoiturageService.annulerParticipation(id, collaborateurId);
 		return CovoiturageDtoLightMapper.toDto(covoiturageService.findById(id));
 	}
-
+	
 	/**
 	 * @method delete
 	 */
 	@DeleteMapping("/{id}")
 	public void deleteCovoiturage(@PathVariable("id") Integer id) {
 		covoiturageService.delete(id);
+
+	}
+	
+	@GetMapping("/annonces/{id}")
+	public List<CovoiturageDtoLight> readByOrganisateur(@PathVariable("id") Integer idOrganisateur, @RequestParam String statut) {
+		List<Covoiturage> listCovoit = covoiturageService.findCovoitByOrganisateur(idOrganisateur, statut);
+		List<CovoiturageDtoLight> listCovoitDto = new ArrayList<>();
+		for(int i=0; i< listCovoit.size();i++) {
+			listCovoitDto.add(CovoiturageDtoLightMapper.toDto(listCovoit.get(i)));
+		};
+		return listCovoitDto;
+	}
+	
+	@DeleteMapping("/annuler-covoit/{id}/{organisateur}")
+	public void annulerCovoiturage(@PathVariable("id") Integer id, @PathVariable("organisateur") Integer idOrganisateur) {
+		covoiturageService.annulerCovoit(id, idOrganisateur);
 
 	}
 

@@ -74,6 +74,7 @@ public class CovoiturageService {
 		}
     
 		CovoiturageUtils.adresseChecker(updateCovoiturage);
+		CovoiturageUtils.placesChecker(updateCovoiturage);
 		CovoiturageUtils.updatePlaces(updateCovoiturage);
 		
 		if (updateCovoiturage.getNbPersonnes() != 1) {
@@ -202,7 +203,7 @@ public class CovoiturageService {
 		}
 	}
 	
-	public void annulerCovoit(Integer id, Collaborateur idOrganisateur) {
+	public void annulerCovoit(Integer id, Integer idOrganisateur) {
 		Collaborateur organisateur = new Collaborateur();
 		for (Covoiturage covoit : organisateur.getAnnonces()) {
 			if (organisateur.getId().equals(idOrganisateur)) {
