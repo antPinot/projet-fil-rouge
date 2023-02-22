@@ -88,7 +88,7 @@ public interface ReservationVehiculeRepository extends JpaRepository<Reservation
 	   @Query("SELECT DISTINCT r FROM ReservationVehicule r WHERE r.collaborateur.id = :collaborateurId AND r.dateRetour < CURRENT_DATE")
 	public List<ReservationVehicule> findHistoriqueByCollaborateur(@Param("collaborateurId") Integer id);
 	
-	@Query("SELECT r FROM ReservationVehicule r WHERE ( (r.dateDepart BETWEEN :dateDepart AND :dateRetour) AND (r.dateRetour BETWEEN :dateDepart AND :dateRetour)) AND r.vehiculeSociete.id = :id")
+	@Query("SELECT r FROM ReservationVehicule r WHERE ((r.dateDepart BETWEEN :dateDepart AND :dateRetour) OR (r.dateRetour BETWEEN :dateDepart AND :dateRetour)) AND r.vehiculeSociete.id = :id")
 	public List<ReservationVehicule> BLABLA(@Param("id")
 			Integer id,@Param("dateDepart") LocalDateTime dateDepart,@Param("dateRetour") LocalDateTime dateRetour
 			);

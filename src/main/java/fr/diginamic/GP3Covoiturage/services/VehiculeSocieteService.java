@@ -73,12 +73,12 @@ public class VehiculeSocieteService {
 	 * METHODE QUI MARCHE VOIR SI ID IL FAUT LE DEGAGER
 	 * 
 	 **/
-	public List<VehiculeSociete> getVehiculesSocietesDispo(Integer id, String dateDepart, String dateRetour) {
+	public List<VehiculeSociete> getVehiculesSocietesDispo(String dateDepart, String dateRetour) {
 
 		LocalDateTime time1 = DateUtils.stringToLocalDateTime(dateDepart);
 		LocalDateTime time2 = DateUtils.stringToLocalDateTime(dateRetour);
 
-		return vehiculeSocieteRepository.VehiculesDispo(id, time1, time2);
+		return vehiculeSocieteRepository.vehiculesDispo(time1, time2);
 
 	}
 

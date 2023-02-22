@@ -43,6 +43,7 @@ public class VehiculePersonnel {
 	private Integer places;
 	
 	@Column(name="limitePlace", length = 1, nullable= false)
+	@Max(value = 9)
 	private Integer limitePlace;
 	
 	@OneToMany(mappedBy = "vehiculePersonnel")

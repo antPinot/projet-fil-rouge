@@ -21,7 +21,7 @@ public class VehiculePersonnelDtoEdit {
 
 	private Integer places;
 
-	private Integer limitePlaces;
+	private Integer limitePlace;
 
 	private List<Integer> collaborateursId;
 
@@ -37,13 +37,13 @@ public class VehiculePersonnelDtoEdit {
 	 * @param collaborateursId
 	 */
 	public VehiculePersonnelDtoEdit(Integer id, String immatriculation, String marque, String modele, Integer places,
-			Integer limitePlaces, List<Integer> collaborateursId) {
+			Integer limitePlace, List<Integer> collaborateursId) {
 		this.id = id;
 		this.immatriculation = immatriculation;
 		this.marque = marque;
 		this.modele = modele;
 		this.places = places;
-		this.limitePlaces = limitePlaces;
+		this.limitePlace = limitePlace;
 		this.collaborateursId = collaborateursId;
 	}
 
@@ -142,8 +142,8 @@ public class VehiculePersonnelDtoEdit {
 	 * 
 	 * @return the limitePlaces
 	 */
-	public Integer getLimitePlaces() {
-		return limitePlaces;
+	public Integer getLimitePlace() {
+		return limitePlace;
 	}
 
 	/**
@@ -151,8 +151,8 @@ public class VehiculePersonnelDtoEdit {
 	 * 
 	 * @param limitePlaces the limitePlaces to set
 	 */
-	public void setLimitePlaces(Integer limitePlaces) {
-		this.limitePlaces = limitePlaces;
+	public void setLimitePlace(Integer limitePlace) {
+		this.limitePlace = limitePlace;
 	}
 
 	/**Getter pour l'attribut collaborateursId

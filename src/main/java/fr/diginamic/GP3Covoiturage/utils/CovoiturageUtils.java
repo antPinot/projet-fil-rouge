@@ -75,7 +75,8 @@ public class CovoiturageUtils {
 			covoiturage.setPlacesRestantes(placesRestantes);
 		}
 	}
-
+	
+	// Remarque de Jordi ==> Problème si on utilise le Pageable, voir si filtrage possible directement depuis le Query du Repository
 	public static void filtrerAffichage(Integer collaborateurId, List<Covoiturage> covoiturages) {
 		List<Covoiturage> covoituragesToRemove = new ArrayList<>();
 		for (Covoiturage covoiturage : covoiturages) {

@@ -87,8 +87,8 @@ public interface VehiculeSocieteRepository extends JpaRepository<VehiculeSociete
 	 * @param id
 	 * 
 	 */
-	@Query("SELECT v FROM VehiculeSociete v WHERE NOT EXISTS (SELECT r FROM ReservationVehicule r WHERE r.vehiculeSociete.id = :id AND ( (r.dateDepart BETWEEN :dateDepart AND :dateRetour) AND (r.dateRetour BETWEEN :dateDepart AND :dateRetour)))")
-	public List<VehiculeSociete> VehiculesDispo(@Param("id") Integer id, @Param("dateDepart") LocalDateTime dateDepart,
+	@Query("SELECT v FROM VehiculeSociete v WHERE NOT EXISTS (SELECT r FROM ReservationVehicule r WHERE((r.dateDepart BETWEEN :dateDepart AND :dateRetour) OR (r.dateRetour BETWEEN :dateDepart AND :dateRetour)))")
+	public List<VehiculeSociete> vehiculesDispo(@Param("dateDepart") LocalDateTime dateDepart,
 			@Param("dateRetour") LocalDateTime dateRetour);
 
 }
