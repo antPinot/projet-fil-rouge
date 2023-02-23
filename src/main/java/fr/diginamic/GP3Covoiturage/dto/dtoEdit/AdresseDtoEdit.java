@@ -18,8 +18,8 @@ public class AdresseDtoEdit {
 
 	private Integer id;
 	
-	@Min(value = 1, message = "Veuillez saisir un numéro compris entre 1 et 999999")
-	@Max(value = 999999, message = "Veuillez saisir un numéro compris entre 1 et 999999")
+	/*@Min(value = 1, message = "Veuillez saisir un numéro compris entre 1 et 999999")
+	@Max(value = 999999, message = "Veuillez saisir un numéro compris entre 1 et 999999")*/
 	private Integer numero;
 	
 	@Size(max = 3, message = "Max 3 lettres")
