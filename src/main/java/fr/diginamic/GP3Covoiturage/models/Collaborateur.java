@@ -55,6 +55,10 @@ public class Collaborateur {
 
 	@Column(name = "password", length = 50, nullable = false)
 	private String password;
+	
+	@Column(name="token")
+    private String token;
+
 
 	@Column(name = "dateCreation", length = 50, nullable = false)
 	private LocalDate dateCreation;
@@ -110,7 +114,7 @@ public class Collaborateur {
 	 * @param covoiturages
 	 */
 	public Collaborateur(Integer id, Integer matricule, String nom, String prenom, LocalDate dateNaissance,
-			Integer telephone, String mail, String login, String password, LocalDate dateCreation,
+			Integer telephone, String mail, String login, String password,String token, LocalDate dateCreation,
 			List<Covoiturage> annonces, List<ReservationVehicule> reservationsVehicule,
 			List<VehiculePersonnel> vehiculespersonnels, List<Role> roles, List<Covoiturage> covoiturages) {
 		this.id = id;
@@ -122,6 +126,7 @@ public class Collaborateur {
 		this.mail = mail;
 		this.login = login;
 		this.password = password;
+		this.token = token;
 		this.dateCreation = dateCreation;
 		this.annonces = annonces;
 		this.reservationsVehicule = reservationsVehicule;
@@ -291,6 +296,29 @@ public class Collaborateur {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	
+	/**
+	 * 
+	 * 
+	 * 
+	 * @return the token
+	 */
+	
+	public String getToken() {
+        return token;
+    }
+	
+	
+	/** 
+	 * setter pour token
+	 * 
+	 * @param token the token to set 
+	 * 
+	 */
+	public void setToken(String token) {
+		// TODO Auto-generated method stub
+		
+	}
 
 	/**
 	 * Getter pour l'attribut dateCreation
@@ -399,5 +427,7 @@ public class Collaborateur {
 	public void setAnnonces(List<Covoiturage> annonces) {
 		this.annonces = annonces;
 	}
+
+	
 
 }

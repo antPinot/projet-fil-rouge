@@ -33,6 +33,9 @@ public interface CollaborateurRepository extends JpaRepository<Collaborateur, In
 	
 	public List<Collaborateur> findByReservationsVehicule(ReservationVehicule reservationsVehicule);
 	
+	
+	public Collaborateur findByLoginAndPassword(String login, String password);
+	
 	@Query("SELECT c FROM Collaborateur c JOIN c.vehiculesPersonnel v WHERE v = :vehiculePersonnel")
 	public List<Collaborateur> findCollaborateurlByVehiculePersonnels(@Param("vehiculePersonnel") VehiculePersonnel vehiculePersonnel);
 	
@@ -41,5 +44,15 @@ public interface CollaborateurRepository extends JpaRepository<Collaborateur, In
 	
 	@Query("SELECT c FROM Collaborateur c JOIN c.covoiturages cov WHERE cov = :covoiturage")
 	public List<Collaborateur> findCollaborateurlByCovoiturages(@Param("covoiturage") Covoiturage covoiturage);
+     
+	
+	
+	/** METHODE qui renvoi un boolean **/
+	 static boolean existsByEmail(String email) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	
 
 }
