@@ -1,6 +1,7 @@
 package fr.diginamic.GP3Covoiturage.services;
 
 import java.util.HashMap;
+import java.time.Instant;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -51,8 +52,8 @@ public class CollaborateurService {
 	public List<Collaborateur> findAll() {
 		return collaborateurRepository.findAll();
 	}
-	
-	public Collaborateur findOneByToken(String token){
+
+	public Collaborateur findOneByToken(String token) {
 		return collaborateurRepository.findByToken(token);
 	}
 
@@ -78,4 +79,46 @@ public class CollaborateurService {
 		}
 	}
 
+	/**
+	 * ICI LES METHODES SIGNIN LOGIN ET LOGOUT (FEKHREDDINE)
+	 * 
+	 * public String login(String login, String password) {
+	 * 
+	 * String token = ""; Collaborateur collaborateur =
+	 * collaborateurRepository.findByLoginAndPassword(login, password);
+	 * 
+	 * if(collaborateur!= null) {
+	 * 
+	 * // Validate the password token = UUID.randomUUID().toString();
+	 * collaborateur.setToken(token); collaborateurRepository.save(collaborateur);
+	 * 
+	 * return token; }
+	 * 
+	 * throw new BadRequestException("erreur");
+	 * 
+	 * 
+	 * 
+	 * }
+	 * 
+	 * public void logout(String login, String password) { // TODO Auto-generated
+	 * method stub
+	 * 
+	 * Collaborateur collaborateur =
+	 * collaborateurRepository.findByLoginAndPassword(login, password); if
+	 * (collaborateur!= null) { // Remove the token collaborateur.setToken(null);
+	 * collaborateurRepository.save(collaborateur); }
+	 * 
+	 * }
+	 * 
+	 * 
+	 **/
+
+	public boolean existsByEmail(String email) {
+		try {
+			return CollaborateurRepository.existsByEmail(email);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException("Erreur lors de la vérification de l'existence d'un collaborateur par email");
+		}
+	}
 }

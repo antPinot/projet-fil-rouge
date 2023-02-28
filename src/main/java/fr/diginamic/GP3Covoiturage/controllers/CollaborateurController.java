@@ -1,12 +1,11 @@
 package fr.diginamic.GP3Covoiturage.controllers;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,7 +30,7 @@ public class CollaborateurController {
 	@Autowired
 	public CollaborateurService collaborateurService;
 
-	@PostMapping
+	@PostMapping()
 	public CollaborateurDtoEdit create(@RequestBody @Valid CollaborateurDtoEdit collaborateurToCreate) {
 		Collaborateur modelCollab = CollaborateurDtoEditMapper.toModel(collaborateurToCreate);
 		collaborateurService.create(modelCollab);
@@ -64,7 +63,7 @@ public class CollaborateurController {
 		return collaborateurDtoLight;
 
 	}
-	
+
 	@PostMapping("/token")
 	public CollaborateurDtoLight findByToken(@RequestBody String token) {
 		System.out.println(token);
@@ -75,26 +74,66 @@ public class CollaborateurController {
 
 	@GetMapping()
 	public List<CollaborateurDtoLight> findAllCollaborateur() {
-		List<Collaborateur> collaborateurs =  collaborateurService.findAll();
+		List<Collaborateur> collaborateurs = collaborateurService.findAll();
 		List<CollaborateurDtoLight> collaborateurDtoLights = new ArrayList<>();
-		
-		for(Collaborateur c : collaborateurs) {
-			
+
+		for (Collaborateur c : collaborateurs) {
+
 			collaborateurDtoLights.add(CollaborateurDtoLightMapper.toDto(c));
-			
+
 		}
 		return collaborateurDtoLights;
 	}
-	
+
 	@PostMapping("/login")
+
 	public Map<String, Object> login(@RequestBody Map<String, String> credentials) {
 		Map<String, Object> token = collaborateurService.login(credentials.get("login"), credentials.get("password"));
 		return token;
 	}
-	
+
 	@PostMapping("/logout")
 	public void logout(@RequestBody Map<String, String> token) {
 		collaborateurService.logout(token.get("access_token"));
 	}
+
+	/**
+	 * FEKHREDDINE TEST AUTH controlleurs methodes signin login logout
+	 * 
+	 * @PostMapping("/login") public Map<String, String> login(@RequestBody
+	 * Map<String, String> credentials) { String token =
+	 * collaborateurService.login(credentials.get("email"),
+	 * credentials.get("password")); String message = token.length()==0 ? "ko" :
+	 * "ok"; Map<String, String> response = new HashMap<>(); response.put("message",
+	 * message); response.put("token", token); return response;
+	 * 
+	 * }
+	 * 
+	 * /** logout
+	 * 
+	 * @PostMapping("/logout") public void logout(String login, String password) {
+	 * collaborateurService.logout(login, password); }
+	 * 
+	 **/
+
+	/**methode Register collaborateur **/
+	@PostMapping("/register")
+	public CollaborateurDtoEdit registerUser(@Valid @RequestBody CollaborateurDtoEdit collaborateurDtoEdit) {
+	    if (collaborateurService.existsByEmail(collaborateurDtoEdit.getMail())) {
+	        throw new RuntimeException("Problème : un collaborateur avec cet email existe déjà.");
+	    }
+
+	    Collaborateur collaborateur = CollaborateurDtoEditMapper.toModel(collaborateurDtoEdit);
+	    
+	    collaborateur.setPassword(collaborateur.getPassword());
+
+	    // Génération du token JWT
+	    String token = UUID.randomUUID().toString();
+	    collaborateur.setToken(token);
+
+	    collaborateurService.create(collaborateur);
+
+	    return collaborateurDtoEdit;
+	 }
 
 }
