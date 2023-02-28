@@ -1,9 +1,12 @@
 package fr.diginamic.GP3Covoiturage.controllers;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -61,6 +64,14 @@ public class CollaborateurController {
 		return collaborateurDtoLight;
 
 	}
+	
+	@PostMapping("/token")
+	public CollaborateurDtoLight findByToken(@RequestBody String token) {
+		System.out.println(token);
+		Collaborateur model = collaborateurService.findOneByToken(token);
+		CollaborateurDtoLight dto = CollaborateurDtoLightMapper.toDto(model);
+		return dto;
+	}
 
 	@GetMapping()
 	public List<CollaborateurDtoLight> findAllCollaborateur() {
@@ -73,6 +84,17 @@ public class CollaborateurController {
 			
 		}
 		return collaborateurDtoLights;
+	}
+	
+	@PostMapping("/login")
+	public Map<String, Object> login(@RequestBody Map<String, String> credentials) {
+		Map<String, Object> token = collaborateurService.login(credentials.get("login"), credentials.get("password"));
+		return token;
+	}
+	
+	@PostMapping("/logout")
+	public void logout(@RequestBody Map<String, String> token) {
+		collaborateurService.logout(token.get("access_token"));
 	}
 
 }

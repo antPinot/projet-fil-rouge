@@ -33,6 +33,10 @@ public interface CollaborateurRepository extends JpaRepository<Collaborateur, In
 	
 	public List<Collaborateur> findByReservationsVehicule(ReservationVehicule reservationsVehicule);
 	
+	public List<Collaborateur> findByLoginAndPassword(String login, String password);
+	
+	public Collaborateur findByToken(String token);
+	
 	@Query("SELECT c FROM Collaborateur c JOIN c.vehiculesPersonnel v WHERE v = :vehiculePersonnel")
 	public List<Collaborateur> findCollaborateurlByVehiculePersonnels(@Param("vehiculePersonnel") VehiculePersonnel vehiculePersonnel);
 	

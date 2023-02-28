@@ -81,8 +81,7 @@ public class ReservationVehiculeService {
 				&& (reservationToUpdate.getDateDepart().isBefore(reservationToUpdate.getDateRetour()))) {
 			return reservationVehiculeRepository.save(reservationToUpdate);
 		}
-		return null; // Exception à générer pour invalidité de date ou reservationVehicule
-						// inexistante
+		throw new BadRequestException("COUCOU");
 	}
 
 	/** Delete */
@@ -128,7 +127,7 @@ public class ReservationVehiculeService {
 
 	/** Modifier la reservation d'un vehicule de service 
 	 * @throws FunctionalException **/
-	public ReservationVehicule updateReserv(ReservationVehicule reservationVehicule) throws FunctionalException {
+	public ReservationVehicule updateReserv(ReservationVehicule reservationVehicule){
 		if (reservationVehicule.getDateDepart().isAfter(reservationVehicule.getDateRetour())) {
 
 			throw new FunctionalException("Erreur : Date de départ est après la date de retour");
@@ -157,7 +156,7 @@ public class ReservationVehiculeService {
 		}
 		
 		if (!reservationAutreCollaborateur.isEmpty()) {
-			throw new FunctionalException("Votre modification chevauche une autre réservation");
+			throw new BadRequestException("Votre modification chevauche une autre réservation");
 		}
 
 		return reservationVehiculeRepository.save(reservationVehicule);

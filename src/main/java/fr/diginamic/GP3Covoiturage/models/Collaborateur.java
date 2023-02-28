@@ -58,6 +58,9 @@ public class Collaborateur {
 
 	@Column(name = "dateCreation", length = 50, nullable = false)
 	private LocalDate dateCreation;
+	
+	@Column(name = "token")
+	private String token;
 
 	@OneToMany(mappedBy = "organisateur")
 	private List<Covoiturage> annonces = new ArrayList<Covoiturage>();
@@ -398,6 +401,20 @@ public class Collaborateur {
 	 */
 	public void setAnnonces(List<Covoiturage> annonces) {
 		this.annonces = annonces;
+	}
+
+	/**Getter pour l'attribut token
+	 * @return the token
+	 */
+	public String getToken() {
+		return token;
+	}
+
+	/**Setter pour l'attribut token
+	 * @param token the token to set
+	 */
+	public void setToken(String token) {
+		this.token = token;
 	}
 
 }
