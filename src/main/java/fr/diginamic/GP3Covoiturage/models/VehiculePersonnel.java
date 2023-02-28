@@ -8,9 +8,12 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Size;
 
 /** Classe VehiculePersonnel
@@ -24,7 +27,7 @@ public class VehiculePersonnel {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private Integer id;
 	
 	@Column(name="immatriculation", length = 9, nullable= false, unique= true)
 	private String immatriculation;
@@ -36,16 +39,18 @@ public class VehiculePersonnel {
 	private String modele;
 	
 	@Column(name="places", length = 1, nullable= false)
-	@Size(max = 9)
-	private int places;
+	@Max(value = 9)
+	private Integer places;
 	
 	@Column(name="limitePlace", length = 1, nullable= false)
-	private int limitePlace;
+	@Max(value = 9)
+	private Integer limitePlace;
 	
 	@OneToMany(mappedBy = "vehiculePersonnel")
 	private List<Covoiturage> covoiturages = new ArrayList<Covoiturage>();
 	
-	@ManyToMany(mappedBy = "vehiculesPersonnel")
+	@ManyToMany
+	@JoinTable(name = "Collaborateur_VehiculePersonnel", joinColumns = @JoinColumn(name = "id_vehiculePersonnel", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "id_collaborateur", referencedColumnName = "id"))
 	private List<Collaborateur> collaborateurs = new ArrayList<Collaborateur>();
 
 	public VehiculePersonnel() {
@@ -62,8 +67,8 @@ public class VehiculePersonnel {
 	 * @param covoiturages
 	 * @param collaborateurs
 	 */
-	public VehiculePersonnel(int id, String immatriculation, String marque, String modele, @Size(max = 9) int places,
-			int limitePlace, List<Covoiturage> covoiturages, List<Collaborateur> collaborateurs) {
+	public VehiculePersonnel(Integer id, String immatriculation, String marque, String modele, @Size(max = 9) Integer places,
+			Integer limitePlace, List<Covoiturage> covoiturages, List<Collaborateur> collaborateurs) {
 		super();
 		this.id = id;
 		this.immatriculation = immatriculation;
@@ -79,7 +84,7 @@ public class VehiculePersonnel {
 	 * Getter pour l'attribut id
 	 * @return the id
 	 */
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
@@ -87,7 +92,7 @@ public class VehiculePersonnel {
 	 * Setter pour l'attribut id
 	 * @param id the id to set
 	 */
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -143,7 +148,7 @@ public class VehiculePersonnel {
 	 * Getter pour l'attribut places
 	 * @return the places
 	 */
-	public int getPlaces() {
+	public Integer getPlaces() {
 		return places;
 	}
 
@@ -151,7 +156,7 @@ public class VehiculePersonnel {
 	 * Setter pour l'attribut places
 	 * @param places the places to set
 	 */
-	public void setPlaces(int places) {
+	public void setPlaces(Integer places) {
 		this.places = places;
 	}
 
@@ -159,7 +164,7 @@ public class VehiculePersonnel {
 	 * Getter pour l'attribut limitePlace
 	 * @return the limitePlace
 	 */
-	public int getLimitePlace() {
+	public Integer getLimitePlace() {
 		return limitePlace;
 	}
 
@@ -167,7 +172,7 @@ public class VehiculePersonnel {
 	 * Setter pour l'attribut limitePlace
 	 * @param limitePlace the limitePlace to set
 	 */
-	public void setLimitePlace(int limitePlace) {
+	public void setLimitePlace(Integer limitePlace) {
 		this.limitePlace = limitePlace;
 	}
 

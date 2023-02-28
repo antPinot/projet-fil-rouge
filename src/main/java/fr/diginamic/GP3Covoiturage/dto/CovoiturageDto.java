@@ -3,9 +3,12 @@ package fr.diginamic.GP3Covoiturage.dto;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 /**
  * @author Fekhreddine
  */
+
 public class CovoiturageDto {
 
 	/**
@@ -29,11 +32,11 @@ public class CovoiturageDto {
 	 */
 
 	private CollaborateurDto organisateur;
-
+	
 	private VehiculePersonnelDto vehiculePersonnel;
-
+	
 	private AdresseDto adresseDepart;
-
+	
 	private AdresseDto adresseArrivee;
 
 	/**

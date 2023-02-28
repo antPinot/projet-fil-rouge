@@ -40,7 +40,7 @@ public class AdresseDtoMapper {
 	 * @param adresseDto
 	 * @return
 	 */
-	public static Adresse toModel(AdresseDto adresseDto) {
+	/*public static Adresse toModel(AdresseDto adresseDto) {
 		Adresse model = new Adresse(adresseDto.getId(), 
 				adresseDto.getNumero(), 
 				adresseDto.getComplementNumero(), 
@@ -53,6 +53,6 @@ public class AdresseDtoMapper {
 				CovoiturageDtoMapper.listToModels(adresseDto.getCovoiturageArrivee()));
 		
 		return model;
-	}
+	}*/
 
 }

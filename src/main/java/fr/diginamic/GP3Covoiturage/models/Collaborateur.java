@@ -4,6 +4,9 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -27,10 +30,10 @@ public class Collaborateur {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private Integer id;
 
 	@Column(name = "matricule", length = 15, nullable = false, unique = true)
-	private int matricule;
+	private Integer matricule;
 
 	@Column(name = "nom", length = 50, nullable = false)
 	private String nom;
@@ -42,7 +45,7 @@ public class Collaborateur {
 	private LocalDate dateNaissance;
 
 	@Column(name = "telephone", length = 10, nullable = false)
-	private int telephone;
+	private Integer telephone;
 
 	@Column(name = "mail", length = 100, nullable = false)
 	private String mail;
@@ -52,6 +55,9 @@ public class Collaborateur {
 
 	@Column(name = "password", length = 50, nullable = false)
 	private String password;
+	
+	@Column(name="token")
+    private String token;
 
 	@Column(name = "dateCreation", length = 50, nullable = false)
 	private LocalDate dateCreation;
@@ -82,6 +88,15 @@ public class Collaborateur {
 	 * Constructeur
 	 * 
 	 * @param id
+	 */
+	public Collaborateur(Integer id) {
+		this.id = id;
+	}
+
+	/**
+	 * Constructeur
+	 * 
+	 * @param id
 	 * @param matricule
 	 * @param nom
 	 * @param prenom
@@ -97,10 +112,10 @@ public class Collaborateur {
 	 * @param roles
 	 * @param covoiturages
 	 */
-	public Collaborateur(int id, int matricule, String nom, String prenom, LocalDate dateNaissance, int telephone,
-			String mail, String login, String password, LocalDate dateCreation, List<Covoiturage> annonces,
-			List<ReservationVehicule> reservationsVehicule, List<VehiculePersonnel> vehiculespersonnels,
-			List<Role> roles, List<Covoiturage> covoiturages) {
+	public Collaborateur(Integer id, Integer matricule, String nom, String prenom, LocalDate dateNaissance,
+			Integer telephone, String mail, String login, String password,String token, LocalDate dateCreation,
+			List<Covoiturage> annonces, List<ReservationVehicule> reservationsVehicule,
+			List<VehiculePersonnel> vehiculespersonnels, List<Role> roles, List<Covoiturage> covoiturages) {
 		this.id = id;
 		this.matricule = matricule;
 		this.nom = nom;
@@ -110,6 +125,7 @@ public class Collaborateur {
 		this.mail = mail;
 		this.login = login;
 		this.password = password;
+		this.token = token;
 		this.dateCreation = dateCreation;
 		this.annonces = annonces;
 		this.reservationsVehicule = reservationsVehicule;
@@ -123,7 +139,7 @@ public class Collaborateur {
 	 * 
 	 * @return the id
 	 */
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
@@ -132,7 +148,7 @@ public class Collaborateur {
 	 * 
 	 * @param id the id to set
 	 */
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -141,7 +157,7 @@ public class Collaborateur {
 	 * 
 	 * @return the matricule
 	 */
-	public int getMatricule() {
+	public Integer getMatricule() {
 		return matricule;
 	}
 
@@ -150,7 +166,7 @@ public class Collaborateur {
 	 * 
 	 * @param matricule the matricule to set
 	 */
-	public void setMatricule(int matricule) {
+	public void setMatricule(Integer matricule) {
 		this.matricule = matricule;
 	}
 
@@ -213,7 +229,7 @@ public class Collaborateur {
 	 * 
 	 * @return the telephone
 	 */
-	public int getTelephone() {
+	public Integer getTelephone() {
 		return telephone;
 	}
 
@@ -222,7 +238,7 @@ public class Collaborateur {
 	 * 
 	 * @param telephone the telephone to set
 	 */
-	public void setTelephone(int telephone) {
+	public void setTelephone(Integer telephone) {
 		this.telephone = telephone;
 	}
 
@@ -387,5 +403,20 @@ public class Collaborateur {
 	public void setAnnonces(List<Covoiturage> annonces) {
 		this.annonces = annonces;
 	}
+
+	/**Getter pour l'attribut token
+	 * @return the token
+	 */
+	public String getToken() {
+		return token;
+	}
+
+	/**Setter pour l'attribut token
+	 * @param token the token to set
+	 */
+	public void setToken(String token) {
+		this.token = token;
+	}
+
 
 }

@@ -10,7 +10,7 @@ import java.util.List;
 
 public class VehiculeSocieteDto {
 	
-	private int id;
+	private Integer id;
 	
 	private String immatriculation;
 	
@@ -22,7 +22,7 @@ public class VehiculeSocieteDto {
 	
 	private String photo;
 	
-	private int disponible;
+	private boolean disponible;
 	
 	private int statut;
 	
@@ -45,8 +45,8 @@ public class VehiculeSocieteDto {
 	 * @param statut
 	 * @param categorie
 	 */
-	public VehiculeSocieteDto(int id, String immatriculation, String marque, String modele, int places, String photo,
-			int disponible, int statut, String categorie, List<ReservationVehiculeDto> reservationsVehicule) {
+	public VehiculeSocieteDto(Integer id, String immatriculation, String marque, String modele, int places, String photo,
+			boolean disponible, int statut, String categorie, List<ReservationVehiculeDto> reservationsVehicule) {
 		super();
 		this.id = id;
 		this.immatriculation = immatriculation;
@@ -64,7 +64,7 @@ public class VehiculeSocieteDto {
 	 * Getter pour l'attribut id
 	 * @return the id
 	 */
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
@@ -72,7 +72,7 @@ public class VehiculeSocieteDto {
 	 * Setter pour l'attribut id
 	 * @param id the id to set
 	 */
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -160,7 +160,7 @@ public class VehiculeSocieteDto {
 	 * Getter pour l'attribut disponible
 	 * @return the disponible
 	 */
-	public int getDisponible() {
+	public boolean getDisponible() {
 		return disponible;
 	}
 
@@ -168,7 +168,7 @@ public class VehiculeSocieteDto {
 	 * Setter pour l'attribut disponible
 	 * @param disponible the disponible to set
 	 */
-	public void setDisponible(int disponible) {
+	public void setDisponible(boolean disponible) {
 		this.disponible = disponible;
 	}
 

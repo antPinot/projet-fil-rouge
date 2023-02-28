@@ -21,7 +21,7 @@ public class VehiculePersonnelDtoMapper {
 		return dto;
 	}
 	
-	public static VehiculePersonnel toModel(VehiculePersonnelDto vehiculePersonnelDto) {
+	/*public static VehiculePersonnel toModel(VehiculePersonnelDto vehiculePersonnelDto) {
 		
 		VehiculePersonnel model = new VehiculePersonnel(vehiculePersonnelDto.getId(),
 				vehiculePersonnelDto.getImmatriculation(),
@@ -33,7 +33,7 @@ public class VehiculePersonnelDtoMapper {
 				CollaborateurDtoMapper.listToModels(vehiculePersonnelDto.getCollaborateurs()));
 		
 		return model;
-	}
+	}*/
 	
 	public static List<VehiculePersonnelDto> listToDto(List<VehiculePersonnel> vehiculePersonnel) {
 		List<VehiculePersonnelDto> listVehiculePersoDto = new ArrayList<>();
@@ -41,9 +41,9 @@ public class VehiculePersonnelDtoMapper {
 		return listVehiculePersoDto;
 	}
 	
-	public static List<VehiculePersonnel> listToModels(List<VehiculePersonnelDto> vehiculePersonnelDto) {
+	/*public static List<VehiculePersonnel> listToModels(List<VehiculePersonnelDto> vehiculePersonnelDto) {
 		List<VehiculePersonnel> listVehiculePersoModel = new ArrayList<>();
 		vehiculePersonnelDto.forEach(c -> listVehiculePersoModel.add(VehiculePersonnelDtoMapper.toModel(c)));
 		return listVehiculePersoModel;
-	}
+	}*/
 }

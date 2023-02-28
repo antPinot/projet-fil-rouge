@@ -42,19 +42,19 @@ public class CovoiturageDtoMapper {
 	/**
 	 * methode qui retourne une liste de modele
 	 */
-	public static List<Covoiturage> listToModels(List<CovoiturageDto> covoituragesDto) {
+	/*public static List<Covoiturage> listToModels(List<CovoiturageDto> covoituragesDto) {
 
 		List<Covoiturage> listCovoiModels = new ArrayList<>();
 
 		covoituragesDto.forEach(c -> listCovoiModels.add(CovoiturageDtoMapper.toModel(c)));
 
 		return listCovoiModels;
-	}
+	}*/
 
 	/**
 	 * methode qui retourne un modele
 	 */
-	private static Covoiturage toModel(CovoiturageDto c) {
+	/*public static Covoiturage toModel(CovoiturageDto c) {
 
 		Covoiturage modelCovoit = new Covoiturage(c.getId(), DateUtils.stringToLocalDateTime(c.getDateDepart()),
 				c.getPlacesRestantes(), c.getNbPersonnes(), c.getDureeTrajet(), c.getDistance(),
@@ -65,6 +65,6 @@ public class CovoiturageDtoMapper {
 				CollaborateurDtoMapper.listToModels(c.getCollaborateurs()));
 
 		return modelCovoit;
-	}
+	}*/
 
 }
