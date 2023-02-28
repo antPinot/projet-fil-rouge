@@ -1,6 +1,7 @@
 package fr.diginamic.GP3Covoiturage.controllers;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -118,7 +119,7 @@ public class CollaborateurController {
 
 	/**methode Register collaborateur **/
 	@PostMapping("/register")
-	public CollaborateurDtoEdit registerUser(@Valid @RequestBody CollaborateurDtoEdit collaborateurDtoEdit) {
+	public Map<String,String> registerUser(@Valid @RequestBody CollaborateurDtoEdit collaborateurDtoEdit) {
 	    if (collaborateurService.existsByEmail(collaborateurDtoEdit.getMail())) {
 	        throw new RuntimeException("Problème : un collaborateur avec cet email existe déjà.");
 	    }
@@ -132,8 +133,12 @@ public class CollaborateurController {
 	    collaborateur.setToken(token);
 
 	    collaborateurService.create(collaborateur);
+	    
+	    Map<String, String> tokenMappingMap = new HashMap<>();
 
-	    return collaborateurDtoEdit;
+	    tokenMappingMap.put("token", token);
+	    
+	    return tokenMappingMap;
 	 }
 
 }
