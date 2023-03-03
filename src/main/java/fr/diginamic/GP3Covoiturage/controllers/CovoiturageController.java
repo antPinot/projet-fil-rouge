@@ -67,10 +67,10 @@ public class CovoiturageController {
 	
 	@GetMapping("/criteres")
 	public List<CovoiturageDtoLight> readByCriteres(@RequestParam Integer collaborateurId,
-			@RequestParam(defaultValue = "none") String adresseDepart,
-			@RequestParam(defaultValue = "none") String adresseArrivee,
-			@RequestParam(defaultValue = "none") String dateDepart) {
-		List<Covoiturage> models = covoiturageService.findByCriteres(collaborateurId, adresseDepart, adresseArrivee,
+			@RequestParam(defaultValue = "0") Integer adresseDepartId,
+			@RequestParam(defaultValue = "0") Integer adresseArriveeId,
+			@RequestParam(defaultValue = "none") String dateDepart){
+		List<Covoiturage> models = covoiturageService.findByCriteres(collaborateurId, adresseDepartId, adresseArriveeId,
 				dateDepart);
 		List<CovoiturageDtoLight> dtos = new ArrayList<>();
 		models.forEach(m -> dtos.add(CovoiturageDtoLightMapper.toDto(m)));

@@ -43,6 +43,9 @@ public interface AdresseRepository extends JpaRepository<Adresse, Integer> {
 			@Param ("dep") String departement,
 			@Param ("pays") String pays,
 			@Param ("ville") String ville);
+	
+	@Query("SELECT a FROM Adresse a WHERE a.voie LIKE %:userQuery% OR a.ville LIKE %:userQuery% OR a.departement LIKE %:userQuery% OR a.codePostal LIKE %:userQuery% OR a.numero LIKE %:userQuery%")
+	public List<Adresse> findByUserQuery(@Param ("userQuery") String userQuery);
 
 }
 

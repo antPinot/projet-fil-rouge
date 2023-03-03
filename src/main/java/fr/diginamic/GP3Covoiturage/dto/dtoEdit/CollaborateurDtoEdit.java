@@ -1,5 +1,7 @@
 package fr.diginamic.GP3Covoiturage.dto.dtoEdit;
 
+import java.util.List;
+
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
@@ -34,6 +36,8 @@ public class CollaborateurDtoEdit {
 	private String password;
 
 	private String dateCreation;
+	
+	private List<Integer> rolesId;
 
 	/**
 	 * @param id
@@ -48,7 +52,7 @@ public class CollaborateurDtoEdit {
 	 * @param dateCreation
 	 */
 	public CollaborateurDtoEdit(Integer id, Integer matricule, String nom, String prenom, String dateNaissance,
-			Integer telephone, String mail, String login, String password, String dateCreation) {
+			Integer telephone, String mail, String login, String password, String dateCreation, List<Integer> rolesId) {
 		super();
 		this.id = id;
 		this.matricule = matricule;
@@ -60,6 +64,7 @@ public class CollaborateurDtoEdit {
 		this.login = login;
 		this.password = password;
 		this.dateCreation = dateCreation;
+		this.rolesId = rolesId;
 	}
 
 	/**
@@ -240,6 +245,14 @@ public class CollaborateurDtoEdit {
 	 */
 	public void setDateCreation(String dateCreation) {
 		this.dateCreation = dateCreation;
+	}
+
+	public List<Integer> getRolesId() {
+		return rolesId;
+	}
+
+	public void setRolesId(List<Integer> rolesId) {
+		this.rolesId = rolesId;
 	}
 
 }

@@ -6,12 +6,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import fr.diginamic.GP3Covoiturage.exceptions.BadRequestException;
 import fr.diginamic.GP3Covoiturage.models.Collaborateur;
+import fr.diginamic.GP3Covoiturage.models.Role;
 import fr.diginamic.GP3Covoiturage.repositories.CollaborateurRepository;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
@@ -66,6 +68,12 @@ public class CollaborateurService {
 			existingCollaborateur.get(0).setToken(token);
 			collaborateurRepository.save(existingCollaborateur.get(0));
 			tokenJson.put("access_token", token);
+			// Partie Admin
+			List<Role> isAdmin = existingCollaborateur.get(0).getRoles().stream().filter(r -> r.getName().equals("ADMIN")).collect(Collectors.toList());
+			if (isAdmin.size() > 0) {
+				tokenJson.put("isAdmin", "YES");
+			}
+			//
 			return tokenJson;
 		}
 		throw new BadRequestException("Unknown credentials");

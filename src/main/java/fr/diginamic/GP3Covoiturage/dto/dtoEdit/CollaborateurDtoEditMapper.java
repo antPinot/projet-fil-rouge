@@ -1,6 +1,10 @@
 package fr.diginamic.GP3Covoiturage.dto.dtoEdit;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import fr.diginamic.GP3Covoiturage.models.Collaborateur;
+import fr.diginamic.GP3Covoiturage.models.Role;
 import fr.diginamic.GP3Covoiturage.utils.DateUtils;
 
 /** Classe CollaborateurDto
@@ -11,6 +15,8 @@ import fr.diginamic.GP3Covoiturage.utils.DateUtils;
 public class CollaborateurDtoEditMapper {
 	
 	public static Collaborateur toModel (CollaborateurDtoEdit collaborateurDtoEdit) {
+		
+		List<Role> roles = new ArrayList<>();
 		
 		Collaborateur model = new Collaborateur();
 		model.setId(collaborateurDtoEdit.getId());		
@@ -23,6 +29,9 @@ public class CollaborateurDtoEditMapper {
 		model.setLogin(collaborateurDtoEdit.getLogin());
 		model.setPassword(collaborateurDtoEdit.getPassword());
 		model.setDateCreation(DateUtils.stringToLocalDate(collaborateurDtoEdit.getDateCreation()));
+		
+		collaborateurDtoEdit.getRolesId().forEach(r -> roles.add(new Role(r)));
+		model.setRoles(roles);
 		
 		return model;
 	}
