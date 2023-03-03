@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import fr.diginamic.GP3Covoiturage.exceptions.FunctionalException;
-
 import fr.diginamic.GP3Covoiturage.models.ReservationVehicule;
 import fr.diginamic.GP3Covoiturage.models.VehiculeSociete;
 import fr.diginamic.GP3Covoiturage.repositories.VehiculeSocieteRepository;
@@ -62,6 +61,14 @@ public class VehiculeSocieteService {
 
 	public List<VehiculeSociete> findAll() {
 		return vehiculeSocieteRepository.findAll();
+	}
+	
+	public List<VehiculeSociete> findByMarque(String marque) {
+		return vehiculeSocieteRepository.findByMarque(marque);
+	}
+	
+	public List<VehiculeSociete> findByImmatriculation(String immatriculation) {
+		return vehiculeSocieteRepository.findByImmatriculation(immatriculation);
 	}
 
 	/**
