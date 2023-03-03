@@ -80,6 +80,22 @@ public class VehiculeSocieteController {
 		vehiculeSocietes.forEach(m -> dtos.add(VehiculeSocieteDtoLightMapper.toDto(m)));
 		return dtos;
 	}
+	
+	@GetMapping("/{marque}")
+	public List<VehiculeSocieteDtoLight> findByMarque(@PathVariable("marque") String marque) {
+		List<VehiculeSociete> models = vehiculeSocieteService.findByMarque(marque);
+		List<VehiculeSocieteDtoLight> dtos = new ArrayList<>();
+		models.forEach(m -> dtos.add(VehiculeSocieteDtoLightMapper.toDto(m)));
+		return dtos;
+	}
+	
+	@GetMapping("/{immatriculation}")
+	public List<VehiculeSocieteDtoLight> findByImmatriculation(@PathVariable("immatriculation") String immatriculation) {
+		List<VehiculeSociete> models = vehiculeSocieteService.findByImmatriculation(immatriculation);
+		List<VehiculeSocieteDtoLight> dtos = new ArrayList<>();
+		models.forEach(m -> dtos.add(VehiculeSocieteDtoLightMapper.toDto(m)));
+		return dtos;
+	}
 
 	/** methode fonctionnel **/
 

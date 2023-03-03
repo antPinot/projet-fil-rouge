@@ -22,8 +22,8 @@ public class CovoiturageDtoLightMapper {
 				covoiturage.getNbPersonnes(), covoiturage.getDureeTrajet(), covoiturage.getDistance(),
 				CollaborateurDtoLightMapper.toDto(covoiturage.getOrganisateur()),
 				VehiculePersonnelDtoLightMapper.toDto(covoiturage.getVehiculePersonnel()),
-				AdresseDtoLightMapper.toDto(covoiturage.getAdresseArrivee()),
 				AdresseDtoLightMapper.toDto(covoiturage.getAdresseDepart()),
+				AdresseDtoLightMapper.toDto(covoiturage.getAdresseArrivee()),
 				collaborateursDto);
 
 		return lightDto;

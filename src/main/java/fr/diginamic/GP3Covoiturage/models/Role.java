@@ -28,8 +28,6 @@ public class Role {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
-	
-
 	@Column(length = 50)
 	private String name;
 
@@ -37,7 +35,7 @@ public class Role {
 	 * relation many to many avec collaborateur
 	 */
 	@ManyToMany
-	@JoinTable(name = "Collaborateur_Role", joinColumns = @JoinColumn(name = "RoleName", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "Collaborateurid", referencedColumnName = "id"))
+	@JoinTable(name = "Collaborateur_Role", joinColumns = @JoinColumn(name = "id_role", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "id_collaborateur", referencedColumnName = "id"))
 
 	List<Collaborateur> collaborateurs = new ArrayList<>();
 
@@ -51,13 +49,20 @@ public class Role {
 		this.collaborateurs = collaborateurs;
 	}
 
-
 	/**
 	 * @return constructor vide
 	 */
 	public Role() {
 	}
 
+	/**
+	 * Constructeur
+	 * 
+	 * @param id
+	 */
+	public Role(Integer id) {
+		this.id = id;
+	}
 
 	/**
 	 * @return the id
@@ -86,8 +91,7 @@ public class Role {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
-	
+
 	/**
 	 * @return the collaborateurs
 	 */

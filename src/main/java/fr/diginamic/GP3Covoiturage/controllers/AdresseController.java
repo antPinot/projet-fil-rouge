@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 
@@ -77,6 +78,14 @@ public class AdresseController {
 	@DeleteMapping("/{id}")
 	public void delete(@PathVariable("id") Integer id) {
 		adresseService.delete(id);
+	}
+	
+	@GetMapping("/autocomplete")
+	public List<AdresseDtoLight> readByUserQuery(@RequestParam String userQuery){
+		List<Adresse> models = adresseService.readByUserQuery(userQuery);
+		List<AdresseDtoLight> dtos = new ArrayList<>();
+		models.forEach(a -> dtos.add(AdresseDtoLightMapper.toDto(a)));
+		return dtos;
 	}
 
 }

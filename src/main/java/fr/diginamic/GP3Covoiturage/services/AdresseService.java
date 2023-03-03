@@ -110,5 +110,9 @@ public class AdresseService {
 			throw new EntityNotFoundException("Il n'y a pas d'entité à effacer");
 		}
 	}
+	
+	public List<Adresse> readByUserQuery(String query){
+		return adresseRepository.findByUserQuery(query);
+	}
 
 }
