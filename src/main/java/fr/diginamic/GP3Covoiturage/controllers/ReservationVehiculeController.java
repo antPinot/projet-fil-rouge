@@ -69,6 +69,14 @@ public class ReservationVehiculeController {
 			return dtos;
 	}
 	
+	@GetMapping("/state")
+	public List<ReservationVehiculeDtoLight> readByState(@RequestParam String state) {
+			List<ReservationVehicule> models = reservationVehiculeService.findReservationVehiculeByState(state);
+			List<ReservationVehiculeDtoLight> dtos = new ArrayList<>();
+			models.forEach(m -> dtos.add(ReservationVehiculeDtoLightMapper.toDto(m)));
+			return dtos;
+	}
+	
   
 	@GetMapping
 	public List<ReservationVehiculeDtoLight> readAll() {

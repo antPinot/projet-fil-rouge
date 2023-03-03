@@ -11,6 +11,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import fr.diginamic.GP3Covoiturage.enums.Categorie;
+import fr.diginamic.GP3Covoiturage.models.Covoiturage;
 import fr.diginamic.GP3Covoiturage.models.ReservationVehicule;
 import fr.diginamic.GP3Covoiturage.models.VehiculeSociete;
 
@@ -90,5 +91,5 @@ public interface VehiculeSocieteRepository extends JpaRepository<VehiculeSociete
 	@Query("SELECT v FROM VehiculeSociete v WHERE NOT EXISTS (SELECT r FROM ReservationVehicule r WHERE((r.dateDepart BETWEEN :dateDepart AND :dateRetour) OR (r.dateRetour BETWEEN :dateDepart AND :dateRetour)))")
 	public List<VehiculeSociete> vehiculesDispo(@Param("dateDepart") LocalDateTime dateDepart,
 			@Param("dateRetour") LocalDateTime dateRetour);
-
+	
 }

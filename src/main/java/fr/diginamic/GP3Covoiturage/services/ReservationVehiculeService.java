@@ -69,6 +69,17 @@ public class ReservationVehiculeService {
 		}
 	}
 	
+	public List<ReservationVehicule> findReservationVehiculeByState(String state) throws BadRequestException {
+		switch (state) {
+		case "en-cours":
+			return reservationVehiculeRepository.findReservationVehiculeByEnCours();
+		case "historique":
+			return reservationVehiculeRepository.findReservationVehiculeByHistorique();
+		default:
+			throw new BadRequestException("Requête Invalide");
+		}
+	}
+	
 	public List<ReservationVehicule> findEnCoursByVehiculeSociete(VehiculeSociete vehiculeSociete){
 		return reservationVehiculeRepository.findEnCoursByVehiculeSociete(vehiculeSociete);
 	}
