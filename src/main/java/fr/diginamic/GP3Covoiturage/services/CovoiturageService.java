@@ -7,8 +7,11 @@ import java.time.LocalTime;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 import fr.diginamic.GP3Covoiturage.exceptions.BadRequestException;
@@ -50,6 +53,9 @@ public class CovoiturageService {
 	 */
 	@Autowired
 	VehiculePersonnelService vehiculePersonnelService;
+
+	@Autowired
+	private JavaMailSender mailSender;
 
 	/**
 	 * Création d'une annonce de covoiturage : Vérifie si les adresses sont en bases
@@ -185,8 +191,8 @@ public class CovoiturageService {
 	 * @return
 	 * @throws BadRequestException
 	 */
-	public List<Covoiturage> findByCriteres(Integer collaborateurId, Integer adresseDepartId, Integer adresseArriveeId, String dateDepart)
-			throws BadRequestException {
+	public List<Covoiturage> findByCriteres(Integer collaborateurId, Integer adresseDepartId, Integer adresseArriveeId,
+			String dateDepart) throws BadRequestException {
 		if (adresseDepartId == 0 && adresseArriveeId == 0 && dateDepart.equals("none")) {
 			throw new BadRequestException("Veuillez saisir au moins un critère de recherche");
 		} else if (adresseDepartId == 0 && adresseArriveeId == 0) {
@@ -202,42 +208,47 @@ public class CovoiturageService {
 			CovoiturageUtils.filtrerAffichage(collaborateurId, covoiturages);
 
 			return covoiturages;
-			
+
 			// Seule l'adresse de départ est renseignée
 		} else if (adresseArriveeId == 0) {
 			LocalDate dateDepartTime = DateUtils.stringToLocalDate(dateDepart);
 
-			List<Covoiturage> covoiturages = covoiturageRepository.findBeetweenStartOfDaytAndEndOfDayAndAdresseDepartOrAdresseArrivee(
-					dateDepartTime.atTime(LocalTime.MIDNIGHT), dateDepartTime.atTime(LocalTime.MAX), adresseDepartId, Integer.MAX_VALUE);
-			
+			List<Covoiturage> covoiturages = covoiturageRepository
+					.findBeetweenStartOfDaytAndEndOfDayAndAdresseDepartOrAdresseArrivee(
+							dateDepartTime.atTime(LocalTime.MIDNIGHT), dateDepartTime.atTime(LocalTime.MAX),
+							adresseDepartId, Integer.MAX_VALUE);
+
 			CovoiturageUtils.filtrerAffichage(collaborateurId, covoiturages);
 
 			return covoiturages;
-			
+
 			// Seule l'adresse d'arrivée est renseignée
 		} else if (adresseDepartId == 0) {
 			LocalDate dateDepartTime = DateUtils.stringToLocalDate(dateDepart);
 
-			List<Covoiturage> covoiturages = covoiturageRepository.findBeetweenStartOfDaytAndEndOfDayAndAdresseDepartOrAdresseArrivee(
-					dateDepartTime.atTime(LocalTime.MIDNIGHT), dateDepartTime.atTime(LocalTime.MAX), Integer.MAX_VALUE, adresseArriveeId);
-			
+			List<Covoiturage> covoiturages = covoiturageRepository
+					.findBeetweenStartOfDaytAndEndOfDayAndAdresseDepartOrAdresseArrivee(
+							dateDepartTime.atTime(LocalTime.MIDNIGHT), dateDepartTime.atTime(LocalTime.MAX),
+							Integer.MAX_VALUE, adresseArriveeId);
+
 			CovoiturageUtils.filtrerAffichage(collaborateurId, covoiturages);
 
 			return covoiturages;
-			
+
 			// Tout est renseigné
 		} else if (adresseDepartId != 0 && adresseArriveeId != 0) {
-			
+
 			LocalDate dateDepartTime = DateUtils.stringToLocalDate(dateDepart);
 
-			List<Covoiturage> covoiturages = covoiturageRepository.findBeetweenStartOfDaytAndEndOfDayAndAdresseDepartAndAdresseArrivee(
-					dateDepartTime.atTime(LocalTime.MIDNIGHT), dateDepartTime.atTime(LocalTime.MAX), adresseDepartId, adresseArriveeId);
-			
+			List<Covoiturage> covoiturages = covoiturageRepository
+					.findBeetweenStartOfDaytAndEndOfDayAndAdresseDepartAndAdresseArrivee(
+							dateDepartTime.atTime(LocalTime.MIDNIGHT), dateDepartTime.atTime(LocalTime.MAX),
+							adresseDepartId, adresseArriveeId);
+
 			CovoiturageUtils.filtrerAffichage(collaborateurId, covoiturages);
 
 			return covoiturages;
-		}
-		else {
+		} else {
 			throw new BadRequestException("Requête Invalide");
 		}
 
@@ -264,7 +275,44 @@ public class CovoiturageService {
 		if (id == null) {
 			throw new RuntimeException("erreur : id covoiturage pas present");
 		}
-		this.covoiturageRepository.deleteById(id);
+
+		Optional<Covoiturage> validCovoiturage = covoiturageRepository.findById(id)
+				.filter(c -> c.getDateDepart().isAfter(LocalDateTime.now()));
+		if (validCovoiturage.isPresent()) {
+			deleteAndNotify(validCovoiturage.get());
+		} else {
+			throw new BadRequestException("Vous ne pouvez pas supprimmer un covoiturage passé");
+		}
+
+	}
+
+	public void deleteAndNotify(Covoiturage covoiturage) {
+
+		List<String> mailAdresses = new ArrayList<>();
+
+		covoiturage.getCollaborateurs().forEach(c -> mailAdresses.add(c.getMail()));
+
+		String[] mails = new String[mailAdresses.size()];
+
+		mailAdresses.toArray(mails);
+
+		String dateDepart = DateUtils.localDateTimeToString(covoiturage.getDateDepart());
+		String organisateur = covoiturage.getOrganisateur().getPrenom() + " " + covoiturage.getOrganisateur().getNom();
+
+		String genericText = "Cher covoitureur,\n\nNous sommes au regret de vous annoncer que votre covoiturage du "
+				+ dateDepart + " n'aura pas lieu car il a été annulé par son organisateur " + organisateur
+				+ ".\nNous vous prions de bien vouloir nous excuser pour le désagrément et espérons que vous pourrez trouver une solution alternative.\n\n"
+				+ "Nous vous remercions de votre confiance et espérons vous revoir bientôt sur GP3 Covoiturage Series\n\n"
+				+ "Bien cordialement,\n\n"
+				+ "GP3C";
+
+		SimpleMailMessage mailMessage = new SimpleMailMessage();
+		mailMessage.setFrom("admin@gp3covoiturageseries.com");
+		mailMessage.setTo(mails);
+		mailMessage.setSubject("Annulation de votre covoiturage du " + dateDepart);
+		mailMessage.setText(genericText);
+		mailSender.send(mailMessage);
+		this.covoiturageRepository.deleteById(covoiturage.getId());
 	}
 
 	public void deleteAfterDate(Integer id, LocalDate dateDepart) {
