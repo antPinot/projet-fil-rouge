@@ -27,7 +27,7 @@ public interface CollaborateurRepository extends JpaRepository<Collaborateur, In
 	
 	public List<Collaborateur> findByTelephone(Integer telephone);
 	
-	public List<Collaborateur> findByMail(String mail);
+	public Collaborateur findByMail(String mail);
 	
 	public List<Collaborateur> findByAnnonces(Covoiturage annonces);
 	

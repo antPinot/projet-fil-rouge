@@ -9,12 +9,17 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
 import fr.diginamic.GP3Covoiturage.exceptions.BadRequestException;
 import fr.diginamic.GP3Covoiturage.models.Collaborateur;
 import fr.diginamic.GP3Covoiturage.models.Role;
 import fr.diginamic.GP3Covoiturage.repositories.CollaborateurRepository;
+import jakarta.mail.MessagingException;
+import jakarta.mail.internet.MimeMessage;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
@@ -25,6 +30,9 @@ public class CollaborateurService {
 
 	@Autowired
 	public CollaborateurRepository collaborateurRepository;
+	
+	@Autowired
+	private JavaMailSender mailSender;
 
 	public Collaborateur create(@Valid Collaborateur collaborateurToCreate) {
 		if (collaborateurToCreate.getId() != null) {
@@ -85,6 +93,44 @@ public class CollaborateurService {
 			existingCollaborateur.setToken(null);
 			collaborateurRepository.save(existingCollaborateur);
 		}
+	}
+	
+	public boolean passwordReset(String mail) {
+		
+		Collaborateur existingCollaborateur = collaborateurRepository.findByMail(mail);
+		if (existingCollaborateur != null) {
+			
+			String resetPasswordURL = "http://localhost:4200/auth/reset-password";
+			
+			String resetMessage ="Cher collaborateur,\n\n"
+					+ "Vous avez demandé la réinitialisation de votre mot de passe.\n\n"
+					+ "Veuillez trouver ci-dessous le lien à cet effet : \n\n"
+					+ "<a href=" + resetPasswordURL + ">Réinitialiser votre mot de passe</a>"
+					+ "";
+						
+			MimeMessage mailMessage = mailSender.createMimeMessage();
+			
+			MimeMessageHelper helper;
+			
+			try {
+				helper = new MimeMessageHelper(mailMessage, true);
+				helper.setFrom("passwordreset@gp3covoiturageseries.com");
+				helper.setTo(mail);
+				helper.setSubject("Récupération de votre mot de passe");
+				helper.setText(resetMessage);
+			} catch (MessagingException e) {
+				e.printStackTrace();
+			}
+			
+
+			mailSender.send(mailMessage);
+			
+			return true;
+		}
+		
+		System.out.println("Collaborateur not found");
+		
+		return false;
 	}
 
 	/**

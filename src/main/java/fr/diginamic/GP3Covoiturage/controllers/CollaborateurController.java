@@ -67,7 +67,6 @@ public class CollaborateurController {
 
 	@PostMapping("/token")
 	public CollaborateurDtoLight findByToken(@RequestBody String token) {
-		System.out.println(token);
 		Collaborateur model = collaborateurService.findOneByToken(token);
 		CollaborateurDtoLight dto = CollaborateurDtoLightMapper.toDto(model);
 		return dto;
@@ -85,7 +84,12 @@ public class CollaborateurController {
 		}
 		return collaborateurDtoLights;
 	}
-
+	
+	@PostMapping("/passwordreset")
+	public boolean resetPassword(@RequestBody String mail){
+		return collaborateurService.passwordReset(mail);
+	}
+	
 	@PostMapping("/login")
 
 	public Map<String, Object> login(@RequestBody Map<String, String> credentials) {
