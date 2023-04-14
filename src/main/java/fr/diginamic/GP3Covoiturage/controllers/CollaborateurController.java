@@ -86,12 +86,16 @@ public class CollaborateurController {
 	}
 	
 	@PostMapping("/passwordreset")
-	public boolean resetPassword(@RequestBody String mail){
-		return collaborateurService.passwordReset(mail);
+	public boolean resetPassword(@RequestBody Map<String, String> passwordReset){
+		return collaborateurService.passwordReset(passwordReset.get("newPassword"),passwordReset.get("passwordToken"));
+	}
+	
+	@PostMapping("/passwordresettoken")
+	public boolean resetPasswordToken(@RequestBody String mail){
+		return collaborateurService.passwordResetToken(mail);
 	}
 	
 	@PostMapping("/login")
-
 	public Map<String, Object> login(@RequestBody Map<String, String> credentials) {
 		Map<String, Object> token = collaborateurService.login(credentials.get("login"), credentials.get("password"));
 		return token;

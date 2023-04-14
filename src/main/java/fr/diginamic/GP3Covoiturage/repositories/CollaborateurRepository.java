@@ -37,7 +37,9 @@ public interface CollaborateurRepository extends JpaRepository<Collaborateur, In
 	public List<Collaborateur> findByLoginAndPassword(String login, String password);
 	
 	public Collaborateur findByToken(String token);
-
+	
+	public Collaborateur findByPasswordToken(String passwordToken);
+	
 	/* Méthode FEKHREDDINE à utiliser à posteriori 
 	public Collaborateur findByLoginAndPassword(String login, String password);
 	*/

@@ -30,7 +30,7 @@ public class CollaborateurService {
 
 	@Autowired
 	public CollaborateurRepository collaborateurRepository;
-	
+
 	@Autowired
 	private JavaMailSender mailSender;
 
@@ -77,7 +77,8 @@ public class CollaborateurService {
 			collaborateurRepository.save(existingCollaborateur.get(0));
 			tokenJson.put("access_token", token);
 			// Partie Admin
-			List<Role> isAdmin = existingCollaborateur.get(0).getRoles().stream().filter(r -> r.getName().equals("ADMIN")).collect(Collectors.toList());
+			List<Role> isAdmin = existingCollaborateur.get(0).getRoles().stream()
+					.filter(r -> r.getName().equals("ADMIN")).collect(Collectors.toList());
 			if (isAdmin.size() > 0) {
 				tokenJson.put("isAdmin", "YES");
 			}
@@ -94,42 +95,59 @@ public class CollaborateurService {
 			collaborateurRepository.save(existingCollaborateur);
 		}
 	}
-	
-	public boolean passwordReset(String mail) {
+
+	public boolean passwordReset(String newPassword, String passwordToken) {
+		Collaborateur existingResetCollaborateur = collaborateurRepository.findByPasswordToken(passwordToken);
+		if (existingResetCollaborateur != null) {
+			existingResetCollaborateur.setPassword(newPassword);
+			existingResetCollaborateur.setPasswordToken(null);
+			collaborateurRepository.save(existingResetCollaborateur);
+
+			return true;
+		}
 		
+		return false;
+
+	}
+
+	public boolean passwordResetToken(String mail) {
+
 		Collaborateur existingCollaborateur = collaborateurRepository.findByMail(mail);
 		if (existingCollaborateur != null) {
-			
-			String resetPasswordURL = "http://localhost:4200/auth/reset-password";
-			
-			String resetMessage ="Cher collaborateur,\n\n"
-					+ "Vous avez demandé la réinitialisation de votre mot de passe.\n\n"
-					+ "Veuillez trouver ci-dessous le lien à cet effet : \n\n"
-					+ "<a href=" + resetPasswordURL + ">Réinitialiser votre mot de passe</a>"
-					+ "";
-						
+
+			String passwordToken = UUID.randomUUID().toString();
+			existingCollaborateur.setPasswordToken(passwordToken);
+			collaborateurRepository.save(existingCollaborateur);
+
+			String resetPasswordURL = "http://localhost:4200/auth/reset-password?token=" + passwordToken;
+
+			String resetMessage = "<p>Cher collaborateur" + "	   <br>"
+					+ "    <br>Vous avez demandé la réinitialisation de votre mot de passe" + "	   <br>"
+					+ "    <br>Veuillez trouver ci-dessous le lien à cet effet :" + "	   <br>" + "    <br><a href="
+					+ resetPasswordURL + ">Réinitialiser votre mot de passe</a>" + "</p>";
+
 			MimeMessage mailMessage = mailSender.createMimeMessage();
-			
+
 			MimeMessageHelper helper;
-			
+
 			try {
 				helper = new MimeMessageHelper(mailMessage, true);
 				helper.setFrom("passwordreset@gp3covoiturageseries.com");
 				helper.setTo(mail);
 				helper.setSubject("Récupération de votre mot de passe");
-				helper.setText(resetMessage);
+				helper.setText(resetMessage, true);
 			} catch (MessagingException e) {
 				e.printStackTrace();
 			}
-			
 
 			mailSender.send(mailMessage);
-			
+
 			return true;
 		}
-		
+
+		// TODO Faire remonter une exception jusqu'au front
 		System.out.println("Collaborateur not found");
-		
+
 		return false;
 	}
 

@@ -58,6 +58,9 @@ public class Collaborateur {
 	
 	@Column(name="token")
     private String token;
+	
+	@Column(name = "passwordToken")
+	private String passwordToken;
 
 	@Column(name = "dateCreation", length = 50, nullable = false)
 	private LocalDate dateCreation;
@@ -417,6 +420,22 @@ public class Collaborateur {
 	public void setToken(String token) {
 		this.token = token;
 	}
+
+	/**Getter pour l'attribut passwordToken
+	 * @return the passwordToken
+	 */
+	public String getPasswordToken() {
+		return passwordToken;
+	}
+
+	/**Setter pour l'attribut passwordToken
+	 * @param passwordToken the passwordToken to set
+	 */
+	public void setPasswordToken(String passwordToken) {
+		this.passwordToken = passwordToken;
+	}
+	
+	
 
 
 }
