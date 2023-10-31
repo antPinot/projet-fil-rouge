@@ -24,6 +24,12 @@ public class VehiculePersonnelDtoEdit {
 	private Integer limitePlace;
 
 	private List<Integer> collaborateursId;
+	
+	/**Constructeur
+	 * 
+	 */
+	public VehiculePersonnelDtoEdit() {
+	}
 
 	/**
 	 * Constructeur

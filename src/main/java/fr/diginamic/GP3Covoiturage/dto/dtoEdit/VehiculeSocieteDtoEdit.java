@@ -3,6 +3,8 @@
  */
 package fr.diginamic.GP3Covoiturage.dto.dtoEdit;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
@@ -17,7 +19,7 @@ import jakarta.validation.constraints.Size;
 public class VehiculeSocieteDtoEdit {
 
 	private Integer id;
-
+	
 	@NotBlank
 	@Pattern(regexp = "^[A-Z]{2}[-][0-9]{3}[-][A-Z]{2}$", message = "Veuillez saisir une immatriculation au format AA-123-BB")
 	private String immatriculation;
@@ -48,6 +50,13 @@ public class VehiculeSocieteDtoEdit {
 	
 	@NotBlank
 	private String categorie;
+	
+
+	/**Constructeur
+	 * 
+	 */
+	public VehiculeSocieteDtoEdit() {
+	}
 
 	/**Constructeur
 	 * @param id
