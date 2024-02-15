@@ -43,6 +43,14 @@ public class CovoiturageDtoEdit {
 	private @Valid AdresseDtoEdit adresseArrivee;
 
 	private List<Integer> collaborateursId;
+	
+	
+
+	/**Constructeur
+	 * 
+	 */
+	public CovoiturageDtoEdit() {
+	}
 
 	/**
 	 * Constructeur

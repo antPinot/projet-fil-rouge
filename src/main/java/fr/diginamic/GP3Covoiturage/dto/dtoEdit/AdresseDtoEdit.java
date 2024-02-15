@@ -48,6 +48,14 @@ public class AdresseDtoEdit {
 	@NotBlank
 	@Size(max = 58, message = "Max. 58 caractères")
 	private String ville;
+	
+	
+
+	/**Constructeur
+	 * 
+	 */
+	public AdresseDtoEdit() {
+	}
 
 	/**
 	 * Constructeur
