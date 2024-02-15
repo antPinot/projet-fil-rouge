@@ -13,6 +13,7 @@ import fr.diginamic.GP3Covoiturage.exceptions.BadRequestException;
 import fr.diginamic.GP3Covoiturage.models.Adresse;
 import fr.diginamic.GP3Covoiturage.models.Collaborateur;
 import fr.diginamic.GP3Covoiturage.models.Covoiturage;
+import fr.diginamic.GP3Covoiturage.repositories.VehiculePersonnelRepository;
 import fr.diginamic.GP3Covoiturage.services.AdresseService;
 
 /**
@@ -23,7 +24,7 @@ import fr.diginamic.GP3Covoiturage.services.AdresseService;
 public class CovoiturageUtils {
 
 	private static AdresseService adresseService;
-
+	
 	@Autowired
 	public CovoiturageUtils(AdresseService adresseService) {
 		CovoiturageUtils.adresseService = adresseService;
@@ -56,16 +57,16 @@ public class CovoiturageUtils {
 
 	}
 
-	public static void placesChecker(Covoiturage covoiturage) {
-		Integer placesRestantes = covoiturage.getPlacesRestantes();
+	public static void placesChecker(Covoiturage covoiturage, Integer limitePlaces) {
+		
 		Integer nbPersonnes = covoiturage.getNbPersonnes();
 
-		if (nbPersonnes > placesRestantes) {
+		if (nbPersonnes > limitePlaces) {
 			throw new BadRequestException(
 					"Veuillez définir un nombre de personnes inférieur ou égal à la capacité du véhicule");
 		}
 
-		covoiturage.setPlacesRestantes(covoiturage.getPlacesRestantes() - covoiturage.getNbPersonnes());
+//		covoiturage.setPlacesRestantes(covoiturage.getPlacesRestantes() - covoiturage.getNbPersonnes());
 	}
 
 	public static void updatePlaces(Covoiturage covoiturage) {

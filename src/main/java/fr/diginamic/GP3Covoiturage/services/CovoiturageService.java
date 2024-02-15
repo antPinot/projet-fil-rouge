@@ -21,6 +21,7 @@ import fr.diginamic.GP3Covoiturage.models.Adresse;
 import fr.diginamic.GP3Covoiturage.models.Collaborateur;
 import fr.diginamic.GP3Covoiturage.models.Covoiturage;
 import fr.diginamic.GP3Covoiturage.repositories.CovoiturageRepository;
+import fr.diginamic.GP3Covoiturage.repositories.VehiculePersonnelRepository;
 import fr.diginamic.GP3Covoiturage.utils.CovoiturageUtils;
 import fr.diginamic.GP3Covoiturage.utils.DateUtils;
 import jakarta.validation.Valid;
@@ -35,6 +36,10 @@ public class CovoiturageService {
 	/** covoiturageRepository : Accès aux entités Covoiturage en BDD */
 	@Autowired
 	CovoiturageRepository covoiturageRepository;
+
+	/** vehiculePersonnelRepository : Accès aux entités VehiculePersonnel en BDD */
+	@Autowired
+	VehiculePersonnelRepository vehiculePersonnelRepository;
 
 	/** adresseService : Accès aux méthodes de service de la classe Adresse */
 	@Autowired
@@ -70,8 +75,12 @@ public class CovoiturageService {
 		if (createCovoiturage.getId() != null) {
 			throw new RuntimeException("erreur : id est deja present");
 		}
+
+		Integer limitePlaces = vehiculePersonnelRepository
+				.findByCollaborateurId(createCovoiturage.getOrganisateur().getId()).get(0).getLimitePlace();
+
 		CovoiturageUtils.adresseChecker(createCovoiturage);
-		CovoiturageUtils.placesChecker(createCovoiturage);
+		CovoiturageUtils.placesChecker(createCovoiturage, limitePlaces);
 
 		return this.covoiturageRepository.save(createCovoiturage);
 	}
@@ -86,12 +95,15 @@ public class CovoiturageService {
 	 */
 	public Covoiturage update(@Valid Covoiturage updateCovoiturage) {
 
+		Integer limitePlaces = vehiculePersonnelRepository
+				.findByCollaborateurId(updateCovoiturage.getOrganisateur().getId()).get(0).getLimitePlace();
+
 		if (updateCovoiturage.getId() == null) {
 			throw new RuntimeException("erreur : le covoiturage n'est pas encore créer");
 		}
 
 		CovoiturageUtils.adresseChecker(updateCovoiturage);
-		CovoiturageUtils.placesChecker(updateCovoiturage);
+		CovoiturageUtils.placesChecker(updateCovoiturage, limitePlaces);
 		CovoiturageUtils.updatePlaces(updateCovoiturage);
 
 		if (updateCovoiturage.getNbPersonnes() != 1) {
@@ -292,26 +304,27 @@ public class CovoiturageService {
 
 		covoiturage.getCollaborateurs().forEach(c -> mailAdresses.add(c.getMail()));
 
-		String[] mails = new String[mailAdresses.size()];
+		if (!mailAdresses.isEmpty()) {
 
-		mailAdresses.toArray(mails);
+			String[] mails = new String[mailAdresses.size()];
 
-		String dateDepart = DateUtils.localDateTimeToString(covoiturage.getDateDepart());
-		String organisateur = covoiturage.getOrganisateur().getPrenom() + " " + covoiturage.getOrganisateur().getNom();
+			mailAdresses.toArray(mails);
 
-		String genericText = "Cher covoitureur,\n\nNous sommes au regret de vous annoncer que votre covoiturage du "
-				+ dateDepart + " n'aura pas lieu car il a été annulé par son organisateur " + organisateur
-				+ ".\nNous vous prions de bien vouloir nous excuser pour le désagrément et espérons que vous pourrez trouver une solution alternative.\n\n"
-				+ "Nous vous remercions de votre confiance et espérons vous revoir bientôt sur GP3 Covoiturage Series\n\n"
-				+ "Bien cordialement,\n\n"
-				+ "GP3C";
-
-		SimpleMailMessage mailMessage = new SimpleMailMessage();
-		mailMessage.setFrom("admin@gp3covoiturageseries.com");
-		mailMessage.setTo(mails);
-		mailMessage.setSubject("Annulation de votre covoiturage du " + dateDepart);
-		mailMessage.setText(genericText);
-		mailSender.send(mailMessage);
+			String dateDepart = DateUtils.localDateTimeToString(covoiturage.getDateDepart());
+			String organisateur = covoiturage.getOrganisateur().getPrenom() + " "
+					+ covoiturage.getOrganisateur().getNom();
+			String genericText = "Cher covoitureur,\n\nNous sommes au regret de vous annoncer que votre covoiturage du "
+					+ dateDepart + " n'aura pas lieu car il a été annulé par son organisateur " + organisateur
+					+ ".\nNous vous prions de bien vouloir nous excuser pour le désagrément et espérons que vous pourrez trouver une solution alternative.\n\n"
+					+ "Nous vous remercions de votre confiance et espérons vous revoir bientôt sur GP3 Covoiturage Series\n\n"
+					+ "Bien cordialement,\n\n" + "GP3C";
+			SimpleMailMessage mailMessage = new SimpleMailMessage();
+			mailMessage.setFrom("admin@gp3covoiturageseries.com");
+			mailMessage.setTo(mails);
+			mailMessage.setSubject("Annulation de votre covoiturage du " + dateDepart);
+			mailMessage.setText(genericText);
+			mailSender.send(mailMessage);
+		}
 		this.covoiturageRepository.deleteById(covoiturage.getId());
 	}
 
