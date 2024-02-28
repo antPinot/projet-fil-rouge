@@ -84,8 +84,11 @@ public class VehiculeSocieteService {
 
 		LocalDateTime time1 = DateUtils.stringToLocalDateTime(dateDepart);
 		LocalDateTime time2 = DateUtils.stringToLocalDateTime(dateRetour);
-
-		return vehiculeSocieteRepository.vehiculesDispo(time1, time2);
+		
+		List<VehiculeSociete> vehiculesDisponibles = vehiculeSocieteRepository.findAll();
+		vehiculesDisponibles.removeAll(vehiculeSocieteRepository.vehiculesReservesBetweenDateDepartAndDateRetour(time1, time2));
+		
+		return vehiculesDisponibles;
 
 	}
 

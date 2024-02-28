@@ -125,7 +125,7 @@ public class ReservationVehiculeService {
 		}
 
 		// listes des reservations en fonctions des dates
-		List<ReservationVehicule> existingReservations = reservationVehiculeRepository.BLABLA(vehicule.getId(),
+		List<ReservationVehicule> existingReservations = reservationVehiculeRepository.findReservationsBetweenDateDepartAndDateRetour(vehicule.getId(),
 				reservationVehicule.getDateDepart(), reservationVehicule.getDateRetour());
 
 		if (!existingReservations.isEmpty()) {
@@ -153,7 +153,7 @@ public class ReservationVehiculeService {
 		}
 
 		// listes des reservations en fonctions des dates
-		List<ReservationVehicule> existingReservations = reservationVehiculeRepository.BLABLA(
+		List<ReservationVehicule> existingReservations = reservationVehiculeRepository.findReservationsBetweenDateDepartAndDateRetour(
 				vehicule.getId(), reservationVehicule.getDateDepart(), reservationVehicule.getDateRetour());
 		
 		List<ReservationVehicule> reservationAutreCollaborateur = new ArrayList<>();
@@ -180,7 +180,7 @@ public class ReservationVehiculeService {
 		LocalDateTime time1 = DateUtils.stringToLocalDateTime(dateDepart);
 		LocalDateTime time2 = DateUtils.stringToLocalDateTime(dateRetour);
 
-		return reservationVehiculeRepository.BLABLA(Id, time1, time2);
+		return reservationVehiculeRepository.findReservationsBetweenDateDepartAndDateRetour(Id, time1, time2);
 
 	}
 	/**
