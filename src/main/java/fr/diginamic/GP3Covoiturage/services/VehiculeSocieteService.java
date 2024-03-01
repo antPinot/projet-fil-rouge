@@ -132,9 +132,9 @@ public class VehiculeSocieteService {
 		VehiculeSociete existingVehicule = vehiculeSocieteRepository.findById(vehiculeSociete.getId())
 				.orElseThrow(() -> new FunctionalException("Erreur : Le véhicule n'existe pas"));
 
-		if (!existingVehicule.getDisponible()) {
-			throw new FunctionalException("Erreur : Le véhicule n'est pas disponible");
-		}
+//		if (!existingVehicule.getDisponible()) {
+//			throw new FunctionalException("Erreur : Le véhicule n'est pas disponible");
+//		}
 
 		int statut = vehiculeSociete.getStatut();
 		if (statut != -1 && statut != 0 && statut != 1) {

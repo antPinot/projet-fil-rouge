@@ -3,6 +3,9 @@
  */
 package fr.diginamic.GP3Covoiturage.enums;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @author antPinot
  * 
@@ -56,4 +59,24 @@ public enum Categorie {
 		}
 		return null;
 	}
+	
+	public static String nameOfValue (String value) {
+		Categorie[] categorie = values();
+		for(Categorie c: categorie) {
+			if (c.name().equals(value)) {
+				return c.getLibelle();
+			}
+		}
+		return null;
+	}
+	
+	public static List<String> getAllCategoriesLibelle(){
+		List<String> allCategoriesLibelle = new ArrayList<>();
+		Categorie[] categories = values();
+		for(Categorie c : categories) {
+			allCategoriesLibelle.add(c.getLibelle());
+		}
+		return allCategoriesLibelle;
+	}
+	
 }

@@ -18,6 +18,7 @@ import fr.diginamic.GP3Covoiturage.dto.dtoEdit.VehiculeSocieteDtoEdit;
 import fr.diginamic.GP3Covoiturage.dto.dtoEdit.VehiculeSocieteDtoEditMapper;
 import fr.diginamic.GP3Covoiturage.dto.dtoLight.VehiculeSocieteDtoLight;
 import fr.diginamic.GP3Covoiturage.dto.dtoLight.VehiculeSocieteDtoLightMapper;
+import fr.diginamic.GP3Covoiturage.enums.Categorie;
 import fr.diginamic.GP3Covoiturage.exceptions.FunctionalException;
 import fr.diginamic.GP3Covoiturage.models.VehiculeSociete;
 import fr.diginamic.GP3Covoiturage.services.VehiculeSocieteService;
@@ -37,7 +38,7 @@ public class VehiculeSocieteController {
 		return vehiculeSocieteToCreate;
 	}
 
-	@PutMapping("/{id}")
+	@PutMapping()
 	public VehiculeSocieteDtoEdit update(@RequestBody @Valid VehiculeSocieteDtoEdit vehiculeSocieteToUpdate) {
 		VehiculeSociete modelVehiculeSociete = VehiculeSocieteDtoEditMapper.toModel(vehiculeSocieteToUpdate);
 		vehiculeSocieteService.update(modelVehiculeSociete);
@@ -124,13 +125,12 @@ public class VehiculeSocieteController {
 	 * 
 	 * 
 	 **/
-	@PutMapping("/MAJVehiculeSociete/{id}")
-	public VehiculeSocieteDtoEdit majVehiculeSociete(
-			@RequestBody @Valid VehiculeSocieteDtoEdit vehiculeSocieteDtoEdit) {
+	@PutMapping("/MAJVehiculeSociete")
+	public VehiculeSocieteDtoEdit majVehiculeSociete(@RequestBody @Valid VehiculeSocieteDtoEdit vehiculeSocieteDtoEdit) {
 
 		VehiculeSociete modelVehiculeSociete = VehiculeSocieteDtoEditMapper.toModel(vehiculeSocieteDtoEdit);
+		
 		try {
-
 			vehiculeSocieteService.updateVehicule(modelVehiculeSociete);
 			return vehiculeSocieteDtoEdit;
 		} catch (FunctionalException e) {
@@ -140,5 +140,16 @@ public class VehiculeSocieteController {
 			return null;
 		}
 	}
+	
+	@GetMapping("/categories")
+	public List<String> findAllCategories(){
+		return Categorie.getAllCategoriesLibelle();
+	}
+	
+	@GetMapping("/categorie")
+	public String findLibelleOfCategorie(@RequestParam String categorie) {
+		return Categorie.nameOfValue(categorie);
+	}
+
 
 }
